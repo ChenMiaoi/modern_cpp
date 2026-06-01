@@ -7,7 +7,11 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "preview": "vitepress preview docs",
+    "cpplings": "node exercises/cpplings.mjs"
+  },
+  "bin": {
+    "cpplings": "exercises/cpplings.mjs"
   },
   "devDependencies": {
     "vitepress": "^1.6.3"

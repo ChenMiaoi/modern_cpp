@@ -1,0 +1,733 @@
+{
+  "title": "Modern C++ Exercises",
+  "description": "Cpplings",
+  "compiler": "g++",
+  "includeDir": "include",
+  "topics": [
+    {
+      "id": "cpp11-basics",
+      "title": "C++11 基础",
+      "desc": "auto、nullptr、enum class、constexpr 等",
+      "std": "c++11"
+    },
+    {
+      "id": "cpp11-classes",
+      "title": "C++11 类与资源管理",
+      "desc": "移动语义、智能指针、RAII",
+      "std": "c++11"
+    },
+    {
+      "id": "cpp11-templates",
+      "title": "C++11 模板与泛型",
+      "desc": "Lambda、可变参数模板、SFINAE",
+      "std": "c++11"
+    },
+    {
+      "id": "cpp11-std",
+      "title": "C++11 标准库",
+      "desc": "thread、array、regex、chrono、tuple、forward、condvar",
+      "std": "c++11"
+    },
+    {
+      "id": "cpp14",
+      "title": "C++14",
+      "desc": "泛型 Lambda、变量模板、make_unique",
+      "std": "c++14"
+    },
+    {
+      "id": "cpp17-basics",
+      "title": "C++17 基础",
+      "desc": "结构化绑定、optional、if constexpr",
+      "std": "c++17"
+    },
+    {
+      "id": "cpp17",
+      "title": "C++17 扩展",
+      "desc": "variant、any、折叠表达式、CTAD、string_view",
+      "std": "c++17"
+    },
+    {
+      "id": "cpp20-basics",
+      "title": "C++20 基础",
+      "desc": "Concepts、三路比较",
+      "std": "c++20"
+    },
+    {
+      "id": "cpp20",
+      "title": "C++20 扩展",
+      "desc": "Ranges、consteval、requires、coroutines、calendar",
+      "std": "c++20"
+    },
+    {
+      "id": "cpp23",
+      "title": "C++23",
+      "desc": "expected、print、mdspan、move_only_function",
+      "std": "c++23"
+    },
+    {
+      "id": "topics",
+      "title": "专题",
+      "desc": "值类别、异常安全、Rule of 5/0、缓存友好、noexcept",
+      "std": "c++17"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "auto1",
+      "topic": "cpp11-basics",
+      "title": "auto 类型推导",
+      "file": "cpp11-basics/auto1.cpp",
+      "solution": "solutions/auto1.cpp",
+      "hint": "",
+      "description": "auto 类型推导"
+    },
+    {
+      "id": "constexpr1",
+      "topic": "cpp11-basics",
+      "title": "constexpr 基础",
+      "file": "cpp11-basics/constexpr1.cpp",
+      "solution": "solutions/constexpr1.cpp",
+      "hint": "",
+      "description": "constexpr 基础"
+    },
+    {
+      "id": "enum1",
+      "topic": "cpp11-basics",
+      "title": "enum class",
+      "file": "cpp11-basics/enum1.cpp",
+      "solution": "solutions/enum1.cpp",
+      "hint": "",
+      "description": "enum class"
+    },
+    {
+      "id": "literals1",
+      "topic": "cpp11-basics",
+      "title": "用户定义字面量",
+      "file": "cpp11-basics/literals1.cpp",
+      "solution": "solutions/literals1.cpp",
+      "hint": "",
+      "description": "用户定义字面量"
+    },
+    {
+      "id": "nullptr1",
+      "topic": "cpp11-basics",
+      "title": "nullptr vs NULL",
+      "file": "cpp11-basics/nullptr1.cpp",
+      "solution": "solutions/nullptr1.cpp",
+      "hint": "",
+      "description": "nullptr vs NULL"
+    },
+    {
+      "id": "move1",
+      "topic": "cpp11-classes",
+      "title": "主题: C++11 类与资源管理 — 移动语义",
+      "file": "cpp11-classes/move1.cpp",
+      "solution": "solutions/move1.cpp",
+      "hint": "",
+      "description": "主题: C++11 类与资源管理 — 移动语义"
+    },
+    {
+      "id": "raii1",
+      "topic": "cpp11-classes",
+      "title": "主题: C++11 类与资源管理 — RAII",
+      "file": "cpp11-classes/raii1.cpp",
+      "solution": "solutions/raii1.cpp",
+      "hint": "",
+      "description": "主题: C++11 类与资源管理 — RAII"
+    },
+    {
+      "id": "smartptr1",
+      "topic": "cpp11-classes",
+      "title": "主题: C++11 类与资源管理 — unique_ptr",
+      "file": "cpp11-classes/smartptr1.cpp",
+      "solution": "solutions/smartptr1.cpp",
+      "hint": "",
+      "description": "主题: C++11 类与资源管理 — unique_ptr"
+    },
+    {
+      "id": "smartptr2",
+      "topic": "cpp11-classes",
+      "title": "主题: C++11 类与资源管理 — shared_ptr 与 weak_ptr",
+      "file": "cpp11-classes/smartptr2.cpp",
+      "solution": "solutions/smartptr2.cpp",
+      "hint": "",
+      "description": "主题: C++11 类与资源管理 — shared_ptr 与 weak_ptr"
+    },
+    {
+      "id": "lambda1",
+      "topic": "cpp11-templates",
+      "title": "主题: C++11 模板与泛型 — Lambda 表达式",
+      "file": "cpp11-templates/lambda1.cpp",
+      "solution": "solutions/lambda1.cpp",
+      "hint": "",
+      "description": "主题: C++11 模板与泛型 — Lambda 表达式"
+    },
+    {
+      "id": "sfinae1",
+      "topic": "cpp11-templates",
+      "title": "主题: C++11 模板与泛型 — SFINAE 检测成员",
+      "file": "cpp11-templates/sfinae1.cpp",
+      "solution": "solutions/sfinae1.cpp",
+      "hint": "",
+      "description": "主题: C++11 模板与泛型 — SFINAE 检测成员"
+    },
+    {
+      "id": "variadic1",
+      "topic": "cpp11-templates",
+      "title": "主题: C++11 模板与泛型 — 可变参数模板",
+      "file": "cpp11-templates/variadic1.cpp",
+      "solution": "solutions/variadic1.cpp",
+      "hint": "",
+      "description": "主题: C++11 模板与泛型 — 可变参数模板"
+    },
+    {
+      "id": "array1",
+      "topic": "cpp11-std",
+      "title": "std::array",
+      "file": "cpp11-std/array1.cpp",
+      "solution": "solutions/array1.cpp",
+      "hint": "",
+      "description": "std::array"
+    },
+    {
+      "id": "attributes1",
+      "topic": "cpp11-std",
+      "title": "属性 (Attributes)",
+      "file": "cpp11-std/attributes1.cpp",
+      "solution": "solutions/attributes1.cpp",
+      "hint": "",
+      "description": "属性 (Attributes)"
+    },
+    {
+      "id": "chrono1",
+      "topic": "cpp11-std",
+      "title": "chrono 时间库",
+      "file": "cpp11-std/chrono1.cpp",
+      "solution": "solutions/chrono1.cpp",
+      "hint": "",
+      "description": "chrono 时间库"
+    },
+    {
+      "id": "condvar1",
+      "topic": "cpp11-std",
+      "title": "条件变量与生产者-消费者模式",
+      "file": "cpp11-std/condvar1.cpp",
+      "solution": "solutions/condvar1.cpp",
+      "hint": "",
+      "description": "条件变量与生产者-消费者模式"
+    },
+    {
+      "id": "customhash1",
+      "topic": "cpp11-std",
+      "title": "自定义哈希",
+      "file": "cpp11-std/customhash1.cpp",
+      "solution": "solutions/customhash1.cpp",
+      "hint": "",
+      "description": "自定义哈希"
+    },
+    {
+      "id": "delegating1",
+      "topic": "cpp11-std",
+      "title": "委托构造函数 (Delegating Constructors)",
+      "file": "cpp11-std/delegating1.cpp",
+      "solution": "solutions/delegating1.cpp",
+      "hint": "",
+      "description": "委托构造函数 (Delegating Constructors)"
+    },
+    {
+      "id": "forward1",
+      "topic": "cpp11-std",
+      "title": "完美转发 (std::forward)",
+      "file": "cpp11-std/forward1.cpp",
+      "solution": "solutions/forward1.cpp",
+      "hint": "",
+      "description": "完美转发 (std::forward)"
+    },
+    {
+      "id": "random1",
+      "topic": "cpp11-std",
+      "title": "随机数库 (std::random)",
+      "file": "cpp11-std/random1.cpp",
+      "solution": "solutions/random1.cpp",
+      "hint": "",
+      "description": "随机数库 (std::random)"
+    },
+    {
+      "id": "regex1",
+      "topic": "cpp11-std",
+      "title": "正则表达式基础 (std::regex)",
+      "file": "cpp11-std/regex1.cpp",
+      "solution": "solutions/regex1.cpp",
+      "hint": "",
+      "description": "正则表达式基础 (std::regex)"
+    },
+    {
+      "id": "staticassert1",
+      "topic": "cpp11-std",
+      "title": "static_assert 编译期断言",
+      "file": "cpp11-std/staticassert1.cpp",
+      "solution": "solutions/staticassert1.cpp",
+      "hint": "",
+      "description": "static_assert 编译期断言"
+    },
+    {
+      "id": "thread1",
+      "topic": "cpp11-std",
+      "title": "std::thread 基础",
+      "file": "cpp11-std/thread1.cpp",
+      "solution": "solutions/thread1.cpp",
+      "hint": "",
+      "description": "std::thread 基础"
+    },
+    {
+      "id": "tuple1",
+      "topic": "cpp11-std",
+      "title": "std::tuple",
+      "file": "cpp11-std/tuple1.cpp",
+      "solution": "solutions/tuple1.cpp",
+      "hint": "",
+      "description": "std::tuple"
+    },
+    {
+      "id": "tupleadv1",
+      "topic": "cpp11-std",
+      "title": "tuple 高级操作",
+      "file": "cpp11-std/tupleadv1.cpp",
+      "solution": "solutions/tupleadv1.cpp",
+      "hint": "",
+      "description": "tuple 高级操作"
+    },
+    {
+      "id": "unordered1",
+      "topic": "cpp11-std",
+      "title": "无序容器 (unordered_map / unordered_set)",
+      "file": "cpp11-std/unordered1.cpp",
+      "solution": "solutions/unordered1.cpp",
+      "hint": "",
+      "description": "无序容器 (unordered_map / unordered_set)"
+    },
+    {
+      "id": "binary1",
+      "topic": "cpp14",
+      "title": "二进制字面量与数字分隔符 (Binary Literals & Digit Separators)",
+      "file": "cpp14/binary1.cpp",
+      "solution": "solutions/binary1.cpp",
+      "hint": "",
+      "description": "二进制字面量与数字分隔符 (Binary Literals & Digit Separators)"
+    },
+    {
+      "id": "digitsep1",
+      "topic": "cpp14",
+      "title": "数字分隔符 (Digit Separators)",
+      "file": "cpp14/digitsep1.cpp",
+      "solution": "solutions/digitsep1.cpp",
+      "hint": "",
+      "description": "数字分隔符 (Digit Separators)"
+    },
+    {
+      "id": "exchange1",
+      "topic": "cpp14",
+      "title": "std::exchange",
+      "file": "cpp14/exchange1.cpp",
+      "solution": "solutions/exchange1.cpp",
+      "hint": "",
+      "description": "std::exchange"
+    },
+    {
+      "id": "glambda1",
+      "topic": "cpp14",
+      "title": "泛型 Lambda (Generic Lambdas)",
+      "file": "cpp14/glambda1.cpp",
+      "solution": "solutions/glambda1.cpp",
+      "hint": "",
+      "description": "泛型 Lambda (Generic Lambdas)"
+    },
+    {
+      "id": "makeunique1",
+      "topic": "cpp14",
+      "title": "std::make_unique",
+      "file": "cpp14/makeunique1.cpp",
+      "solution": "solutions/makeunique1.cpp",
+      "hint": "",
+      "description": "std::make_unique"
+    },
+    {
+      "id": "rettype1",
+      "topic": "cpp14",
+      "title": "返回类型推导 (Return Type Deduction)",
+      "file": "cpp14/rettype1.cpp",
+      "solution": "solutions/rettype1.cpp",
+      "hint": "",
+      "description": "返回类型推导 (Return Type Deduction)"
+    },
+    {
+      "id": "vartemplate1",
+      "topic": "cpp14",
+      "title": "变量模板 (Variable Templates)",
+      "file": "cpp14/vartemplate1.cpp",
+      "solution": "solutions/vartemplate1.cpp",
+      "hint": "",
+      "description": "变量模板 (Variable Templates)"
+    },
+    {
+      "id": "bind1",
+      "topic": "cpp17-basics",
+      "title": "Title: Structured Bindings",
+      "file": "cpp17-basics/bind1.cpp",
+      "solution": "solutions/bind1.cpp",
+      "hint": "",
+      "description": "Title: Structured Bindings"
+    },
+    {
+      "id": "ifconstexpr1",
+      "topic": "cpp17-basics",
+      "title": "Title: if constexpr",
+      "file": "cpp17-basics/ifconstexpr1.cpp",
+      "solution": "solutions/ifconstexpr1.cpp",
+      "hint": "",
+      "description": "Title: if constexpr"
+    },
+    {
+      "id": "optional1",
+      "topic": "cpp17-basics",
+      "title": "Title: std::optional",
+      "file": "cpp17-basics/optional1.cpp",
+      "solution": "solutions/optional1.cpp",
+      "hint": "",
+      "description": "Title: std::optional"
+    },
+    {
+      "id": "any1",
+      "topic": "cpp17",
+      "title": "any1 — std::any",
+      "file": "cpp17/any1.cpp",
+      "solution": "solutions/any1.cpp",
+      "hint": "",
+      "description": "any1 — std::any"
+    },
+    {
+      "id": "ctad1",
+      "topic": "cpp17",
+      "title": "ctad1 — 类模板参数推导 (CTAD)",
+      "file": "cpp17/ctad1.cpp",
+      "solution": "solutions/ctad1.cpp",
+      "hint": "",
+      "description": "ctad1 — 类模板参数推导 (CTAD)"
+    },
+    {
+      "id": "filesystem1",
+      "topic": "cpp17",
+      "title": "filesystem1 — 文件系统基础",
+      "file": "cpp17/filesystem1.cpp",
+      "solution": "solutions/filesystem1.cpp",
+      "hint": "",
+      "description": "filesystem1 — 文件系统基础"
+    },
+    {
+      "id": "foldexpr1",
+      "topic": "cpp17",
+      "title": "foldexpr1 — 折叠表达式",
+      "file": "cpp17/foldexpr1.cpp",
+      "solution": "solutions/foldexpr1.cpp",
+      "hint": "",
+      "description": "foldexpr1 — 折叠表达式"
+    },
+    {
+      "id": "inlinevars1",
+      "topic": "cpp17",
+      "title": "inlinevars1 — 内联变量",
+      "file": "cpp17/inlinevars1.cpp",
+      "solution": "solutions/inlinevars1.cpp",
+      "hint": "",
+      "description": "inlinevars1 — 内联变量"
+    },
+    {
+      "id": "niscard1",
+      "topic": "cpp17",
+      "title": "nodiscard1 — [[nodiscard]] 等属性",
+      "file": "cpp17/niscard1.cpp",
+      "solution": "solutions/niscard1.cpp",
+      "hint": "",
+      "description": "nodiscard1 — [[nodiscard]] 等属性"
+    },
+    {
+      "id": "stringview1",
+      "topic": "cpp17",
+      "title": "stringview1 — std::string_view",
+      "file": "cpp17/stringview1.cpp",
+      "solution": "solutions/stringview1.cpp",
+      "hint": "",
+      "description": "stringview1 — std::string_view"
+    },
+    {
+      "id": "variant1",
+      "topic": "cpp17",
+      "title": "variant1 — std::variant",
+      "file": "cpp17/variant1.cpp",
+      "solution": "solutions/variant1.cpp",
+      "hint": "",
+      "description": "variant1 — std::variant"
+    },
+    {
+      "id": "concepts1",
+      "topic": "cpp20-basics",
+      "title": "Title: C++20 Concepts",
+      "file": "cpp20-basics/concepts1.cpp",
+      "solution": "solutions/concepts1.cpp",
+      "hint": "",
+      "description": "Title: C++20 Concepts"
+    },
+    {
+      "id": "spaceship1",
+      "topic": "cpp20-basics",
+      "title": "Title: Three-way Comparison (operator<=>)",
+      "file": "cpp20-basics/spaceship1.cpp",
+      "solution": "solutions/spaceship1.cpp",
+      "hint": "",
+      "description": "Title: Three-way Comparison (operator<=>)"
+    },
+    {
+      "id": "aggregate1",
+      "topic": "cpp20",
+      "title": "Title: 聚合初始化增强",
+      "file": "cpp20/aggregate1.cpp",
+      "solution": "solutions/aggregate1.cpp",
+      "hint": "",
+      "description": "Title: 聚合初始化增强"
+    },
+    {
+      "id": "calendar1",
+      "topic": "cpp20",
+      "title": "主题: C++20 — 日历与时间区",
+      "file": "cpp20/calendar1.cpp",
+      "solution": "solutions/calendar1.cpp",
+      "hint": "",
+      "description": "主题: C++20 — 日历与时间区"
+    },
+    {
+      "id": "consteval1",
+      "topic": "cpp20",
+      "title": "Title: consteval 与 constinit",
+      "file": "cpp20/consteval1.cpp",
+      "solution": "solutions/consteval1.cpp",
+      "hint": "",
+      "description": "Title: consteval 与 constinit"
+    },
+    {
+      "id": "coroutine1",
+      "topic": "cpp20",
+      "title": "主题: C++20 — 协程基础（手写 Generator）",
+      "file": "cpp20/coroutine1.cpp",
+      "solution": "solutions/coroutine1.cpp",
+      "hint": "",
+      "description": "主题: C++20 — 协程基础（手写 Generator）"
+    },
+    {
+      "id": "format1",
+      "topic": "cpp20",
+      "title": "Title: std::format 格式化",
+      "file": "cpp20/format1.cpp",
+      "solution": "solutions/format1.cpp",
+      "hint": "",
+      "description": "Title: std::format 格式化"
+    },
+    {
+      "id": "jthread1",
+      "topic": "cpp20",
+      "title": "Title: std::jthread 与 stop_token",
+      "file": "cpp20/jthread1.cpp",
+      "solution": "solutions/jthread1.cpp",
+      "hint": "",
+      "description": "Title: std::jthread 与 stop_token"
+    },
+    {
+      "id": "ranges1",
+      "topic": "cpp20",
+      "title": "Title: Ranges 基础 — Views and Algorithms",
+      "file": "cpp20/ranges1.cpp",
+      "solution": "solutions/ranges1.cpp",
+      "hint": "",
+      "description": "Title: Ranges 基础 — Views and Algorithms"
+    },
+    {
+      "id": "requires1",
+      "topic": "cpp20",
+      "title": "Title: requires 表达式与约束",
+      "file": "cpp20/requires1.cpp",
+      "solution": "solutions/requires1.cpp",
+      "hint": "",
+      "description": "Title: requires 表达式与约束"
+    },
+    {
+      "id": "spaceship_ext",
+      "topic": "cpp20",
+      "title": "Title: <=> 运算符扩展 — 字符串与容器比较",
+      "file": "cpp20/spaceship_ext.cpp",
+      "solution": "solutions/spaceship_ext.cpp",
+      "hint": "",
+      "description": "Title: <=> 运算符扩展 — 字符串与容器比较"
+    },
+    {
+      "id": "span1",
+      "topic": "cpp20",
+      "title": "Title: std::span 非拥有视图",
+      "file": "cpp20/span1.cpp",
+      "solution": "solutions/span1.cpp",
+      "hint": "",
+      "description": "Title: std::span 非拥有视图"
+    },
+    {
+      "id": "deducingthis1",
+      "topic": "cpp23",
+      "title": "主题: C++23 — Deducing this (显式对象参数)",
+      "file": "cpp23/deducingthis1.cpp",
+      "solution": "solutions/deducingthis1.cpp",
+      "hint": "",
+      "description": "主题: C++23 — Deducing this (显式对象参数)"
+    },
+    {
+      "id": "expected23",
+      "topic": "cpp23",
+      "title": "主题: C++23 — std::expected 错误处理",
+      "file": "cpp23/expected23.cpp",
+      "solution": "solutions/expected23.cpp",
+      "hint": "",
+      "description": "主题: C++23 — std::expected 错误处理"
+    },
+    {
+      "id": "flatmap1",
+      "topic": "cpp23",
+      "title": "主题: C++23 — std::flat_map / std::flat_set",
+      "file": "cpp23/flatmap1.cpp",
+      "solution": "solutions/flatmap1.cpp",
+      "hint": "",
+      "description": "主题: C++23 — std::flat_map / std::flat_set"
+    },
+    {
+      "id": "ifconsteval1",
+      "topic": "cpp23",
+      "title": "主题: C++23 — if consteval 编译期/运行期分支",
+      "file": "cpp23/ifconsteval1.cpp",
+      "solution": "solutions/ifconsteval1.cpp",
+      "hint": "",
+      "description": "主题: C++23 — if consteval 编译期/运行期分支"
+    },
+    {
+      "id": "mdspan1",
+      "topic": "cpp23",
+      "title": "主题: C++23 — 多维数组视图 (std::mdspan)",
+      "file": "cpp23/mdspan1.cpp",
+      "solution": "solutions/mdspan1.cpp",
+      "hint": "",
+      "description": "主题: C++23 — 多维数组视图 (std::mdspan)"
+    },
+    {
+      "id": "movonlyfunc1",
+      "topic": "cpp23",
+      "title": "主题: C++23 — move_only_function 移动专用可调用包装器",
+      "file": "cpp23/movonlyfunc1.cpp",
+      "solution": "solutions/movonlyfunc1.cpp",
+      "hint": "",
+      "description": "主题: C++23 — move_only_function 移动专用可调用包装器"
+    },
+    {
+      "id": "print23",
+      "topic": "cpp23",
+      "title": "主题: C++23 — std::print / std::println 格式化输出",
+      "file": "cpp23/print23.cpp",
+      "solution": "solutions/print23.cpp",
+      "hint": "",
+      "description": "主题: C++23 — std::print / std::println 格式化输出"
+    },
+    {
+      "id": "atomics1",
+      "topic": "topics",
+      "title": "主题: 原子操作与内存序 — std::atomic, memory_order",
+      "file": "topics/atomics1.cpp",
+      "solution": "solutions/atomics1.cpp",
+      "hint": "",
+      "description": "主题: 原子操作与内存序 — std::atomic, memory_order"
+    },
+    {
+      "id": "cachefriendly1",
+      "topic": "topics",
+      "title": "主题: 缓存友好的数据结构 — AoS vs SoA, alignment, flat_map",
+      "file": "topics/cachefriendly1.cpp",
+      "solution": "solutions/cachefriendly1.cpp",
+      "hint": "",
+      "description": "主题: 缓存友好的数据结构 — AoS vs SoA, alignment, flat_map"
+    },
+    {
+      "id": "compiletime1",
+      "topic": "topics",
+      "title": "主题: 编译期计算 — constexpr/consteval 数据结构与算法",
+      "file": "topics/compiletime1.cpp",
+      "solution": "solutions/compiletime1.cpp",
+      "hint": "",
+      "description": "主题: 编译期计算 — constexpr/consteval 数据结构与算法"
+    },
+    {
+      "id": "exception1",
+      "topic": "topics",
+      "title": "主题: 异常安全 — 三大保证、swap 惯用法、RAII、noexcept",
+      "file": "topics/exception1.cpp",
+      "solution": "solutions/exception1.cpp",
+      "hint": "",
+      "description": "主题: 异常安全 — 三大保证、swap 惯用法、RAII、noexcept"
+    },
+    {
+      "id": "noexcept1",
+      "topic": "topics",
+      "title": "主题: noexcept 的影响 — specifier, operator, 移动语义与 vector",
+      "file": "topics/noexcept1.cpp",
+      "solution": "solutions/noexcept1.cpp",
+      "hint": "",
+      "description": "主题: noexcept 的影响 — specifier, operator, 移动语义与 vector"
+    },
+    {
+      "id": "patterns1",
+      "topic": "topics",
+      "title": "主题: 设计模式 — RAII Guard, 类型擦除, CRTP, Observer",
+      "file": "topics/patterns1.cpp",
+      "solution": "solutions/patterns1.cpp",
+      "hint": "",
+      "description": "主题: 设计模式 — RAII Guard, 类型擦除, CRTP, Observer"
+    },
+    {
+      "id": "perf1",
+      "topic": "topics",
+      "title": "主题: 性能优化技巧 — 移动语义, SBO, 缓存友好, string_view",
+      "file": "topics/perf1.cpp",
+      "solution": "solutions/perf1.cpp",
+      "hint": "",
+      "description": "主题: 性能优化技巧 — 移动语义, SBO, 缓存友好, string_view"
+    },
+    {
+      "id": "ruleof501",
+      "topic": "topics",
+      "title": "主题: Rule of 5 与 Rule of 0",
+      "file": "topics/ruleof501.cpp",
+      "solution": "solutions/ruleof501.cpp",
+      "hint": "",
+      "description": "主题: Rule of 5 与 Rule of 0"
+    },
+    {
+      "id": "tmp1",
+      "topic": "topics",
+      "title": "主题: 模板元编程 — type_list, SFINAE, void_t 检测",
+      "file": "topics/tmp1.cpp",
+      "solution": "solutions/tmp1.cpp",
+      "hint": "",
+      "description": "主题: 模板元编程 — type_list, SFINAE, void_t 检测"
+    },
+    {
+      "id": "valuecat1",
+      "topic": "topics",
+      "title": "主题: 值类别 (Value Categories) — lvalue, prvalue, xvalue",
+      "file": "topics/valuecat1.cpp",
+      "solution": "solutions/valuecat1.cpp",
+      "hint": "",
+      "description": "主题: 值类别 (Value Categories) — lvalue, prvalue, xvalue"
+    }
+  ]
+}
