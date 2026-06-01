@@ -37,7 +37,7 @@ std::string long_str(100, 'x');   // 堆分配一次
 // GCC: empty capacity = 15, libc++: 22
 ```
 
-SSO 影响：短字符串操作快（无堆分配），但 `sizeof(std::string)` 较大（64-bit 上通常 32 字节），且移动短字符串可能需要拷贝（数据内联）。
+SSO 影响：短字符串操作快（无堆分配），但 `sizeof(std::string)` 较大（libc++ 为 24 字节，libstdc++/MSVC 为 32 字节），且移动短字符串可能需要拷贝（数据内联）。
 
 ## 缓存友好的数据结构
 
@@ -91,10 +91,12 @@ int process(int value) {
 
 影响代码布局（热/冷路径分离），不控制条件移动指令生成。
 
-## SIMD（C++26 std::simd）
+## SIMD 向量化（实验性 TS / C++26 草案）
+
+> **注意**：`std::simd` 已被纳入 C++26 草案（P1928），但截至 2024 年主流编译器仍以实验性 TS 形式提供（`<experimental/simd>`）。下方示例使用 TS 命名空间；待编译器正式支持后可切换为 `std::simd`。
 
 ```cpp
-#include <simd>
+#include <experimental/simd>
 namespace stdx = std::experimental;
 
 void vector_add(const float* a, const float* b, float* out, std::size_t n) {
@@ -102,13 +104,17 @@ void vector_add(const float* a, const float* b, float* out, std::size_t n) {
     constexpr auto w = V::size();
     std::size_t i = 0;
     for (; i + w <= n; i += w) {
+        // ⚠️ vector_aligned 要求指针满足 native_simd 的对齐要求
+        // 实际使用时需确保 a/b/out 按 V::alignment() 对齐分配
         V va(a + i, stdx::vector_aligned);
         V vb(b + i, stdx::vector_aligned);
         (va + vb).copy_to(out + i, stdx::vector_aligned);
     }
-    for (; i < n; ++i) out[i] = a[i] + b[i];
+    for (; i < n; ++i) out[i] = a[i] + b[i]; // 标量尾部处理
 }
 ```
+
+编译示例（GCC 14+）：`g++ -std=c++26 -O3 -march=native -I/path/to/experimental/simd`
 
 ## 分配器感知容器
 

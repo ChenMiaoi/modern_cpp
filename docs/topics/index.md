@@ -6,7 +6,7 @@
 
 | 专题 | 说明 |
 |------|------|
-| [C++ 术语黑话全书](/topics/cpp-jargon) | 120+ 个专业术语系统性讲解：值类别、重载决议、SFINAE、类型擦除、异常安全、UB 等 |
+| [C++ 术语黑话全书](/topics/cpp-jargon/) | 120+ 个专业术语系统性讲解：值类别、重载决议、SFINAE、类型擦除、异常安全、UB 等 |
 | [内存模型与并发](/topics/memory-model) | 从 C++11 的内存模型到 C++26 的 Senders/Receivers |
 | [模板元编程](/topics/template-metaprogramming) | 从 SFINAE 到 Concepts，模板技术的进化 |
 | [RAII 与资源管理](/topics/raii) | 从构造/析构到智能指针到 Coroutine scope guard |

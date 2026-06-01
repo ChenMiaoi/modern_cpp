@@ -6,21 +6,24 @@ Google C++ 风格指南**禁止使用异常**（在大多数场景下）——�
 
 ## Status 内部布局
 
+`Status` 使用 tagged pointer 设计，将常见状态码内联到指针值中，避免堆分配：
+
 ```cpp
-// status.h 中的简化表示
+// status.h 中的简化表示（实际实现更复杂）
 class Status {
-  // OK 状态：指针为 nullptr，零开销
-  // 非 OK 状态：指向堆分配的 State 结构
-  struct State {
-    absl::StatusCode code_;        // 错误码枚举
-    std::string message_;          // 错误消息
-    absl::InlinedVector<Payload, 1> payloads_;  // 附加数据
+  uintptr_t rep_;  // tagged pointer：
+  // - 低位标记区分"内联规范状态码"和"堆分配 StatusRep"
+  // - 内联模式：直接编码 StatusCode（如 OK、CANCELLED 等常见状态）
+  // - 堆模式：指向 StatusRep（包含 code + message + payloads + source location）
+  struct StatusRep {
+    absl::StatusCode code_;
+    std::string message_;
+    // payloads, source location 等
   };
-  State* state_;                   // nullptr = OK
 };
 ```
 
-关键设计：OK 状态时 `state_` 为 `nullptr`，`sizeof(Status)` = 一个指针（8 字节）。只有出错时才分配堆内存。这是**错误路径有开销、成功路径零开销**的设计哲学。
+关键设计：OK 和常见错误码直接内联在 `rep_` 中，零堆分配。只有携带消息或附加数据的复杂错误才分配堆内存。`sizeof(Status)` = 一个指针大小（8 字节）。
 
 ```cpp
 // 使用示例

@@ -78,7 +78,12 @@ public:
 };
 
 // 方案 3: std::variant — 无堆分配的有限策略集合
-using Policy = std::variant<struct Ascending, struct Descending>;
+struct Ascending { bool operator()(int a, int b) const { return a < b; } };
+struct Descending { bool operator()(int a, int b) const { return a > b; } };
+using Policy = std::variant<Ascending, Descending>;
+void sort_with_policy(std::vector<int>& data, Policy policy) {
+    std::visit([&](auto& comp) { std::ranges::sort(data, comp); }, policy);
+}
 ```
 
 ## 工厂模式（Factory）
@@ -119,17 +124,25 @@ std::unique_ptr<Widget> Widget::create(const std::string& type) {
 class HttpRequest {
     std::string method_, url_, body_;
     int timeout_ms_ = 5000;
+    // 注意：Builder 需要访问 HttpRequest 的私有构造函数
+    // 因此将 Builder 声明为友元，或让 Builder 保存分散字段
 public:
+    HttpRequest(std::string method, std::string url, std::string body, int timeout)
+        : method_(std::move(method)), url_(std::move(url)),
+          body_(std::move(body)), timeout_ms_(timeout) {}
+
     class Builder {
-        HttpRequest req_;
+        std::string method_ = "GET", url_, body_;
+        int timeout_ms_ = 5000;
     public:
-        Builder& method(std::string m)  { req_.method_ = std::move(m); return *this; }
-        Builder& url(std::string u)     { req_.url_ = std::move(u); return *this; }
-        Builder& body(std::string b)    { req_.body_ = std::move(b); return *this; }
-        Builder& timeout(int ms)        { req_.timeout_ms_ = ms; return *this; }
+        Builder& method(std::string m)  { method_ = std::move(m); return *this; }
+        Builder& url(std::string u)     { url_ = std::move(u); return *this; }
+        Builder& body(std::string b)    { body_ = std::move(b); return *this; }
+        Builder& timeout(int ms)        { timeout_ms_ = ms; return *this; }
         HttpRequest build() {
-            if (req_.url_.empty()) throw std::logic_error("URL required");
-            return std::move(req_);
+            if (url_.empty()) throw std::logic_error("URL required");
+            return HttpRequest(std::move(method_), std::move(url_),
+                               std::move(body_), timeout_ms_);
         }
     };
 };

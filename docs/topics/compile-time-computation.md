@@ -60,7 +60,7 @@ constexpr int v = Derived{}.value();
 
 ### C++23：constexpr string/vector
 
-C++23 允许 `std::string` 和 `std::vector` 作为 constexpr 变量，标志编译期计算走向实用。
+C++20/23 允许在常量求值期间使用 `std::string` 和 `std::vector`——它们的构造、修改和析构操作都可以在编译期执行。这使得编译期计算从"受限的标量操作"走向"可以使用动态容器"。但需注意：编译期内存分配有上限，且动态分配的存储通常不能跨越该次常量求值存活。
 
 ```cpp
 constexpr auto sorted = [] {
@@ -90,11 +90,11 @@ consteval std::size_t enum_count(auto enum_type) {
     return std::meta::enumerators_of(enum_type).size();
 }
 enum class Color { Red, Green, Blue };
-static_assert(enum_count(^Color) == 3);
+static_assert(enum_count(^^Color) == 3);
 
 // 编译期生成 enum→string
 constexpr std::string_view color_name(Color c) {
-    template for (constexpr auto e : std::meta::enumerators_of(^Color)) {
+    template for (constexpr auto e : std::meta::enumerators_of(^^Color)) {
         if (c == [:e:]) return std::meta::name_of(e);
     }
     return "unknown";
@@ -105,7 +105,8 @@ template <typename T>
 std::string to_json(const T& obj) {
     std::string result = "{";
     bool first = true;
-    template for (constexpr auto mem : std::meta::members_of(^T)) {
+    // nonstatic_data_members_of 只遍历数据成员，排除成员函数等
+    template for (constexpr auto mem : std::meta::nonstatic_data_members_of(^^T)) {
         if (!first) result += ", "; first = false;
         result += "\"" + std::string(std::meta::name_of(mem)) + "\"";
         result += ": " + serialize(obj.[:mem:]);

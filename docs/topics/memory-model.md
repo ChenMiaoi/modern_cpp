@@ -73,11 +73,16 @@ counter.fetch_add(1, std::memory_order_relaxed);
 
 // C++20: 原子等待/通知（替代忙轮询）
 std::atomic<bool> ready{false};
-// 等待端
+
+// 旧式忙轮询（C++20 之前）— 浪费 CPU：
+// while (!ready.load(std::memory_order_acquire)) {
+//     std::this_thread::yield();
+// }
+
+// C++20 阻塞等待 — 内核级挂起，不浪费 CPU：
 while (!ready.load(std::memory_order_acquire)) {
-    // C++20 之前: std::this_thread::yield() 或 _mm_pause()
+    ready.wait(false, std::memory_order_acquire); // 若 ready 仍为 false，线程阻塞
 }
-ready.wait(false, std::memory_order_acquire); // C++20 阻塞等待
 
 // 通知端
 ready.store(true, std::memory_order_release);
@@ -153,8 +158,7 @@ auto work = std::execution::just(42)
           | std::execution::then([](int v) { return v * 2; })
           | std::execution::then([](int v) { return std::to_string(v); });
 
-auto result = std::execution::on(scheduler, std::move(work))
-             | std::sync_wait();
+auto result = std::this_thread::sync_wait(std::move(work));
 
 // 优势：取消通过 stop_token 自动传播，错误通过类型系统传播，
 // 执行策略可组合且不与特定线程池绑定

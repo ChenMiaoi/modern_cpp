@@ -44,6 +44,7 @@ static_assert(!has_size<int>::value);
 
 ```cpp
 // enable_if: 条件为 true 时启用重载
+// ⚠️ 注意：此示例仅展示 SFINAE 约束机制，溢出检测仅覆盖有符号正数上溢场景
 template <typename T>
 std::enable_if_t<std::is_integral_v<T>, T>
 safe_add(T a, T b) {
@@ -75,13 +76,17 @@ auto process(T value) {
 template <typename> struct always_false : std::false_type {};
 
 // 关键优势：两个分支不需要同时合法
+// （process 的两个分支不需要同时编译通过——不满足的分支被丢弃）
+```
+
+```cpp
+// C++20: if constexpr + requires 表达式（组合使用）
 template <typename T>
 void serialize(const T& obj) {
     if constexpr (requires { obj.serialize(); }) obj.serialize();
     else { /* 默认序列化 */ }
 }
 ```
-
 ## Concepts（C++20）
 
 将约束提升为一等公民，彻底改善模板编程的可读性和错误信息质量：
@@ -93,15 +98,14 @@ concept Hashable = requires(T a) {
 };
 
 template <typename T>
-concept Sortable = std::ranges::range<T>
-    && requires(std::ranges::range_value_t<T>& a,
-                std::ranges::range_value_t<T>& b) {
-        { a < b } -> std::convertible_to<bool>;
-    };
+concept Sortable = std::ranges::random_access_range<T>
+    && std::sortable<std::ranges::iterator_t<T>>;
 
 // 约束函数
 template <Sortable Range>
 void sort_and_print(Range& r) { std::ranges::sort(r); }
+// 注意：Sortable 要求 random_access_range，因此 std::list 不满足此约束
+// 这与 std::ranges::sort 的真实签名一致
 
 // 简写语法
 void process(std::integral auto val) { /* ... */ }
@@ -165,12 +169,13 @@ public:
 
 C++26 引入编译期反射（P2996），允许在编译期检查和操控程序结构：
 ```cpp
-// 编译期生成序列化代码
+// 编译期生成序列化代码（注意：^^T 是反射操作符，[:e:] 是 splice 操作符）
 template <typename T>
 std::string to_json(const T& obj) {
     std::string result = "{";
     bool first = true;
-    template for (constexpr auto mem : std::meta::members_of(^T)) {
+    // nonstatic_data_members_of 只遍历数据成员，排除成员函数等
+    template for (constexpr auto mem : std::meta::nonstatic_data_members_of(^^T)) {
         if (!first) result += ", "; first = false;
         result += "\"" + std::string(std::meta::name_of(mem)) + "\"";
         result += ": " + serialize(obj.[:mem:]);

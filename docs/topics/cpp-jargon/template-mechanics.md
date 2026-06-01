@@ -126,7 +126,7 @@ auto sum(Args... args) {
 // =   展开整个表达式，直接计算到 a 中
 ```
 
-详见 [Boost.Multiprecision](/libraries/algorithms/multiprecision) 中的表达式模板实现。
+详见 Boost.Multiprecision 中的表达式模板实现（参见 `references/impl/` 中的 Boost 源码）。
 
 ## Template Template Parameter
 

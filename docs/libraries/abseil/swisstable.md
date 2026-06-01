@@ -2,20 +2,23 @@
 
 > 源码路径：`references/impl/abseil-cpp/absl/container/internal/raw_hash_set.h`
 
-由 Matt Kulukundis 在 CppCon 2017 演讲 "Designing a Fast, Efficient, Cache-friendly Hash Table" 后为业界所知。SwissTable 是 GCC 11+ `std::unordered_map` 的底层实现，也是 C++23 `std::flat_hash_map` 提案的基础。
+由 Matt Kulukundis 在 CppCon 2017 演讲 "Designing a Fast, Efficient, Cache-friendly Hash Table" 后为业界所知。SwissTable 是 Abseil `flat_hash_map`/`flat_hash_set` 的底层实现，其设计思想影响了众多高性能哈希表实现。
 
 ## 哈希值分割：H1/H2
 
 对任意 key `x`，计算 `hash(x)` 后拆分为两部分：
 
-- **H1**（高位）：取 `hash & (capacity - 1)` 定位初始探测位置。因为 capacity 始终是 2 的幂，等价于取低 `log2(capacity)` 位。
-- **H2**（低 7 位）：取 `hash & 0x7F`，得到一个 7-bit 的标签值（`h2_t = uint8_t`，范围 `0x00`~`0x7F`），写入该 slot 对应的 control byte。H2 的作用是**预过滤**：在对 slot 执行真正的 `operator==` 之前，先用 1 字节的 H2 快速排除不可能匹配的 slot。7-bit H2 的假阳性概率为 `1/128`，实测中每次 `find` 的误判比较次数 < 1/8。
+- **H1**（低位）：直接使用完整哈希值，后续通过 `hash & (capacity - 1)` 取低位定位初始探测位置。因为 capacity 始终是 2 的幂，等价于取低 `log2(capacity)` 位。
+- **H2**（高 7 位）：取 `hash >> (sizeof(size_t) * 8 - 7)`，即哈希值的最高 7 位，得到一个 7-bit 的标签值（`h2_t = uint8_t`，范围 `0x00`~`0x7F`），写入该 slot 对应的 control byte。H2 的作用是**预过滤**：在对 slot 执行真正的 `operator==` 之前，先用 1 字节的 H2 快速排除不可能匹配的 slot。7-bit H2 的假阳性概率为 `1/128`，实测中每次 `find` 的误判比较次数 < 1/8。
 
 ```cpp
-// hash_function_defaults.h 使用 absl::Hash
-// H1 和 H2 的实际提取（简化）：
-h2_t H1(size_t hash) { return hash; }         // 模 capacity 后做索引
-h2_t H2(size_t hash) { return hash & 0x7F; }  // 低 7 位做标签
+// 源码：raw_hash_set.h
+// H1 直接保留完整哈希值，后续 mask 操作取低位
+inline size_t H1(size_t hash) { return hash; }
+// H2 取最高 7 位作为标签
+inline h2_t H2(size_t hash) {
+    return static_cast<h2_t>(hash >> (sizeof(size_t) * 8 - 7));
+}
 ```
 
 ## Control Byte 布局
@@ -74,7 +77,7 @@ inline bool IsEmptyOrDeleted(ctrl_t c) { return c < ctrl_t::kSentinel; }
   └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**为什么 ctrl 和 slots 分离？** 16 个 control bytes（SSE2 一组）只占 16 字节，恰好放进一个 cache line。如果与 slot 交错，一个 cache line 只能容纳少量 slot 的元数据。分离后，探测时只需加载 control bytes 到 SIMD 寄存器，绝大多数探测在第一个 `_mm_cmpeq_epi8` + `_mm_movemask_epi8` 后即可确定是否命中或需要继续。
+**为什么 ctrl 和 slots 分离？** 16 个 control bytes 恰好装进一个 128-bit SSE 寄存器，一次 SIMD 操作即可完成探测。如果与 slot 交错，一个 64 字节 cache line 只能容纳少量 slot 的元数据。分离后，探测时只需加载 control bytes 到 SIMD 寄存器，绝大多数探测在第一个 `_mm_cmpeq_epi8` + `_mm_movemask_epi8` 后即可确定是否命中或需要继续。
 
 `clones[kWidth - 1]` 是 `ctrl` 数组前 `kWidth - 1` 个字节的拷贝。当探测位置靠近 `ctrl` 数组末尾时，GroupSse2Impl 的 16 字节加载会"绕回"到数组开头——`clones` 数组提供了这段环绕数据的合法副本，避免越界读。
 
@@ -152,28 +155,27 @@ struct GroupSse2Impl {
 ## 探测序列（probe_seq）
 
 ```cpp
+// 源码：raw_hash_set.h
 class probe_seq {
   size_t mask_;    // capacity - 1
-  size_t offset_;  // 当前探测偏移
-  size_t stride_;  // 步长 = H1（模 capacity）
+  size_t offset_;  // 当前探测偏移（模 capacity）
+  size_t index_;   // 累积步长（0, kWidth, 2*kWidth, 3*kWidth, ...）
 
  public:
   probe_seq(size_t hash, size_t mask)
-      : mask_(mask), offset_(hash & mask), stride_(hash & mask) {
-    stride_ |= 1;  // 奇数化，保证与 capacity 互质
-  }
+      : mask_(mask), offset_(hash & mask), index_(0) {}
 
   size_t offset() const { return offset_; }
   size_t offset(size_t i) const { return (offset_ + i) & mask_; }
 
   void next() {
-    offset_ = (offset_ + stride_) & mask_;
-    stride_ += kWidth;  // 二次探测：stride 每步递增 kWidth（16）
+    index_ += kWidth;                    // 步长递增一个 Group 宽度
+    offset_ = (offset_ + index_) & mask_; // 累积偏移
   }
 };
 ```
 
-不是线性探测，而是**二次探测**的变体。每次 `next()` 让 stride 增加 `kWidth`（SSE2 下为 16），保证所有 slot 组都能被访问到。
+探测序列为三角数增量：第 N 步偏移 `N * kWidth`（SSE2 下 16）。例如 capacity=64 时，探测序列为 0, 16, 48, 96%64=32, ...。步长始终是 Group 宽度的倍数，保证每个 Group 都被探测到，且不会陷入固定步长的循环。
 
 ## 加载因子与 rehash
 
@@ -220,12 +222,16 @@ absl::node_hash_map<std::string, std::vector<int>> big_values;
 | 引用稳定性 | ✗ | ✓ |
 | 适用场景 | 大多数场景 | 需要引用稳定性 |
 
-## 与 libstdc++ SwissTable 的差异
+## 与 libstdc++ `_Hashtable` 的差异
 
-| 维度 | Abseil | libstdc++ (GCC 11+) |
-|------|--------|---------------------|
-| ctrl 与 slots | **分离**（平行数组） | **交错**（ctrl[i] 紧邻 slot[i]） |
-| 增长策略 | 7/8 负载因子 | 7/8 负载因子 |
-| 异构查找 | 支持 | 支持 |
-| 小表优化 | SOO（内联存储） | 无 |
-| 墓碑清理 | Group 内有 EMPTY 时直接标 EMPTY | 类似 |
+libstdc++ 的 `std::unordered_map` 使用节点式 `_Hashtable`（bucket + `_Hash_node` 链表），而非开放寻址。以下是 Abseil SwissTable 与 libstdc++ `_Hashtable` 的关键差异：
+
+| 维度 | Abseil SwissTable | libstdc++ `_Hashtable` |
+|------|-------------------|----------------------|
+| 内存布局 | 开放寻址：ctrl 平行数组 + 连续 slot 数组 | 链式：bucket 数组 + `_Hash_node` 链表 |
+| 缓存行为 | 连续内存，SIMD 探测 | 指针追逐，缓存不友好 |
+| 负载因子 | 7/8（87.5%） | 1.0（默认） |
+| 哈希分割 | H1/H2 分离，7-bit 标签预过滤 | 无预过滤 |
+| 迭代器稳定性 | ✗（rehash 后失效） | ✓（节点独立分配） |
+| 引用稳定性 | ✗ | ✓ |
+| 适用场景 | 高性能查询密集场景 | 需要迭代器/引用稳定性的场景 |

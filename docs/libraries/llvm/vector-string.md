@@ -61,6 +61,8 @@ Step 4: 在空位放置 X           → [A B X ? ? ? ? D E ?]
 
 ## std::string：24 字节 SSO
 
+> **注意**：libc++ 有两套 string ABI 布局（default 和 alternate）。以下描述的是 **alternate layout**（`_LIBCPP_ABI_ALTERNATE_STRING_LAYOUT`），也是源码中的默认实现。`_LIBCPP_ABI_STRING_PAIR_LAYOUT` 等其他 ABI 选项的布局不同。
+
 ```
 sizeof(basic_string) = 24 字节
 
@@ -77,3 +79,5 @@ SSO 容量 = 22 字节 → 存储百万个短字符串时比其他实现少用 ~
 ```
 
 **为什么 22 字节？** `sizeof(__long)` = 8+8+8 = 24。短模式的 `__data_[23]` 占 23 字节，减去 1 字节 `\0` = 22。
+
+**`__is_long()` 如何判断？** 检查最后字节的最低位：`0` = Short，`1` = Long。这个判断在几乎所有 string 操作的热路径上执行。

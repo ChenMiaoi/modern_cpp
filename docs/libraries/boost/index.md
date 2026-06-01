@@ -10,107 +10,92 @@
 
 | 排名 | 库 | 领域 | 标准化影响 |
 |------|---|------|-----------|
-| 1 | [Asio](/libraries/boost/networking/asio) | 网络/异步 I/O | Networking TS |
-| 2 | [SmartPtr](/libraries/boost/utility/smart-ptr) | 内存管理 | C++11 `shared_ptr`/`weak_ptr` |
-| 3 | [Filesystem](/libraries/boost/utility/filesystem) | 文件系统 | C++17 `std::filesystem` |
-| 4 | [Variant](/libraries/boost/utility/variant-optional-any) | 类型安全 union | C++17 `std::variant` |
-| 5 | [Optional](/libraries/boost/utility/variant-optional-any) | 可选值 | C++17 `std::optional` |
-| 6 | [Regex](/libraries/boost/utility/regex-url) | 正则表达式 | C++11 `std::regex` |
-| 7 | [Hana](/libraries/boost/metaprogramming/hana) | 编译期编程 | — |
-| 8 | [Spirit.X3](/libraries/boost/parsing/spirit-x3) | PEG 解析 | — |
-| 9 | [Beast](/libraries/boost/networking/beast) | HTTP/WebSocket | — |
-| 10 | [Container](/libraries/boost/containers/container) | 高级容器 | C++23 `std::flat_map` |
-| 11 | [MultiIndex](/libraries/boost/containers/multi-index) | 多索引容器 | — |
-| 12 | [JSON](/libraries/boost/networking/json) | JSON 解析 | — |
-| 13 | [Multiprecision](/libraries/boost/algorithms/multiprecision) | 任意精度算术 | — |
-| 14 | [Thread](/libraries/boost/concurrency/thread) | 线程 | C++11 `std::thread` |
-| 15 | [Program Options](/libraries/boost/utility/program-options) | 命令行解析 | — |
-| 16 | [Log](/libraries/boost/utility/log) | 日志 | — |
-| 17 | [PropertyTree](/libraries/boost/serialization/property-tree) | 树形配置 | — |
-| 18 | [Geometry](/libraries/boost/algorithms/geometry) | 计算几何 | — |
-| 19 | [Graph](/libraries/boost/containers/graph) | 图算法 | — |
-| 20 | [Math](/libraries/boost/algorithms/math) | 数学函数 | — |
-| 21 | [Intrusive](/libraries/boost/containers/intrusive) | 侵入式容器 | — |
-| 22 | [Fiber](/libraries/boost/concurrency/fiber) | 协程/纤程 | — |
-| 23 | [Coroutine2](/libraries/boost/concurrency/coroutine2) | 协程 | — |
-| 24 | [Signals2](/libraries/boost/functional/signals2) | 信号槽 | — |
-| 25 | [Range](/libraries/boost/algorithms/range) | 范围算法 | C++20 Ranges |
-| 26 | [Algorithm](/libraries/boost/algorithms/algorithm) | 字符串/序列算法 | — |
-| 27 | [Mp11](/libraries/boost/metaprogramming/mp11) | 现代元编程 | — |
-| 28 | [DLL](/libraries/boost/utility/dll) | 动态库加载 | — |
-| 29 | [Uuid](/libraries/boost/utility/uuid) | UUID 生成 | — |
-| 30 | [Endian](/libraries/boost/utility/endian) | 字节序处理 | — |
-| 31 | [Serialization](/libraries/boost/serialization/serialization) | 序列化 | — |
-| 32 | [Test](/libraries/boost/utility/test) | 单元测试 | — |
-| 33 | [Outcome](/libraries/boost/functional/outcome) | 结果/错误 | C++23 `std::expected` 启发 |
-| 34 | [Lockfree](/libraries/boost/concurrency/lockfree) | 无锁数据结构 | — |
-| 35 | [Bimap](/libraries/boost/containers/bimap) | 双向映射 | — |
-| 36 | [CircularBuffer](/libraries/boost/containers/circular-buffer) | 环形缓冲区 | — |
-| 37 | [DynamicBitset](/libraries/boost/containers/dynamic-bitset) | 动态位集 | — |
-| 38 | [Heap](/libraries/boost/containers/heap) | 堆数据结构 | — |
-| 39 | [PFR](/libraries/boost/metaprogramming/pfr) | 反射 | C++26 反射 |
-| 40 | [Describe](/libraries/boost/metaprogramming/describe) | 类型描述 | — |
-| 41 | [TypeTraits](/libraries/boost/metaprogramming/type-traits) | 类型特征 | C++11 `<type_traits>` |
-| 42 | [Bind](/libraries/boost/functional/bind-lambda) | 绑定器 | C++11 `std::bind` |
-| 43 | [Lambda](/libraries/boost/functional/bind-lambda) | Lambda | C++11 lambda |
-| 44 | [Function](/libraries/boost/functional/function) | 函数对象 | C++11 `std::function` |
-| 45 | [Format](/libraries/boost/parsing/format) | 格式化 | `std::format`（被 fmt 取代） |
-| 46 | [Tokenizer](/libraries/boost/parsing/tokenizer) | 分词器 | — |
-| 47 | [Locale](/libraries/boost/parsing/locale) | 本地化 | — |
-| 48 | [Pool](/libraries/boost/memory/pool) | 内存池 | — |
-| 49 | [CRC](/libraries/boost/algorithms/crc) | CRC 校验 | — |
-| 50 | [Conversion](/libraries/boost/algorithms/conversion) | 类型转换 | — |
+| 1 | Asio | 网络/异步 I/O | Networking TS |
+| 2 | SmartPtr | 内存管理 | C++11 `shared_ptr`/`weak_ptr` |
+| 3 | Filesystem | 文件系统 | C++17 `std::filesystem` |
+| 4 | Variant | 类型安全 union | C++17 `std::variant` |
+| 5 | Optional | 可选值 | C++17 `std::optional` |
+| 6 | Regex | 正则表达式 | C++11 `std::regex` |
+| 7 | Hana | 编译期编程 | — |
+| 8 | Spirit.X3 | PEG 解析 | — |
+| 9 | Beast | HTTP/WebSocket | — |
+| 10 | Container | 高级容器 | C++23 `std::flat_map` |
+| 11 | MultiIndex | 多索引容器 | — |
+| 12 | JSON | JSON 解析 | — |
+| 13 | Multiprecision | 任意精度算术 | — |
+| 14 | Thread | 线程 | C++11 `std::thread` |
+| 15 | Program Options | 命令行解析 | — |
+| 16 | Log | 日志 | — |
+| 17 | PropertyTree | 树形配置 | — |
+| 18 | Geometry | 计算几何 | — |
+| 19 | Graph | 图算法 | — |
+| 20 | Math | 数学函数 | — |
+| 21 | Intrusive | 侵入式容器 | — |
+| 22 | Fiber | 协程/纤程 | — |
+| 23 | Coroutine2 | 协程 | — |
+| 24 | Signals2 | 信号槽 | — |
+| 25 | Range | 范围算法 | C++20 Ranges |
+| 26 | Algorithm | 字符串/序列算法 | — |
+| 27 | Mp11 | 现代元编程 | — |
+| 28 | DLL | 动态库加载 | — |
+| 29 | Uuid | UUID 生成 | — |
+| 30 | Endian | 字节序处理 | — |
+| 31 | Serialization | 序列化 | — |
+| 32 | Test | 单元测试 | — |
+| 33 | Outcome | 结果/错误 | C++23 `std::expected` 启发 |
+| 34 | Lockfree | 无锁数据结构 | — |
+| 35 | Bimap | 双向映射 | — |
+| 36 | CircularBuffer | 环形缓冲区 | — |
+| 37 | DynamicBitset | 动态位集 | — |
+| 38 | Heap | 堆数据结构 | — |
+| 39 | PFR | 反射 | C++26 反射 |
+| 40 | Describe | 类型描述 | — |
+| 41 | TypeTraits | 类型特征 | C++11 `<type_traits>` |
+| 42 | Bind | 绑定器 | C++11 `std::bind` |
+| 43 | Lambda | Lambda | C++11 lambda |
+| 44 | Function | 函数对象 | C++11 `std::function` |
+| 45 | Format | 格式化 | `std::format`（被 fmt 取代） |
+| 46 | Tokenizer | 分词器 | — |
+| 47 | Locale | 本地化 | — |
+| 48 | Pool | 内存池 | — |
+| 49 | CRC | CRC 校验 | — |
+| 50 | Conversion | 类型转换 | — |
+
+> 各库的详细分析见下方按领域分组的文档。
 
 ---
 
 ## 按领域导航
 
 ### [网络与 I/O](/libraries/boost/networking/)
-- [Asio](/libraries/boost/networking/asio) — Proactor 模型、事件循环、strand、C++20 协程
-- [Beast](/libraries/boost/networking/beast) — HTTP/WebSocket 协议引擎
-- [JSON](/libraries/boost/networking/json) — DOM 与 SAX 解析、内存池
-- [URL](/libraries/boost/networking/url) — RFC 3986 URL 解析
+Asio（Proactor 模型、事件循环、strand、C++20 协程）、Beast（HTTP/WebSocket）、JSON（DOM 与 SAX 解析）、URL（RFC 3986）
 
 ### [容器与数据结构](/libraries/boost/containers/)
-- [Container](/libraries/boost/containers/container) — flat_map、stable_vector、small_vector
-- [MultiIndex](/libraries/boost/containers/multi-index) — 多索引容器
-- [Graph](/libraries/boost/containers/graph) — BGL 图算法
-- [Intrusive](/libraries/boost/containers/intrusive) — 侵入式容器
-- [Bimap / CircularBuffer / DynamicBitset / Heap](/libraries/boost/containers/misc)
+Container（flat_map、stable_vector）、MultiIndex（多索引容器）、Graph（BGL 图算法）、Intrusive（侵入式容器）、Bimap、CircularBuffer、DynamicBitset、Heap
 
 ### [元编程](/libraries/boost/metaprogramming/)
-- [Hana](/libraries/boost/metaprogramming/hana) — Monad 驱动编译期编程
-- [Mp11](/libraries/boost/metaprogramming/mp11) — 现代 C++11 元编程
-- [PFR](/libraries/boost/metaprogramming/pfr) — 编译期结构体反射
-- [Describe](/libraries/boost/metaprogramming/describe) — 类型描述
-- [TypeTraits](/libraries/boost/metaprogramming/type-traits) — 类型特征
+Hana（Monad 驱动编译期编程）、Mp11（现代元编程）、PFR（编译期结构体反射）、Describe（类型描述）、TypeTraits（类型特征）
 
 ### [解析与文本](/libraries/boost/parsing/)
-- [Spirit.X3](/libraries/boost/parsing/spirit-x3) — PEG 解析器
-- [Format / Tokenizer / Locale](/libraries/boost/parsing/misc)
+Spirit.X3（PEG 解析器）、Format、Tokenizer、Locale
 
 ### [算法与数学](/libraries/boost/algorithms/)
-- [Multiprecision](/libraries/boost/algorithms/multiprecision) — 任意精度算术
-- [Math](/libraries/boost/algorithms/math) — 数学函数
-- [Geometry](/libraries/boost/algorithms/geometry) — 计算几何
-- [Range / Algorithm / CRC / Conversion](/libraries/boost/algorithms/misc)
+Multiprecision（任意精度算术）、Math（数学函数）、Geometry（计算几何）、Range、Algorithm、CRC、Conversion
 
 ### [并发](/libraries/boost/concurrency/)
-- [Thread / Fiber / Coroutine2](/libraries/boost/concurrency/coroutines)
-- [Lockfree](/libraries/boost/concurrency/lockfree)
+Thread、Fiber、Coroutine2、Lockfree（无锁数据结构）
 
 ### [函数式编程](/libraries/boost/functional/)
-- [Function / Signals2 / Outcome / Bind / Lambda](/libraries/boost/functional/misc)
+Function、Signals2、Outcome、Bind、Lambda
 
 ### [内存管理](/libraries/boost/memory/)
-- [SmartPtr / Pool / Align](/libraries/boost/memory/smart-ptr)
+SmartPtr、Pool、Align
 
 ### [序列化](/libraries/boost/serialization/)
-- [Serialization / PropertyTree](/libraries/boost/serialization/overview)
+Serialization、PropertyTree
 
 ### [工具](/libraries/boost/utility/)
-- [Filesystem / UUID / Endian / ProgramOptions / DLL / Log / Test](/libraries/boost/utility/misc)
-
+Filesystem、UUID、Endian、ProgramOptions、DLL、Log、Test
 ---
 
 ## Boost → 标准演进
