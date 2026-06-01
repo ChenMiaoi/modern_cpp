@@ -1,0 +1,15 @@
+{
+  "name": "modern-cpp-knowledge-base",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "C++ Knowledge Base: C++98 to C++29",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  }
+}

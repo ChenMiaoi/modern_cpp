@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# VitePress build output & cache
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# Downloaded references (PDFs, cloned repos, extracted archives)
+# These are large binary/vendor files — not tracked in git.
+# See docs/references/index.md for the full catalog and download instructions.
+references/books/
+references/standards/
+references/cppreference/html/
+# Backup dirs from submodule rebuild
+references/impl/_*_bak/
+references/guidelines/_*_bak/
+references/cppreference/_*_bak/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
