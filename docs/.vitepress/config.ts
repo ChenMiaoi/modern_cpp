@@ -5,13 +5,16 @@ export default defineConfig({
   description: 'C++ 知识库：从 C++98 到 C++29',
   lang: 'zh-CN',
   base: '/modern_cpp/',
-  // Suppress Shiki warnings for unsupported languages like 'meson'
-  // by aliasing them to a similar syntax via markdown-it config
   markdown: {
-    // VitePress uses Shiki for syntax highlighting.
-    // Languages not in Shiki's built-in set cause a warning.
-    // We silence it by mapping 'meson' -> 'ini' (closest match).
     languages: ['ini'],
+    languageAlias: {
+      meson: 'ini',
+    },
+  },
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1200,
+    },
   },
   themeConfig: {
     logo: '/logo.svg',
