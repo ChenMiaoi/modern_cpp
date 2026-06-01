@@ -7,6 +7,32 @@
 [submodule "references/impl/folly"]
 	path = references/impl/folly
 	url = https://github.com/facebook/folly.git
+	shallow = true
 [submodule "references/impl/llvm-project"]
 	path = references/impl/llvm-project
 	url = https://github.com/llvm/llvm-project.git
+	shallow = true
+[submodule "references/impl/fmt"]
+	path = references/impl/fmt
+	url = https://github.com/fmtlib/fmt.git
+	shallow = true
+[submodule "references/impl/spdlog"]
+	path = references/impl/spdlog
+	url = https://github.com/gabime/spdlog.git
+	shallow = true
+[submodule "references/impl/EASTL"]
+	path = references/impl/EASTL
+	url = https://github.com/electronicarts/EASTL.git
+	shallow = true
+[submodule "references/impl/range-v3"]
+	path = references/impl/range-v3
+	url = https://github.com/ericniebler/range-v3.git
+	shallow = true
+[submodule "references/impl/abseil-cpp"]
+	path = references/impl/abseil-cpp
+	url = https://github.com/abseil/abseil-cpp.git
+	shallow = true
+[submodule "references/impl/gcc"]
+	path = references/impl/gcc
+	url = https://github.com/gcc-mirror/gcc.git
+	shallow = true
