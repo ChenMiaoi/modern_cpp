@@ -1,0 +1,12 @@
+[submodule "references/guidelines/CppCoreGuidelines"]
+	path = references/guidelines/CppCoreGuidelines
+	url = https://github.com/isocpp/CppCoreGuidelines.git
+[submodule "references/cppreference/cppreference-doc"]
+	path = references/cppreference/cppreference-doc
+	url = https://github.com/PeterFeicht/cppreference-doc.git
+[submodule "references/impl/folly"]
+	path = references/impl/folly
+	url = https://github.com/facebook/folly.git
+[submodule "references/impl/llvm-project"]
+	path = references/impl/llvm-project
+	url = https://github.com/llvm/llvm-project.git
