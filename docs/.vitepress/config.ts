@@ -4,7 +4,7 @@ export default defineConfig({
   title: 'Modern C++',
   description: 'C++ 知识库：从 C++98 到 C++29',
   lang: 'zh-CN',
-
+  base: '/',
   themeConfig: {
     logo: '/logo.svg',
     siteTitle: 'Modern C++',

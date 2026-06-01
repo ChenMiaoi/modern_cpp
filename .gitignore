@@ -4,7 +4,7 @@ node_modules/
 # VitePress build output & cache
 docs/.vitepress/dist/
 docs/.vitepress/cache/
-
+/.vitepress/
 # Downloaded references (PDFs, cloned repos, extracted archives)
 # These are large binary/vendor files — not tracked in git.
 # See docs/references/index.md for the full catalog and download instructions.
