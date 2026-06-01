@@ -10,6 +10,16 @@ export default defineConfig({
     languageAlias: {
       meson: 'ini',
     },
+    config: (md) => {
+      const defaultRender = md.renderer.rules.fence!.bind(md.renderer.rules)
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const rendered = defaultRender(tokens, idx, options, env, self)
+        if (!/^(cpp|c\+\+|cxx)\b/.test(token.info.trim())) return rendered
+        const b64 = Buffer.from(token.content, 'utf-8').toString('base64')
+        return `<div class="ce-wrapper" data-ce-code="${b64}">${rendered}</div>\n`
+      }
+    },
   },
   vite: {
     build: {
