@@ -5,6 +5,14 @@ export default defineConfig({
   description: 'C++ 知识库：从 C++98 到 C++29',
   lang: 'zh-CN',
   base: '/modern_cpp/',
+  // Suppress Shiki warnings for unsupported languages like 'meson'
+  // by aliasing them to a similar syntax via markdown-it config
+  markdown: {
+    // VitePress uses Shiki for syntax highlighting.
+    // Languages not in Shiki's built-in set cause a warning.
+    // We silence it by mapping 'meson' -> 'ini' (closest match).
+    languages: ['ini'],
+  },
   themeConfig: {
     logo: '/logo.svg',
     siteTitle: 'Modern C++',
@@ -217,6 +225,7 @@ export default defineConfig({
           text: '专题',
           items: [
             { text: '总览', link: '/topics/' },
+            { text: 'C++ 术语黑话全书', link: '/topics/cpp-jargon/' },
             { text: '内存模型与并发', link: '/topics/memory-model' },
             { text: '模板元编程', link: '/topics/template-metaprogramming' },
             { text: 'RAII 与资源管理', link: '/topics/raii' },
@@ -249,14 +258,14 @@ export default defineConfig({
           text: 'STL 与标准库实现',
           items: [
             { text: '总览', link: '/libraries/' },
-            { text: 'libc++ (LLVM)', link: '/libraries/llvm' },
-            { text: 'libstdc++ (GCC)', link: '/libraries/libstdcxx' },
-            { text: 'Abseil (Google)', link: '/libraries/abseil' },
-            { text: 'Folly (Meta)', link: '/libraries/folly' },
-            { text: 'Boost', link: '/libraries/boost' },
-            { text: 'EASTL (EA)', link: '/libraries/eastl' },
-            { text: 'fmt / spdlog', link: '/libraries/fmt-spdlog' },
-            { text: 'range-v3', link: '/libraries/range-v3' },
+            { text: 'libc++ (LLVM)', link: '/libraries/llvm/' },
+            { text: 'libstdc++ (GCC)', link: '/libraries/libstdcxx/' },
+            { text: 'Abseil (Google)', link: '/libraries/abseil/' },
+            { text: 'Folly (Meta)', link: '/libraries/folly/' },
+            { text: 'Boost (Top 50)', link: '/libraries/boost/' },
+            { text: 'EASTL (EA)', link: '/libraries/eastl/' },
+            { text: 'fmt / spdlog', link: '/libraries/fmt-spdlog/' },
+            { text: 'range-v3', link: '/libraries/range-v3/' },
           ],
         },
       ],
