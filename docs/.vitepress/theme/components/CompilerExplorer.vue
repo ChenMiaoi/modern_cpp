@@ -1,5 +1,26 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useData } from 'vitepress'
+
+const { lang } = useData()
+const isZh = computed(() => lang.value.startsWith('zh'))
+
+const i18n = {
+  btnRun:     { zh: '在 Compiler Explorer 中运行', en: 'Run in Compiler Explorer' },
+  btnRunning: { zh: '编译中…', en: 'Compiling…' },
+  tabAsm:     { zh: '汇编',     en: 'Assembly' },
+  tabOutput:  { zh: '输出',     en: 'Output' },
+  noAsm:      { zh: '无汇编输出', en: 'No assembly output' },
+  runOk:      { zh: '✓ 运行成功（无输出）', en: '✓ Ran successfully (no output)' },
+  compileOk:  { zh: '编译成功 ✓ （无运行时输出 — static_assert / constexpr 在编译期求值）', en: 'Compiled ✓ (no runtime output — static_assert / constexpr evaluated at compile time)' },
+  reqFail:    { zh: '请求失败：', en: 'Request failed: ' },
+  checkNet:   { zh: '请检查网络连接。', en: 'Check your network connection.' },
+} as const
+
+function t(key: keyof typeof i18n): string {
+  return isZh.value ? i18n[key].zh : i18n[key].en
+}
+
 const props = defineProps<{ code?: string }>()
 const innerCode = ref(props.code ?? '')
 const running = ref(false)
@@ -115,7 +136,6 @@ async function fetchAsm(src: string): Promise<string> {
   return asm.map(l => l.text).join('\n')
 }
 
-// Execute request → runs the program and returns output HTML + exit code
 async function fetchRun(src: string): Promise<{ html: string; ok: boolean }> {
   const res = await fetch(GODBOLT_API, {
     method: 'POST', headers: HEADERS,
@@ -136,8 +156,8 @@ async function fetchRun(src: string): Promise<{ html: string; ok: boolean }> {
   let html: string
   if (json.didExecute && stdout)      html = `<pre class="ce-stdout">${esc(stdout)}</pre>`
   else if (json.didExecute && stderr)  html = `<pre class="ce-stderr">${esc(stderr)}</pre>`
-  else if (json.didExecute)            html = `<pre class="ce-ok">\u2713 运行成功（无输出）</pre>`
-  else                                 html = `<pre class="ce-info">编译成功 \u2713 （无运行时输出 — static_assert / constexpr 在编译期求值）</pre>`
+  else if (json.didExecute)            html = `<pre class="ce-ok">${t('runOk')}</pre>`
+  else                                 html = `<pre class="ce-info">${t('compileOk')}</pre>`
   return { html, ok }
 }
 
@@ -147,11 +167,10 @@ async function run(): Promise<void> {
   running.value = true
   try {
     const src = fullSource()
-    // Fire both requests in parallel
     const [asmRaw, execResult] = await Promise.all([
       fetchAsm(src),
       fetchRun(src).catch((e): { html: string; ok: boolean } => ({
-        html: `<pre class="ce-stderr">请求失败：${esc(e instanceof Error ? e.message : String(e))}</pre>`,
+        html: `<pre class="ce-stderr">${t('reqFail')}${esc(e instanceof Error ? e.message : String(e))}</pre>`,
         ok: false,
       })),
     ])
@@ -162,7 +181,7 @@ async function run(): Promise<void> {
     opened.value = true
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e)
-    output.value = `<pre class="ce-stderr">请求失败：${esc(msg)}\n请检查网络连接。</pre>`
+    output.value = `<pre class="ce-stderr">${t('reqFail')}${esc(msg)}\n${t('checkNet')}</pre>`
     rawAsm.value = ''
     activeTab.value = 'output'
     opened.value = true
@@ -181,7 +200,7 @@ function esc(s: string): string {
   <div class="ce-inner">
     <button class="ce-btn" :class="{ running }" :disabled="running" @click="run">
       <span class="ce-ico">{{ running ? '\u23f3' : '\u25b6' }}</span>
-      {{ running ? '编译中\u2026' : '在 Compiler Explorer 中运行' }}
+      {{ running ? t('btnRunning') : t('btnRun') }}
     </button>
     <Transition name="ce-slide">
       <div v-if="opened" class="ce-panel">
@@ -190,11 +209,11 @@ function esc(s: string): string {
             <button
               class="ce-tab" :class="{ active: activeTab === 'asm' }"
               @click="activeTab = 'asm'"
-            >汇编 ({{ FLAGS }})</button>
+            >{{ t('tabAsm') }} ({{ FLAGS }})</button>
             <button
               class="ce-tab" :class="{ active: activeTab === 'output' }"
               @click="activeTab = 'output'"
-            >输出</button>
+            >{{ t('tabOutput') }}</button>
           </div>
           <span>
             {{ COMPILER }} \u00b7 {{ STD }}
@@ -203,7 +222,7 @@ function esc(s: string): string {
         </div>
         <div v-if="activeTab === 'asm'" class="ce-asm-panel">
           <pre v-if="displayAsm" class="ce-asm-code">{{ displayAsm }}</pre>
-          <pre v-else class="ce-info">无汇编输出</pre>
+          <pre v-else class="ce-info">{{ t('noAsm') }}</pre>
         </div>
         <div v-else class="ce-output" v-html="output"></div>
       </div>
