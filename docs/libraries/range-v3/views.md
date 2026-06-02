@@ -92,7 +92,7 @@ range-v3 views 遵循 C++20 ranges 标准语义，核心概念包括：
 - **borrowed_range**：迭代器在 range 销毁后仍有效。`take_view` 通过 `enable_borrowed_range` 特化继承底层 range 的 borrowed 属性。
 - **lazy evaluation**：所有 view 适配器在构造时仅存储描述符（谓词、函数、计数），遍历时才逐元素执行操作，无中间容器分配。
 
-view_interface<Derived> 作为 CRTP 基类，为所有 view 提供默认实现：
+`view_interface<Derived>` 作为 CRTP 基类，为所有 view 提供默认实现：
 - `empty()`：优先使用 `size() == 0`（若 sized_range），否则 `begin() == end()`
 - `operator bool()`：委托给 `!empty()`
 - `front()` / `back()`：分别要求 forward_range / bidirectional_range + common_range
@@ -117,19 +117,19 @@ libcxx/include/__ranges/
 
 ## 核心类 / 函数
 
-### filter_view<View, Pred>
+### `filter_view<View, Pred>`
 - **成员**：`__base_`（底层 view）、`__pred_`（`__movable_box<_Pred>` 存储谓词）、`__cached_begin_`（`__non_propagating_cache` 缓存首个匹配迭代器）
 - **begin()**：首次调用执行 `ranges::find_if` 线性扫描找首个匹配元素，forward_range 时缓存结果
 - **operator++**：内部调用 `ranges::find_if(++current, end, pred)` 跳过不匹配元素
 - **operator--**：仅 bidirectional_range 可用，反向扫描直到谓词匹配
 
-### transform_view<View, Fn>
+### `transform_view<View, Fn>`
 - **成员**：`__base_`（底层 view）、`__func_`（`__movable_box<_Fn>` 存储变换函数）
 - **operator***：直接 `std::invoke(*__parent_->__func_, *__current_)`，无缓存
 - **value_type**：`remove_cvref_t<invoke_result_t<Fn&, range_reference_t<View>>>`，即函数返回值的纯类型
 - **iterator_category**：若函数返回引用且底层是 contiguous_tag，降级为 random_access_tag；否则继承底层 category
 
-### take_view<View>
+### `take_view<View>`
 - **成员**：`__base_`（底层 view）、`__count_`（`range_difference_t<View>` 计数值）
 - **begin()**：三种策略——
   1. random_access + sized_range：直接返回 `begin(__base_)`（无需包装）
@@ -138,7 +138,7 @@ libcxx/include/__ranges/
 - **end()**：random_access + sized_range 返回 `begin + size`（迭代器类型）；sized_range 返回 `default_sentinel`；其他返回 `__sentinel`
 - **size()**：`min(ranges::size(__base_), __count_)`
 
-### view_interface<Derived>
+### `view_interface<Derived>`
 CRTP 基类，通过 `static_cast<Derived&>(*this)` 访问派生类的 begin()/end()，提供 empty、operator bool、front、back、operator[]、data、size 的默认实现。
 
 ### range_adaptor_closure 与 pipe operator
@@ -196,7 +196,7 @@ sentinel 比较（非 sized_range 路径）：
 ### take_view
 - **迭代器失效**：`counted_iterator` 包装底层迭代器，底层迭代器失效则失效。
 - **sentinel 失效**：`__sentinel` 存储底层 sentinel，若底层 sentinel 失效则 take_view 的 end() 失效。
-- **borrowed_range 传播**：`enable_borrowed_range<take_view<T>> = enable_borrowed_range<T>`，仅当底层 range 是 borrowed 时，take_view 才是 borrowed。
+- **borrowed_range 传播**：`enable_borrowed_range<take_view<T>> = enable_borrowed_range<T>`，仅当底层 range 是 borrowed 时，`take_view` 才是 borrowed。
 
 ### 通用规则
 - view 适配器本身不拥有元素（owning_view 除外），迭代器/引用稳定性完全依赖底层 range。

@@ -331,6 +331,6 @@ SROA 对性能的影响主要体现在：
 - [别名分析](/topics/compiler-optimizations/alias-analysis) — 别名信息帮助 SROA 判断地址是否逃逸
 - [LTO](/topics/compiler-optimizations/lto) — 跨模块 SROA
 - [C++ 编译器优化全景](/topics/compiler-optimizations) — 整体优化管线
-- [值类别深度解析](/topics/value-categories) — 值语义与 SROA 的关系
+- [值类别深度解析](/topics/value-categories-deep-dive) — 值语义与 SROA 的关系
 - [性能优化](/topics/performance) — SROA 在实际性能调优中的角色
 - LLVM 官方文档：[SROA Pass](https://llvm.org/docs/Passes.html#sroa-scalar-replacement-of-aggregates)

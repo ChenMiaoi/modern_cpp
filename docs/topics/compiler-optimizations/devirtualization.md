@@ -351,4 +351,4 @@ perf stat -e branch-misses,branches ./test_app
 - [C++ 编译器优化全景](/topics/compiler-optimizations) — 整体优化管线
 - [模板元编程](/topics/template-metaprogramming) — CRTP 与模板技术
 - [设计模式](/topics/design-patterns) — 多态在设计模式中的应用
-- [值类别深度解析](/topics/value-categories) — 移动语义与虚函数的交互
+- [值类别深度解析](/topics/value-categories-deep-dive) — 移动语义与虚函数的交互

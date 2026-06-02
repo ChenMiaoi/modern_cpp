@@ -5,6 +5,9 @@ export default defineConfig({
   description: 'C++ 知识库：从 C++98 到 C++29',
   lang: 'zh-CN',
   base: '/modern_cpp/',
+  ignoreDeadLinks: [
+    /^(\.\/)?\.\.\/\.\.\/\.\.\/exercises\//,
+  ],
   markdown: {
     languages: ['ini'],
     languageAlias: {

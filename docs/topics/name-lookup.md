@@ -779,7 +779,7 @@ foo(N::S{42});  // ✅ 显式构造，ADL 在 N 中找到 foo
 
 - [模板实例化](/topics/template-instantiation) — 显式/隐式实例化、特化与名称查找的交互
 - [重载决议](/topics/overload-resolution) — 名称查找之后的候选函数选择
-- [值类别](/topics/value-categories) — 左值/右值如何影响函数参数绑定
+- [值类别](/topics/value-categories-deep-dive) — 左值/右值如何影响函数参数绑定
 - [RAII 与资源管理](/topics/raii) — 资源管理模式中名称查找的实际应用
 - C++ 标准 [basic.lookup](https://eel.is/c++draft/basic.lookup) — 名称查找的形式化规则
 - cppreference [Name lookup](https://en.cppreference.com/w/cpp/language/lookup) — 完整参考

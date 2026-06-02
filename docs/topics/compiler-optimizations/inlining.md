@@ -406,4 +406,4 @@ g++ -O2 -fdump-ipa-inline-details test.cpp
 - [PGO](/topics/compiler-optimizations/pgo) — Profile 引导内联决策
 - [C++ 编译器优化全景](/topics/compiler-optimizations) — 整体优化管线
 - [RAII 与资源管理](/topics/raii) — 小对象 RAII 的内联特性
-- [值类别深度解析](/topics/value-categories) — 右值引用与内联的交互
+- [值类别深度解析](/topics/value-categories-deep-dive) — 右值引用与内联的交互

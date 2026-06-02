@@ -580,7 +580,7 @@ private:
 ## 延伸阅读
 
 - [RAII 与资源管理](/topics/raii) — 构造/析构与资源管理的惯用法
-- [值类别深度解析](/topics/value-categories) — 左值、右值、将亡值与移动语义
+- [值类别深度解析](/topics/value-categories-deep-dive) — 左值、右值、将亡值与移动语义
 - [编译器优化全景](/topics/compiler-optimizations) — 去虚拟化、内联、别名分析如何利用对象模型
 - [内存模型与并发](/topics/memory-model) — 对象在多线程中的可见性保证
 - [模板元编程](/topics/template-metaprogramming) — `is_trivially_copyable` 等 traits 的实现原理
