@@ -1,3 +1,10 @@
+---
+title: "C++17 属性：`[[nodiscard]]`、`[[maybe_unused]]`、`[[fallthrough]]`"
+topic: unknown
+feature: attributes
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 属性：`[[nodiscard]]`、`[[maybe_unused]]`、`[[fallthrough]]`
 
 ## 概述

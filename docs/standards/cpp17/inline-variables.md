@@ -1,3 +1,10 @@
+---
+title: "C++17 内联变量（Inline Variables）"
+topic: unknown
+feature: inline-variables
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 内联变量（Inline Variables）
 
 ## 概述

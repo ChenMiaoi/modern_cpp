@@ -1,3 +1,10 @@
+---
+title: "C++17 结构化绑定（Structured Bindings）"
+topic: unknown
+feature: structured-bindings
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 结构化绑定（Structured Bindings）
 
 ## 概述

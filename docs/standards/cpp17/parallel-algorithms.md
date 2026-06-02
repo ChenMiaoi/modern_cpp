@@ -1,3 +1,10 @@
+---
+title: "C++17 并行算法（Parallel Algorithms）"
+topic: unknown
+feature: parallel-algorithms
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 并行算法（Parallel Algorithms）
 
 ## 概述

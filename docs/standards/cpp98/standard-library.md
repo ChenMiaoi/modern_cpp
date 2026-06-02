@@ -1,3 +1,10 @@
+---
+title: "C++98 标准库"
+topic: unknown
+feature: standard-library
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++98 标准库
 
 ## STL 容器

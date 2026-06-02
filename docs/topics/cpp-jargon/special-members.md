@@ -1,3 +1,10 @@
+---
+title: "构造、析构与特殊成员"
+topic: unknown
+feature: special-members
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 构造、析构与特殊成员
 
 ## Rule of Zero / Three / Five

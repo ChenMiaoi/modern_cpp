@@ -1,3 +1,10 @@
+---
+title: "Boost 深度剖析（Top 50 热门库）"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # Boost 深度剖析（Top 50 热门库）
 
 > Boost 是 C++ 生态中最古老、影响最深远的库集合。它不是单一库，而是一个**经过同行评审的、可复用的 C++ 库合集**，涵盖从智能指针到异步 I/O、从元编程到计算几何的方方面面。C++ 标准库中大量组件直接源自 Boost——可以说，Boost 是 C++ 标准的"试验田"。

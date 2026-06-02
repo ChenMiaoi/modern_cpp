@@ -1,3 +1,10 @@
+---
+title: "C++ 设计模式"
+topic: unknown
+feature: design-patterns
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++ 设计模式
 
 ## 单例模式（Singleton）

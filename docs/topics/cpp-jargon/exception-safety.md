@@ -1,3 +1,10 @@
+---
+title: "异常安全"
+topic: unknown
+feature: exception-safety
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 异常安全
 
 ## 三级保证

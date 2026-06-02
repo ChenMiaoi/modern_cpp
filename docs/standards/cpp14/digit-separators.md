@@ -1,3 +1,10 @@
+---
+title: "C++14 数字分隔符 (Digit Separators)"
+topic: unknown
+feature: digit-separators
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 数字分隔符 (Digit Separators)
 
 ## 概述

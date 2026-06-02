@@ -1,3 +1,10 @@
+---
+title: "C++98 语言特性"
+topic: unknown
+feature: features
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++98 语言特性
 
 ## 类与面向对象

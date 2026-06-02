@@ -1,3 +1,18 @@
+---
+title: range-v3 管道运算符源码实现
+topic: libraries
+feature: pipe-operator
+standard: C++20
+status_checked_at: 2026-06-02
+implementation:
+  libcxx:
+    path: references/impl/llvm-project/libcxx/include/__ranges/range_adaptor.h
+    symbols:
+      - __range_adaptor_closure
+      - __pipeable
+exercises: []
+solutions: []
+---
 # range-v3 管道运算符的源码实现
 
 > 源码路径：`references/impl/llvm-project/libcxx/include/__ranges/range_adaptor.h`

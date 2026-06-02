@@ -1,7 +1,11 @@
 ---
 title: C++26 constexpr 扩展
 status_checked_at: 2026-06-01
+topic: unknown
+feature: constexpr-extensions
+standard: N/A
 ---
+
 
 # C++26 constexpr 扩展
 

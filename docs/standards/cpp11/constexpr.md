@@ -1,3 +1,10 @@
+---
+title: "constexpr"
+topic: unknown
+feature: constexpr
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # constexpr
 
 ## 概述

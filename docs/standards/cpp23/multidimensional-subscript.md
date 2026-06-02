@@ -1,3 +1,10 @@
+---
+title: "多维下标运算符"
+topic: unknown
+feature: multidimensional-subscript
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 多维下标运算符
 
 C++23 允许 `operator[]` 接受多个参数，即 `operator[](size_t, size_t, ...)`。这使得矩阵、张量等多维容器可以直接用 `m[i, j]` 语法访问元素。

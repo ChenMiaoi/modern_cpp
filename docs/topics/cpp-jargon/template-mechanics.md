@@ -1,3 +1,10 @@
+---
+title: "模板机制术语"
+topic: unknown
+feature: template-mechanics
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 模板机制术语
 
 ## SFINAE（Substitution Failure Is Not An Error）

@@ -1,3 +1,10 @@
+---
+title: "Boost 内存管理"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # Boost 内存管理
 
 ## SmartPtr

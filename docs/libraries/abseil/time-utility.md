@@ -1,3 +1,12 @@
+---
+title: Abseil Time 与基础工具
+topic: libraries
+feature: time-utility
+standard: N/A
+status_checked_at: 2026-06-02
+exercises: []
+solutions: []
+---
 # Abseil Time 与基础工具
 
 > 源码路径：`references/impl/abseil-cpp/absl/time/`, `absl/types/`, `absl/container/`

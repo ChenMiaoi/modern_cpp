@@ -1,3 +1,10 @@
+---
+title: "fmt / spdlog 源码级深度剖析"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # fmt / spdlog 源码级深度剖析
 
 > 源码路径：`references/impl/fmt/include/fmt/`, `references/impl/spdlog/include/spdlog/`

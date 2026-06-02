@@ -1,3 +1,10 @@
+---
+title: "libstdc++ (GCC) 源码级深度剖析"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # libstdc++ (GCC) 源码级深度剖析
 
 > 源码路径：`references/impl/gcc/libstdc++-v3/include/`

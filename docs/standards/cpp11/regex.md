@@ -1,3 +1,10 @@
+---
+title: "std::regex 正则表达式"
+topic: unknown
+feature: regex
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # std::regex 正则表达式
 
 ## 概述

@@ -1,3 +1,19 @@
+---
+title: std::expected
+topic: cpp23
+feature: expected
+standard: C++23
+status_checked_at: 2026-06-02
+standard_refs:
+  - draft: N4950
+    clause: "[expected]"
+proposals:
+  - paper: P0323
+    revision: R12
+    status: accepted
+exercises: []
+solutions: []
+---
 # std::expected
 
 `std::expected<T, E>` 是 C++23 引入的错误处理工具，表示一个值要么是期望的结果 `T`，要么是错误 `E`。它提供了一种不依赖异常的显式错误传播机制。

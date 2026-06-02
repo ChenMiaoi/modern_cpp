@@ -1,3 +1,10 @@
+---
+title: "std::array 固定大小数组容器"
+topic: unknown
+feature: array
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # std::array 固定大小数组容器
 
 ## 概述

@@ -1,3 +1,10 @@
+---
+title: "C++17 if constexpr"
+topic: unknown
+feature: if-constexpr
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 if constexpr
 
 ## 概述

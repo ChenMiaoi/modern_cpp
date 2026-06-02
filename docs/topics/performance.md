@@ -2,8 +2,10 @@
 title: 性能优化
 topic: topics
 feature: performance
-status_checked_at: 2026-06-01
+status_checked_at: 2026-06-02
+standard: N/A
 ---
+
 # 性能优化
 
 ## 移动语义与避免拷贝
@@ -97,9 +99,9 @@ int process(int value) {
 
 影响代码布局（热/冷路径分离），不控制条件移动指令生成。
 
-## SIMD 向量化（实验性 TS / C++26 草案）
+## SIMD 向量化
 
-> **注意**：`std::simd` 已被纳入 C++26 草案（P1928），但截至 2024 年主流编译器仍以实验性 TS 形式提供（`<experimental/simd>`）。下方示例使用 TS 命名空间；待编译器正式支持后可切换为 `std::simd`。
+> **状态说明**（2026-06-02）：`std::simd` 已被纳入 C++26 草案（P1928），已投票接受。GCC 14+ 提供 `<experimental/simd>` 实验性实现（命名空间 `std::experimental`）。Clang/LLVM 和 MSVC 尚未提供完整支持。下方示例使用 TS 命名空间；待编译器正式支持 `std::simd` 后可切换。
 
 ```cpp
 #include <experimental/simd>

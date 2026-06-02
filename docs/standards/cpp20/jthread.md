@@ -1,3 +1,10 @@
+---
+title: "`std::jthread` 与协作式取消"
+topic: unknown
+feature: jthread
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # `std::jthread` 与协作式取消
 
 ## 概述

@@ -1,3 +1,10 @@
+---
+title: "类型系统术语"
+topic: unknown
+feature: type-system
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 类型系统术语
 
 ## Type Erasure（类型擦除）

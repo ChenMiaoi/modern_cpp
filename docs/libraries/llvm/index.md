@@ -1,3 +1,10 @@
+---
+title: "libc++ (LLVM) 源码级深度剖析"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # libc++ (LLVM) 源码级深度剖析
 
 > 源码路径：`references/impl/llvm-project/libcxx/include/`

@@ -1,3 +1,10 @@
+---
+title: "C++14 std::exchange"
+topic: unknown
+feature: exchange
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 std::exchange
 
 ## 概述

@@ -1,6 +1,20 @@
 ---
 title: C++26 反射 (Reflection)
-status_checked_at: 2026-06-01
+topic: cpp26
+feature: reflection
+standard: C++26
+status_checked_at: 2026-06-02
+proposal:
+  main: P2996
+  revision: R7
+  checked_at: 2026-06-02
+syntax_status: accepted
+compiler_support:
+  clang: experimental (-freflection)
+  gcc: experimental branch
+  msvc: in progress
+exercises: []
+solutions: []
 ---
 
 # C++26 反射 (Reflection)

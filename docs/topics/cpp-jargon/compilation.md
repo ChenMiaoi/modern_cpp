@@ -1,3 +1,10 @@
+---
+title: "编译与链接术语"
+topic: unknown
+feature: compilation
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 编译与链接术语
 
 ## Translation Unit（翻译单元）

@@ -1,3 +1,21 @@
+---
+title: Abseil Status 与 StatusOr
+topic: libraries
+feature: status
+standard: N/A
+status_checked_at: 2026-06-02
+implementation:
+  abseil:
+    paths:
+      - references/impl/abseil-cpp/absl/status/status.h
+      - references/impl/abseil-cpp/absl/status/statusor.h
+    symbols:
+      - Status
+      - StatusOr
+      - StatusCode
+exercises: []
+solutions: []
+---
 # Abseil Status 与 StatusOr：显式错误处理
 
 > 源码路径：`references/impl/abseil-cpp/absl/status/status.h`, `status/statusor.h`

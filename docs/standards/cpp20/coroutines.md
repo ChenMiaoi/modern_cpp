@@ -1,3 +1,10 @@
+---
+title: "C++20 协程 (Coroutines)"
+topic: unknown
+feature: coroutines
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++20 协程 (Coroutines)
 
 ## 概述

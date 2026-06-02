@@ -1,3 +1,12 @@
+---
+title: EASTL 侵入式容器与哈希表
+topic: libraries
+feature: eastl-intrusive
+standard: N/A
+status_checked_at: 2026-06-02
+exercises: []
+solutions: []
+---
 # EASTL 侵入式容器与哈希表
 
 > 源码路径：`references/impl/EASTL/include/EASTL/intrusive_list.h`, `internal/hashtable.h`

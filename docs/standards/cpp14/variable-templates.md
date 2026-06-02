@@ -1,3 +1,10 @@
+---
+title: "C++14 变量模板 (Variable Templates)"
+topic: unknown
+feature: variable-templates
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 变量模板 (Variable Templates)
 
 ## 概述

@@ -1,3 +1,10 @@
+---
+title: "C++11 chrono 时间库"
+topic: unknown
+feature: chrono
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++11 chrono 时间库
 
 ## 概述

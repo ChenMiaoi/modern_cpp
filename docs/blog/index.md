@@ -1,3 +1,10 @@
+---
+title: "博客"
+topic: blog
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 博客
 
 学习笔记、技术分析和实践总结。

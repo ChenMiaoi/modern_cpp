@@ -1,3 +1,10 @@
+---
+title: "C++23"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++23
 
 C++23（ISO/IEC 14882:2024）延续了 C++20 的方向，在四大基石之上进一步完善和扩展。

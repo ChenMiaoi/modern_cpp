@@ -1,3 +1,10 @@
+---
+title: "右值引用与移动语义"
+topic: unknown
+feature: move-semantics
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 右值引用与移动语义
 
 ## 核心问题

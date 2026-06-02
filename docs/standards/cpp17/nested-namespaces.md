@@ -1,3 +1,10 @@
+---
+title: "C++17 嵌套命名空间（Nested Namespaces）"
+topic: unknown
+feature: nested-namespaces
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 嵌套命名空间（Nested Namespaces）
 
 ## 概述

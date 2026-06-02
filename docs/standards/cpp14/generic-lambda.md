@@ -1,3 +1,10 @@
+---
+title: "C++14 泛型 Lambda (Generic Lambda)"
+topic: unknown
+feature: generic-lambda
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 泛型 Lambda (Generic Lambda)
 
 ## 概述

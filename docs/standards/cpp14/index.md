@@ -1,3 +1,10 @@
+---
+title: "C++14"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14
 
 C++14（ISO/IEC 14882:2014）是 C++11 的增量更新，主要完成 C++11 中"未竟之业"，而非引入全新的编程范式。

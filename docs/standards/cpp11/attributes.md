@@ -1,3 +1,10 @@
+---
+title: "属性 (Attributes)"
+topic: unknown
+feature: attributes
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 属性 (Attributes)
 
 ## 概述

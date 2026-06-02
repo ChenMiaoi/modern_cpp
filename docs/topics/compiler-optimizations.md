@@ -1,3 +1,10 @@
+---
+title: "C++ 编译器优化全景"
+topic: unknown
+feature: compiler-optimizations
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++ 编译器优化全景
 
 > 编译器优化是 C++ 性能的"隐藏层"。你写的代码和实际执行的机器码之间隔着一整套优化管线。理解这些优化不是可选的——它决定了你能否写出真正高效的代码，以及能否在性能出问题时定位原因。

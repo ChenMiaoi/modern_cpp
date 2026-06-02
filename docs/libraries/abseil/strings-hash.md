@@ -1,3 +1,12 @@
+---
+title: Abseil 字符串与哈希工具
+topic: libraries
+feature: strings-hash
+standard: N/A
+status_checked_at: 2026-06-02
+exercises: []
+solutions: []
+---
 # Abseil 字符串与哈希工具
 
 > 源码路径：`references/impl/abseil-cpp/absl/strings/`, `absl/hash/`

@@ -1,3 +1,10 @@
+---
+title: "C++11 无序容器"
+topic: unknown
+feature: unordered-containers
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++11 无序容器
 
 ## 概述

@@ -1,7 +1,11 @@
 ---
 title: C++26 契约 (Contracts)
 status_checked_at: 2026-06-01
+topic: unknown
+feature: contracts
+standard: N/A
 ---
+
 
 # C++26 契约 (Contracts)
 

@@ -1,3 +1,10 @@
+---
+title: "静态断言 (static_assert)"
+topic: unknown
+feature: static-assert
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 静态断言 (static_assert)
 
 ## 概述

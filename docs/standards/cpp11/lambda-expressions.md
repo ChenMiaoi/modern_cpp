@@ -1,3 +1,10 @@
+---
+title: "Lambda 表达式"
+topic: unknown
+feature: lambda-expressions
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # Lambda 表达式
 
 ## 概述

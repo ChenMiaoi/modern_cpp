@@ -1,3 +1,10 @@
+---
+title: "标准库惯用语"
+topic: unknown
+feature: stdlib-idioms
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 标准库惯用语
 
 ## CPO（Customization Point Object）

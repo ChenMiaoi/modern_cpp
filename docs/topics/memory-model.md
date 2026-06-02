@@ -3,7 +3,9 @@ title: 内存模型与并发
 topic: topics
 feature: memory-model
 status_checked_at: 2026-06-01
+standard: N/A
 ---
+
 # 内存模型与并发
 
 ## C++11 内存模型

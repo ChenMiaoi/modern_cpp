@@ -1,3 +1,10 @@
+---
+title: "`std::format`"
+topic: unknown
+feature: format
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # `std::format`
 
 ## 概述

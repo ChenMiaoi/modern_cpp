@@ -1,3 +1,10 @@
+---
+title: "C++17 文件系统（`std::filesystem`）"
+topic: unknown
+feature: filesystem
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 文件系统（`std::filesystem`）
 
 ## 概述

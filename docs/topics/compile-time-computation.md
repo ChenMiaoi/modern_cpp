@@ -1,3 +1,10 @@
+---
+title: "编译期计算"
+topic: unknown
+feature: compile-time-computation
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 编译期计算
 
 ## constexpr 的演进

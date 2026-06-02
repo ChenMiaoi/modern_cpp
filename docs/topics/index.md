@@ -1,3 +1,10 @@
+---
+title: "专题"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 专题
 
 本部分从跨版本的视角梳理 C++ 的核心知识领域。每个专题整合多个标准版本中相关特性的演进脉络。
@@ -12,8 +19,11 @@
 | [RAII 与资源管理](/topics/raii) | 从构造/析构到智能指针到 Coroutine scope guard |
 | [编译期计算](/topics/compile-time-computation) | `constexpr` → `consteval` → `constinit` → 反射 |
 | [编译器优化](/topics/compiler-optimizations) | 完整优化管线：内联、SROA、循环向量化、LTO、PGO |
+| [ABI 深度解析](/topics/abi) | 名称修饰、vtable 布局、异常 ABI、调用约定、符号可见性、ABI 版本化策略 |
 | [C++ 设计模式](/topics/design-patterns) | 现代 C++ 实现经典设计模式 |
+| [值类别深入解析](/topics/value-categories-deep-dive) | 从 C 到 C++17：五个值类别、实体化、移动语义、完美转发、拷贝消除 |
 | [性能优化](/topics/performance) | 移动语义、小对象优化、缓存友好设计 |
+| [对象生命周期](/topics/lifetime) | 存储期、子对象、悬垂指针引用、隐式对象创建、constexpr 生命周期 |
 | [工具链与生态](/topics/toolchain) | 编译器、构建系统、包管理器、sanitizers |
 
 ## 阅读建议

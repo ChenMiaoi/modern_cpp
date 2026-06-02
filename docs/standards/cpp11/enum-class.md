@@ -1,3 +1,10 @@
+---
+title: "枚举类（enum class）— 作用域枚举"
+topic: unknown
+feature: enum-class
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 枚举类（enum class）— 作用域枚举
 
 ## 概述

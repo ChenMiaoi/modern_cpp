@@ -1,3 +1,10 @@
+---
+title: "三路比较运算符：`operator<=>`"
+topic: unknown
+feature: spaceship-operator
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 三路比较运算符：`operator<=>`
 
 ## 概述

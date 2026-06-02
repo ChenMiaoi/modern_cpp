@@ -1,3 +1,10 @@
+---
+title: "C++14 二进制字面量 (Binary Literals)"
+topic: unknown
+feature: binary-literals
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 二进制字面量 (Binary Literals)
 
 ## 概述

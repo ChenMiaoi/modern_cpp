@@ -1,3 +1,10 @@
+---
+title: "C++11 std::tuple 元组"
+topic: unknown
+feature: tuple
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++11 std::tuple 元组
 
 ## 概述

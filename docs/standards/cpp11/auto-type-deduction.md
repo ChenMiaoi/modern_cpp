@@ -1,3 +1,10 @@
+---
+title: "auto 类型推导"
+topic: unknown
+feature: auto-type-deduction
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # auto 类型推导
 
 ## 概述

@@ -1,3 +1,10 @@
+---
+title: "参考资料"
+topic: references
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 参考资料
 
 本页面汇总了 C++ 学习和工程实践中最重要的参考资料。所有可合法免费获取的资源均已下载到 `references/` 目录。

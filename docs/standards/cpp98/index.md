@@ -1,3 +1,10 @@
+---
+title: "C++98"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++98
 
 C++98（ISO/IEC 14882:1998）是 C++ 语言的第一个国际标准。它在 C with Classes 和早期 C++ 实践的基础上，正式确立了语言的核心框架。

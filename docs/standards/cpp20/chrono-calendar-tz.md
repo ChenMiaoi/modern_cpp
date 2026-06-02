@@ -1,3 +1,10 @@
+---
+title: "日历与时间区"
+topic: unknown
+feature: chrono-calendar-tz
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 日历与时间区
 
 ## 概述

@@ -1,3 +1,10 @@
+---
+title: "C++29"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++29
 
 C++29 是下一代 C++ 标准的展望（预计 2029 年发布）。截至目前，具体的提案尚处于早期讨论阶段。

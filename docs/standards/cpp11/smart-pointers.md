@@ -1,3 +1,10 @@
+---
+title: "智能指针"
+topic: unknown
+feature: smart-pointers
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 智能指针
 
 ## 概述

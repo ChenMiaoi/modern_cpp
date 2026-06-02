@@ -1,3 +1,12 @@
+---
+title: EASTL String、Span 与排序
+topic: libraries
+feature: eastl-string-sort
+standard: N/A
+status_checked_at: 2026-06-02
+exercises: []
+solutions: []
+---
 # EASTL String、Span 与排序
 
 > 源码路径：`references/impl/EASTL/include/EASTL/string.h`, `span.h`, `sort.h`

@@ -32,4 +32,9 @@ features:
   - icon: 🚀
     title: 持续更新
     details: 跟踪 C++26/29 标准委员会的最新动态，内容随标准演进持续更新。
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
 ---
+

@@ -1,3 +1,10 @@
+---
+title: "C++03"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++03
 
 C++03（ISO/IEC 14882:2003）是 C++98 的一次缺陷修复版（bug-fix release），没有引入新的语言特性，但修复了标准文本中的若干缺陷报告（Defect Reports）。

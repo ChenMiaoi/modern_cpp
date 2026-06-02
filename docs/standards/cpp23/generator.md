@@ -1,3 +1,10 @@
+---
+title: "std::generator"
+topic: unknown
+feature: generator
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # std::generator
 
 `std::generator` 是 C++23 提供的标准协程生成器，用于惰性生成元素序列。它封装了 C++20 协程原语，提供开箱即用的生成器类型。

@@ -1,3 +1,10 @@
+---
+title: "`consteval` 与 `constinit`"
+topic: unknown
+feature: consteval-constinit
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # `consteval` 与 `constinit`
 
 ## 概述

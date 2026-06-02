@@ -1,3 +1,10 @@
+---
+title: "C++17 类模板参数推导（CTAD）"
+topic: unknown
+feature: class-template-argument-deduction
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 类模板参数推导（CTAD）
 
 ## 概述

@@ -1,3 +1,19 @@
+---
+title: import std
+topic: cpp23
+feature: import_std
+standard: C++23
+status_checked_at: 2026-06-02
+standard_refs:
+  - draft: N4950
+    clause: "[std.modules]"
+proposals:
+  - paper: P2465
+    revision: R3
+    status: accepted
+exercises: []
+solutions: []
+---
 # import std
 
 C++23 引入 `import std;`，允许在单条语句中导入整个 C++ 标准库。它是标准库模块化的重要里程碑，显著减少编译时间并简化项目配置。

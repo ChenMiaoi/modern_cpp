@@ -1,3 +1,10 @@
+---
+title: "C++17"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17
 
 C++17（ISO/IEC 14882:2017）是一次大规模更新，引入了大量实用性极强的语言特性和库组件，进一步提升了 C++ 的表达力和安全性。

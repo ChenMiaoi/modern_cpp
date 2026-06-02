@@ -1,3 +1,10 @@
+---
+title: "C++11"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++11
 
 C++11（ISO/IEC 14882:2011）是 C++ 历史上最具里程碑意义的版本，被称为"现代 C++"的起点。它在语言和标准库两个层面都带来了根本性的变革。

@@ -1,3 +1,10 @@
+---
+title: "if consteval"
+topic: unknown
+feature: if-consteval
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # if consteval
 
 C++23 引入 `if consteval`，允许在 constexpr 函数中显式区分编译期和运行时执行路径，取代了 C++20 中的 `std::is_constant_evaluated()`。

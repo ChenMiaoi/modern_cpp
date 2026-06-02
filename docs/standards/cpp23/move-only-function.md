@@ -1,3 +1,10 @@
+---
+title: "std::move_only_function"
+topic: unknown
+feature: move-only-function
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # std::move_only_function
 
 C++23 引入 `std::move_only_function`，是一个仅支持移动的可调用对象包装器，解决了 `std::function` 要求被包装的可调用对象必须可拷贝的限制。

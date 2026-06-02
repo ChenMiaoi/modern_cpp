@@ -1,3 +1,22 @@
+---
+title: Abseil Cord
+topic: libraries
+feature: cord
+standard: N/A
+status_checked_at: 2026-06-02
+implementation:
+  abseil:
+    paths:
+      - references/impl/abseil-cpp/absl/strings/cord.h
+      - references/impl/abseil-cpp/absl/strings/cord_internal.h
+    symbols:
+      - Cord
+      - CordRep
+      - CordRepConcat
+      - CordRepLeaf
+exercises: []
+solutions: []
+---
 # Abseil Cord：面向大文本的 B-tree 缓冲区
 
 > 源码路径：`references/impl/abseil-cpp/absl/strings/cord.h`, `cord_internal.h`

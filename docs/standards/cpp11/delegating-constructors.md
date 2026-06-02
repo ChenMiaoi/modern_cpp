@@ -1,3 +1,10 @@
+---
+title: "委托构造函数 (Delegating Constructors)"
+topic: unknown
+feature: delegating-constructors
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 委托构造函数 (Delegating Constructors)
 
 ## 概述

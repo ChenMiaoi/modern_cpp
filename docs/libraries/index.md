@@ -1,3 +1,10 @@
+---
+title: "STL 与标准库实现深度剖析"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # STL 与标准库实现深度剖析
 
 本部分深入分析与 C++ 标准库（STL）直接相关的开源库——不是简单介绍 API，而是剖析**设计原理**、**实现细节**、**与标准库的对比**，以及它们对 C++ 标准演进的影响。

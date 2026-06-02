@@ -1,3 +1,10 @@
+---
+title: "Boost 算法与数学"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # Boost 算法与数学
 
 ## Multiprecision：任意精度算术

@@ -1,3 +1,12 @@
+---
+title: EASTL fixed_* 容器
+topic: libraries
+feature: eastl-fixed
+standard: N/A
+status_checked_at: 2026-06-02
+exercises: []
+solutions: []
+---
 # EASTL fixed_* 容器：零堆分配的确定性容器
 
 > 源码路径：`references/impl/EASTL/include/EASTL/fixed_vector.h`, `fixed_string.h`

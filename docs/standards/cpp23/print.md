@@ -1,3 +1,21 @@
+---
+title: std::print / std::println
+topic: cpp23
+feature: print
+standard: C++23
+status_checked_at: 2026-06-02
+standard_refs:
+  - draft: N4950
+    clause: "[print]"
+proposals:
+  - paper: P2093
+    revision: R14
+    status: accepted
+exercises:
+  - exercises/cpp23/print23.cpp
+solutions:
+  - exercises/solutions/print23.cpp
+---
 # std::print / std::println
 
 C++23 引入 `std::print` 和 `std::println`，提供 Python 风格的格式化输出，基于 `std::format` 实现，绕过了 iostream 的复杂性和性能开销。

@@ -1,3 +1,10 @@
+---
+title: "Folly (Meta) 源码级深度剖析"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # Folly (Meta) 源码级深度剖析
 
 > Folly 是 Meta（前 Facebook）的 C++ 基础库。源码位于 `references/impl/folly/folly/`。

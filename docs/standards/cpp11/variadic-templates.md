@@ -1,3 +1,10 @@
+---
+title: "可变参数模板"
+topic: unknown
+feature: variadic-templates
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 可变参数模板
 
 ## 概述

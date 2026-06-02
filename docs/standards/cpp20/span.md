@@ -1,3 +1,10 @@
+---
+title: "`std::span`"
+topic: unknown
+feature: span
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # `std::span`
 
 ## 概述

@@ -1,3 +1,10 @@
+---
+title: "C++20"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++20
 
 C++20（ISO/IEC 14882:2020）是继 C++11 之后最具影响力的版本，引入了四大"基石级"特性：**Concepts**、**Ranges**、**Coroutines** 和 **Modules**。

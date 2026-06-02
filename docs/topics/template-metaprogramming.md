@@ -3,7 +3,9 @@ title: 模板元编程
 topic: topics
 feature: template-metaprogramming
 status_checked_at: 2026-06-01
+standard: N/A
 ---
+
 # 模板元编程
 
 ## TMP 的起源
@@ -175,13 +177,13 @@ public:
 
 C++26 引入编译期反射（P2996），允许在编译期检查和操控程序结构：
 ```cpp
-// 编译期生成序列化代码（注意：^^T 是反射操作符，[:e:] 是 splice 操作符）
+// 编译期生成序列化代码（注意：^T 是反射操作符，[:e:] 是 splice 操作符）
 template <typename T>
 std::string to_json(const T& obj) {
     std::string result = "{";
     bool first = true;
     // nonstatic_data_members_of 只遍历数据成员，排除成员函数等
-    template for (constexpr auto mem : std::meta::nonstatic_data_members_of(^^T)) {
+    template for (constexpr auto mem : std::meta::nonstatic_data_members_of(^T)) {
         if (!first) result += ", "; first = false;
         result += "\"" + std::string(std::meta::name_of(mem)) + "\"";
         result += ": " + serialize(obj.[:mem:]);

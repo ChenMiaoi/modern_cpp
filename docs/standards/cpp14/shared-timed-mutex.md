@@ -1,3 +1,10 @@
+---
+title: "C++14 shared_timed_mutex 与 shared_lock"
+topic: unknown
+feature: shared-timed-mutex
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 shared_timed_mutex 与 shared_lock
 
 ## 概述

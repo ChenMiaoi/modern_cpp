@@ -1,3 +1,10 @@
+---
+title: "nullptr — 类型安全的空指针字面量"
+topic: unknown
+feature: nullptr
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # nullptr — 类型安全的空指针字面量
 
 ## 概述

@@ -1,3 +1,10 @@
+---
+title: "Boost 容器与数据结构"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # Boost 容器与数据结构
 
 ## Container：flat_map 与 stable_vector

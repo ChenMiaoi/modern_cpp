@@ -1,7 +1,11 @@
 ---
 title: C++26 Senders/Receivers
 status_checked_at: 2026-06-01
+topic: unknown
+feature: senders-receivers
+standard: N/A
 ---
+
 
 # C++26 Senders/Receivers
 

@@ -1,3 +1,10 @@
+---
+title: "C++17 `std::string_view`"
+topic: unknown
+feature: string-view
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 `std::string_view`
 
 ## 概述

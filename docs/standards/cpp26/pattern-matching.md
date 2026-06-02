@@ -1,7 +1,11 @@
 ---
 title: C++26 模式匹配 (Pattern Matching)
 status_checked_at: 2026-06-01
+topic: unknown
+feature: pattern-matching
+standard: N/A
 ---
+
 
 # C++26 模式匹配 (Pattern Matching)
 

@@ -1,3 +1,10 @@
+---
+title: "std::thread 与多线程编程"
+topic: unknown
+feature: thread
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # std::thread 与多线程编程
 
 ## 概述

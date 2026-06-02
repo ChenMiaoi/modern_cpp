@@ -1,3 +1,10 @@
+---
+title: "C++17 折叠表达式（Fold Expressions）"
+topic: unknown
+feature: fold-expressions
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++17 折叠表达式（Fold Expressions）
 
 ## 概述

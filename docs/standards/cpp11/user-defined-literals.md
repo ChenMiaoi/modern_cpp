@@ -1,3 +1,10 @@
+---
+title: "用户自定义字面量 (User-Defined Literals)"
+topic: unknown
+feature: user-defined-literals
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 用户自定义字面量 (User-Defined Literals)
 
 ## 概述

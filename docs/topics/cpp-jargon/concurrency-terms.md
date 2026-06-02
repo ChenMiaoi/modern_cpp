@@ -1,3 +1,10 @@
+---
+title: "并发与内存模型术语"
+topic: unknown
+feature: concurrency-terms
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 并发与内存模型术语
 
 ## Data Race vs Race Condition

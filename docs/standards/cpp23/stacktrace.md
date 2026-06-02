@@ -1,3 +1,10 @@
+---
+title: "std::stacktrace"
+topic: unknown
+feature: stacktrace
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # std::stacktrace
 
 C++23 引入 `<stacktrace>`，提供标准化的堆栈跟踪功能，用于调试、日志记录和错误报告。

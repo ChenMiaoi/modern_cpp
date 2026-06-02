@@ -1,3 +1,10 @@
+---
+title: "C++14 std::make_unique"
+topic: unknown
+feature: make-unique
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 std::make_unique
 
 ## 概述

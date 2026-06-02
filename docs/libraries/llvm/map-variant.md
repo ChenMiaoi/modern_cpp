@@ -1,3 +1,22 @@
+---
+title: libc++ map/set 与 variant
+topic: libraries
+feature: map-variant
+standard: C++17
+status_checked_at: 2026-06-02
+implementation:
+  libcxx:
+    paths:
+      - references/impl/llvm-project/libcxx/include/__tree
+      - references/impl/llvm-project/libcxx/include/variant
+    symbols:
+      - __tree_node
+      - __end_node_
+      - __variant_detail::__traits
+      - __visit_alt_at
+exercises: []
+solutions: []
+---
 # libc++ map/set 与 variant
 
 ## std::map/set：红黑树

@@ -1,3 +1,10 @@
+---
+title: "C++14 返回类型推导 (Return Type Deduction)"
+topic: unknown
+feature: return-type-deduction
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++14 返回类型推导 (Return Type Deduction)
 
 ## 概述

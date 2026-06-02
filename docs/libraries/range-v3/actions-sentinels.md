@@ -1,3 +1,12 @@
+---
+title: range-v3 Actions 与 Sentinels
+topic: libraries
+feature: actions-sentinels
+standard: C++20
+status_checked_at: 2026-06-02
+exercises: []
+solutions: []
+---
 # range-v3 Actions 与 Sentinels
 
 ## Actions：Eager 操作

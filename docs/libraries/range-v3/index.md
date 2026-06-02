@@ -1,3 +1,10 @@
+---
+title: "range-v3 源码级深度剖析"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # range-v3 源码级深度剖析
 
 > range-v3 是 Eric Niebler 编写的 C++ 范围库，直接催生了 C++20 Ranges 标准。

@@ -1,3 +1,10 @@
+---
+title: "std::random 随机数库"
+topic: unknown
+feature: random
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # std::random 随机数库
 
 ## 概述

@@ -1,3 +1,12 @@
+---
+title: EASTL 分配器模型
+topic: libraries
+feature: eastl-allocator
+standard: N/A
+status_checked_at: 2026-06-02
+exercises: []
+solutions: []
+---
 # EASTL 分配器模型：非模板、实例化设计
 
 > 源码路径：`references/impl/EASTL/include/EASTL/internal/config.h`, `allocator.h`

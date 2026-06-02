@@ -1,3 +1,22 @@
+---
+title: libc++ Ranges 与 unique_ptr
+topic: libraries
+feature: ranges-unique-ptr
+standard: C++20
+status_checked_at: 2026-06-02
+implementation:
+  libcxx:
+    paths:
+      - references/impl/llvm-project/libcxx/include/ranges
+      - references/impl/llvm-project/libcxx/include/__memory/unique_ptr.h
+    symbols:
+      - __range_adaptor_closure
+      - __pipeable
+      - std::unique_ptr
+      - __unique_ptr_deleter_sfinae
+exercises: []
+solutions: []
+---
 # libc++ Ranges 与 unique_ptr
 
 ## Ranges：管道运算符

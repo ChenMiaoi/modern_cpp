@@ -1,3 +1,10 @@
+---
+title: "值类别（Value Categories）"
+topic: unknown
+feature: value-categories
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 值类别（Value Categories）
 
 > "Every expression in C++ has two independent properties: a **type** and a **value category**."——标准

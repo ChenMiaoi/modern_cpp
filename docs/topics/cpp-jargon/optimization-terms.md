@@ -1,3 +1,10 @@
+---
+title: "优化与性能惯用语"
+topic: unknown
+feature: optimization-terms
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 优化与性能惯用语
 
 ## Copy Elision（拷贝消除）

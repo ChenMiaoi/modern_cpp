@@ -1,3 +1,10 @@
+---
+title: "对象模型与内存术语"
+topic: unknown
+feature: object-model
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 对象模型与内存术语
 
 ## Lifetime（生命周期）

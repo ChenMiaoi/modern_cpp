@@ -1,3 +1,16 @@
+---
+title: C++20 Concepts
+topic: cpp20
+feature: concepts
+standard: C++20
+status_checked_at: 2026-06-02
+standard_refs:
+  - draft: N4861
+    clause: "[concepts]"
+proposals: []
+exercises: []
+solutions: []
+---
 # C++20 Concepts（概念）
 
 ## 概述

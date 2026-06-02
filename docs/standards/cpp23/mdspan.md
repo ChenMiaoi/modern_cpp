@@ -47,7 +47,7 @@ using Matrix3x4 = std::mdspan<int, std::extents<size_t, 3, 4>>;
 static_assert(Matrix3x4::static_extent(0) == 3);
 
 // 动态 — 运行时确定
-using DynMatrix = std::mdspan<int, std::dynamic_extent, std::dynamic_extent>;
+using DynMatrix = std::mdspan<int, std::dextents<std::size_t, 2>>;
 DynMatrix m(data.data(), rows, cols);
 
 // 混合
@@ -83,7 +83,7 @@ std::mdspan m3(data.data(), mapping);
 #include <mdspan>
 #include <vector>
 
-using Matrix = std::mdspan<double, std::dynamic_extent, std::dynamic_extent>;
+using Matrix = std::mdspan<double, std::dextents<std::size_t, 2>>;
 
 void matmul(Matrix A, Matrix B, Matrix C) {
     size_t M = A.extent(0), N = B.extent(1), K = A.extent(1);
@@ -111,7 +111,7 @@ int main() {
 void process(int arr[][4], int rows);  // 第二维必须编译期已知
 
 // mdspan — 安全、灵活
-void process(std::mdspan<int, std::dynamic_extent, std::dynamic_extent> m) {
+void process(std::mdspan<int, std::dextents<std::size_t, 2>> m) {
     // m.extent(0), m.extent(1) 可在运行时获取
 }
 ```

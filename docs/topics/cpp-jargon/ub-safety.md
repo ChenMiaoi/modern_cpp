@@ -1,3 +1,10 @@
+---
+title: "未定义行为与安全术语"
+topic: unknown
+feature: ub-safety
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 未定义行为与安全术语
 
 ## Undefined Behavior（UB，未定义行为）

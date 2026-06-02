@@ -1,3 +1,10 @@
+---
+title: "聚合初始化增强"
+topic: unknown
+feature: aggregate-init-enhancements
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 聚合初始化增强
 
 ## 概述

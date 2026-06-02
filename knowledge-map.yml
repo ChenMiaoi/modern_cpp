@@ -386,3 +386,1357 @@ compiler_optimization:
     title: 去虚拟化 (Devirtualization)
     docs:
       - docs/topics/compiler-optimizations/examples/devirt.cpp
+
+# ==================== C++11 扩展 ====================
+  move_semantics:
+    title: "移动语义"
+    docs:
+      - "docs/standards/cpp11/move-semantics.md"
+    exercises:
+      - "exercises/cpp11-classes/move1.cpp"
+    solutions:
+      - "exercises/solutions/move1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run move1'
+
+  lambda:
+    title: "Lambda 表达式"
+    docs:
+      - "docs/standards/cpp11/lambda-expressions.md"
+    exercises:
+      - "exercises/cpp11-templates/lambda1.cpp"
+    solutions:
+      - "exercises/solutions/lambda1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run lambda1'
+
+  constexpr:
+    title: "constexpr"
+    docs:
+      - "docs/standards/cpp11/constexpr.md"
+    exercises:
+      - "exercises/cpp11-basics/constexpr1.cpp"
+    solutions:
+      - "exercises/solutions/constexpr1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run constexpr1'
+
+  auto_type_deduction:
+    title: "auto 类型推导"
+    docs:
+      - "docs/standards/cpp11/auto-type-deduction.md"
+    exercises:
+      - "exercises/cpp11-basics/auto1.cpp"
+    solutions:
+      - "exercises/solutions/auto1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run auto1'
+
+  unordered_map:
+    title: "std::unordered_map"
+    docs:
+      - "docs/standards/cpp11/unordered-containers.md"
+      - "docs/libraries/libstdcxx/vector-hashtable.md"
+    exercises:
+      - "exercises/cpp11-std/unordered1.cpp"
+    solutions:
+      - "exercises/solutions/unordered1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run unordered1'
+
+  chrono:
+    title: "std::chrono"
+    docs:
+      - "docs/standards/cpp11/chrono.md"
+    exercises:
+      - "exercises/cpp11-std/chrono1.cpp"
+    solutions:
+      - "exercises/solutions/chrono1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run chrono1'
+
+  tuple:
+    title: "std::tuple"
+    docs:
+      - "docs/standards/cpp11/tuple.md"
+    exercises:
+      - "exercises/cpp11-std/tuple1.cpp"
+      - "exercises/cpp11-std/tupleadv1.cpp"
+    solutions:
+      - "exercises/solutions/tuple1.cpp"
+      - "exercises/solutions/tupleadv1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run tuple1'
+
+  thread:
+    title: "std::thread"
+    docs:
+      - "docs/standards/cpp11/thread.md"
+    exercises:
+      - "exercises/cpp11-std/thread1.cpp"
+    solutions:
+      - "exercises/solutions/thread1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run thread1'
+
+  regex:
+    title: "std::regex"
+    docs:
+      - "docs/standards/cpp11/regex.md"
+    exercises:
+      - "exercises/cpp11-std/regex1.cpp"
+    solutions:
+      - "exercises/solutions/regex1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run regex1'
+
+  array:
+    title: "std::array"
+    docs:
+      - "docs/standards/cpp11/array.md"
+    exercises:
+      - "exercises/cpp11-std/array1.cpp"
+    solutions:
+      - "exercises/solutions/array1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run array1'
+
+  variadic_templates:
+    title: "可变参数模板"
+    docs:
+      - "docs/standards/cpp11/variadic-templates.md"
+    exercises:
+      - "exercises/cpp11-templates/variadic1.cpp"
+    solutions:
+      - "exercises/solutions/variadic1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run variadic1'
+
+  enum_class:
+    title: "enum class"
+    docs:
+      - "docs/standards/cpp11/enum-class.md"
+    exercises:
+      - "exercises/cpp11-basics/enum1.cpp"
+    solutions:
+      - "exercises/solutions/enum1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run enum1'
+
+  nullptr:
+    title: "nullptr"
+    docs:
+      - "docs/standards/cpp11/nullptr.md"
+    exercises:
+      - "exercises/cpp11-basics/nullptr1.cpp"
+    solutions:
+      - "exercises/solutions/nullptr1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run nullptr1'
+
+  static_assert:
+    title: "static_assert"
+    docs:
+      - "docs/standards/cpp11/static-assert.md"
+    exercises:
+      - "exercises/cpp11-std/staticassert1.cpp"
+    solutions:
+      - "exercises/solutions/staticassert1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run staticassert1'
+
+  user_defined_literals:
+    title: "用户定义字面量"
+    docs:
+      - "docs/standards/cpp11/user-defined-literals.md"
+    exercises:
+      - "exercises/cpp11-basics/literals1.cpp"
+    solutions:
+      - "exercises/solutions/literals1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run literals1'
+
+  delegating_constructors:
+    title: "委托构造函数"
+    docs:
+      - "docs/standards/cpp11/delegating-constructors.md"
+    exercises:
+      - "exercises/cpp11-std/delegating1.cpp"
+    solutions:
+      - "exercises/solutions/delegating1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run delegating1'
+
+  forward:
+    title: "完美转发"
+    docs:
+      - "docs/standards/cpp11/move-semantics.md"
+    exercises:
+      - "exercises/cpp11-std/forward1.cpp"
+    solutions:
+      - "exercises/solutions/forward1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run forward1'
+
+  condvar:
+    title: "条件变量"
+    docs:
+      - "docs/standards/cpp11/thread.md"
+    exercises:
+      - "exercises/cpp11-std/condvar1.cpp"
+    solutions:
+      - "exercises/solutions/condvar1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run condvar1'
+
+  random:
+    title: "随机数"
+    docs:
+      - "docs/standards/cpp11/random.md"
+    exercises:
+      - "exercises/cpp11-std/random1.cpp"
+    solutions:
+      - "exercises/solutions/random1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run random1'
+
+  customhash:
+    title: "自定义哈希"
+    docs:
+      - "docs/standards/cpp11/unordered-containers.md"
+    exercises:
+      - "exercises/cpp11-std/customhash1.cpp"
+    solutions:
+      - "exercises/solutions/customhash1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run customhash1'
+
+  sfinae:
+    title: "SFINAE"
+    docs:
+      - "docs/topics/template-metaprogramming.md"
+    exercises:
+      - "exercises/cpp11-templates/sfinae1.cpp"
+    solutions:
+      - "exercises/solutions/sfinae1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run sfinae1'
+
+  raii:
+    title: "RAII"
+    docs:
+      - "docs/topics/raii.md"
+    exercises:
+      - "exercises/cpp11-classes/raii1.cpp"
+    solutions:
+      - "exercises/solutions/raii1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run raii1'
+
+# ==================== C++14 扩展 ====================
+  generic_lambda:
+    title: "泛型 Lambda"
+    docs:
+      - "docs/standards/cpp14/generic-lambda.md"
+    exercises:
+      - "exercises/cpp14/glambda1.cpp"
+    solutions:
+      - "exercises/solutions/glambda1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run glambda1'
+
+  return_type_deduction:
+    title: "返回类型推导"
+    docs:
+      - "docs/standards/cpp14/return-type-deduction.md"
+    exercises:
+      - "exercises/cpp14/rettype1.cpp"
+    solutions:
+      - "exercises/solutions/rettype1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run rettype1'
+
+  variable_templates:
+    title: "变量模板"
+    docs:
+      - "docs/standards/cpp14/variable-templates.md"
+    exercises:
+      - "exercises/cpp14/vartemplate1.cpp"
+    solutions:
+      - "exercises/solutions/vartemplate1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run vartemplate1'
+
+  exchange:
+    title: "std::exchange"
+    docs:
+      - "docs/standards/cpp14/exchange.md"
+    exercises:
+      - "exercises/cpp14/exchange1.cpp"
+    solutions:
+      - "exercises/solutions/exchange1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run exchange1'
+
+  make_unique:
+    title: "std::make_unique"
+    docs:
+      - "docs/standards/cpp14/make-unique.md"
+    exercises:
+      - "exercises/cpp14/makeunique1.cpp"
+    solutions:
+      - "exercises/solutions/makeunique1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run makeunique1'
+
+  binary_literals:
+    title: "二进制字面量"
+    docs:
+      - "docs/standards/cpp14/binary-literals.md"
+    exercises:
+      - "exercises/cpp14/binary1.cpp"
+    solutions:
+      - "exercises/solutions/binary1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run binary1'
+
+  digit_separators:
+    title: "数字分隔符"
+    docs:
+      - "docs/standards/cpp14/digit-separators.md"
+    exercises:
+      - "exercises/cpp14/digitsep1.cpp"
+    solutions:
+      - "exercises/solutions/digitsep1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run digitsep1'
+
+# ==================== C++17 扩展 ====================
+  fold_expressions:
+    title: "折叠表达式"
+    docs:
+      - "docs/standards/cpp17/fold-expressions.md"
+    exercises:
+      - "exercises/cpp17/foldexpr1.cpp"
+    solutions:
+      - "exercises/solutions/foldexpr1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run foldexpr1'
+
+  structured_bindings:
+    title: "结构化绑定"
+    docs:
+      - "docs/standards/cpp17/structured-bindings.md"
+    exercises: []
+    solutions: []
+
+  if_constexpr:
+    title: "if constexpr"
+    docs:
+      - "docs/standards/cpp17/if-constexpr.md"
+    exercises:
+      - "exercises/cpp17-basics/ifconstexpr1.cpp"
+    solutions:
+      - "exercises/solutions/ifconstexpr1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run ifconstexpr1'
+
+  ctad:
+    title: "类模板参数推导"
+    docs:
+      - "docs/standards/cpp17/class-template-argument-deduction.md"
+    exercises:
+      - "exercises/cpp17/ctad1.cpp"
+    solutions:
+      - "exercises/solutions/ctad1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run ctad1'
+
+  filesystem:
+    title: "std::filesystem"
+    docs:
+      - "docs/standards/cpp17/filesystem.md"
+    exercises:
+      - "exercises/cpp17/filesystem1.cpp"
+    solutions:
+      - "exercises/solutions/filesystem1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run filesystem1'
+
+  inline_variables:
+    title: "inline 变量"
+    docs:
+      - "docs/standards/cpp17/inline-variables.md"
+    exercises:
+      - "exercises/cpp17/inlinevars1.cpp"
+    solutions:
+      - "exercises/solutions/inlinevars1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run inlinevars1'
+
+  niscard:
+    title: "nodiscard"
+    docs:
+      - "docs/standards/cpp17/attributes.md"
+    exercises:
+      - "exercises/cpp17/niscard1.cpp"
+    solutions:
+      - "exercises/solutions/niscard1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run niscard1'
+
+  std_bind:
+    title: "std::bind"
+    docs:
+      - "docs/standards/cpp17/structured-bindings.md"
+    exercises:
+      - "exercises/cpp17-basics/bind1.cpp"
+    solutions:
+      - "exercises/solutions/bind1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run bind1'
+
+  optional_ex:
+    title: "std::optional 练习"
+    docs:
+      - "docs/standards/cpp17/optional.md"
+    exercises:
+      - "exercises/cpp17-basics/optional1.cpp"
+    solutions:
+      - "exercises/solutions/optional1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run optional1'
+
+# ==================== C++20 扩展 ====================
+  concepts:
+    title: "Concepts"
+    docs:
+      - "docs/standards/cpp20/concepts.md"
+    exercises:
+      - "exercises/cpp20-basics/concepts1.cpp"
+      - "exercises/cpp20/requires1.cpp"
+    solutions:
+      - "exercises/solutions/concepts1.cpp"
+      - "exercises/solutions/requires1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run concepts1'
+        - 'node exercises/cpplings.mjs run requires1'
+
+  spaceship:
+    title: "三路比较运算符"
+    docs:
+      - "docs/standards/cpp20/spaceship-operator.md"
+    exercises:
+      - "exercises/cpp20-basics/spaceship1.cpp"
+      - "exercises/cpp20/spaceship_ext.cpp"
+    solutions:
+      - "exercises/solutions/spaceship1.cpp"
+      - "exercises/solutions/spaceship_ext.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run spaceship1'
+
+  consteval_constinit:
+    title: "consteval / constinit"
+    docs:
+      - "docs/standards/cpp20/consteval-constinit.md"
+    exercises:
+      - "exercises/cpp20/consteval1.cpp"
+    solutions:
+      - "exercises/solutions/consteval1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run consteval1'
+
+  format:
+    title: "std::format"
+    docs:
+      - "docs/standards/cpp20/format.md"
+      - "docs/libraries/fmt-spdlog/fmt-engine.md"
+    exercises:
+      - "exercises/cpp20/format1.cpp"
+    solutions:
+      - "exercises/solutions/format1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run format1'
+
+  span:
+    title: "std::span"
+    docs:
+      - "docs/standards/cpp20/span.md"
+    exercises:
+      - "exercises/cpp20/span1.cpp"
+    solutions:
+      - "exercises/solutions/span1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run span1'
+
+  jthread:
+    title: "std::jthread"
+    docs:
+      - "docs/standards/cpp20/jthread.md"
+    exercises:
+      - "exercises/cpp20/jthread1.cpp"
+    solutions:
+      - "exercises/solutions/jthread1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run jthread1'
+
+  calendar:
+    title: "日历与时区"
+    docs:
+      - "docs/standards/cpp20/chrono-calendar-tz.md"
+    exercises:
+      - "exercises/cpp20/calendar1.cpp"
+    solutions:
+      - "exercises/solutions/calendar1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run calendar1'
+
+  aggregate_init:
+    title: "聚合初始化增强"
+    docs:
+      - "docs/standards/cpp20/aggregate-init-enhancements.md"
+    exercises:
+      - "exercises/cpp20/aggregate1.cpp"
+    solutions:
+      - "exercises/solutions/aggregate1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run aggregate1'
+
+  modules_doc:
+    title: "C++ Modules"
+    docs:
+      - "docs/standards/cpp20/modules.md"
+    exercises: []
+    solutions: []
+
+  requires_expression:
+    title: "requires 表达式"
+    docs:
+      - "docs/standards/cpp20/requires-expression.md"
+    exercises:
+      - "exercises/cpp20/requires1.cpp"
+    solutions:
+      - "exercises/solutions/requires1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run requires1'
+
+# ==================== C++23 扩展 ====================
+  expected:
+    title: "std::expected"
+    docs:
+      - "docs/standards/cpp23/expected.md"
+    exercises:
+      - "exercises/cpp23/expected23.cpp"
+    solutions:
+      - "exercises/solutions/expected23.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run expected23'
+
+  print:
+    title: "std::print"
+    docs:
+      - "docs/standards/cpp23/print.md"
+    exercises:
+      - "exercises/cpp23/print23.cpp"
+    solutions:
+      - "exercises/solutions/print23.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run print23'
+
+  move_only_function:
+    title: "std::move_only_function"
+    docs:
+      - "docs/standards/cpp23/move-only-function.md"
+    exercises:
+      - "exercises/cpp23/movonlyfunc1.cpp"
+    solutions:
+      - "exercises/solutions/movonlyfunc1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run movonlyfunc1'
+
+  if_consteval:
+    title: "if consteval"
+    docs:
+      - "docs/standards/cpp23/if-consteval.md"
+    exercises:
+      - "exercises/cpp23/ifconsteval1.cpp"
+    solutions:
+      - "exercises/solutions/ifconsteval1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run ifconsteval1'
+
+  import_std:
+    title: "import std"
+    docs:
+      - "docs/standards/cpp23/import-std.md"
+    exercises: []
+    solutions: []
+
+  generator:
+    title: "std::generator"
+    docs:
+      - "docs/standards/cpp23/generator.md"
+    exercises: []
+    solutions: []
+
+  stacktrace:
+    title: "std::stacktrace"
+    docs:
+      - "docs/standards/cpp23/stacktrace.md"
+    exercises: []
+    solutions: []
+
+  multidimensional_subscript:
+    title: "多维下标运算符"
+    docs:
+      - "docs/standards/cpp23/multidimensional-subscript.md"
+    exercises: []
+    solutions: []
+
+# ==================== C++26 ====================
+cpp26:
+  reflection:
+    title: "C++26 反射"
+    docs:
+      - "docs/standards/cpp26/reflection.md"
+    exercises: []
+    solutions: []
+
+  contracts:
+    title: "C++26 Contracts"
+    docs:
+      - "docs/standards/cpp26/contracts.md"
+    exercises: []
+    solutions: []
+
+  pattern_matching:
+    title: "C++26 模式匹配"
+    docs:
+      - "docs/standards/cpp26/pattern-matching.md"
+    exercises: []
+    solutions: []
+
+  simd:
+    title: "std::simd"
+    docs:
+      - "docs/standards/cpp26/simd.md"
+    exercises: []
+    solutions: []
+
+  senders_receivers:
+    title: "Senders/Receivers"
+    docs:
+      - "docs/standards/cpp26/senders-receivers.md"
+    exercises: []
+    solutions: []
+
+  constexpr_extensions:
+    title: "constexpr 扩展"
+    docs:
+      - "docs/standards/cpp26/constexpr-extensions.md"
+    exercises: []
+    solutions: []
+
+# ==================== 专题 ====================
+topics:
+  value_categories:
+    title: "值类别"
+    docs:
+      - "docs/topics/cpp-jargon/value-categories.md"
+    exercises:
+      - "exercises/topics/valuecat1.cpp"
+    solutions:
+      - "exercises/solutions/valuecat1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run valuecat1'
+
+  exception_safety:
+    title: "异常安全"
+    docs:
+      - "docs/topics/cpp-jargon/exception-safety.md"
+    exercises:
+      - "exercises/topics/exception1.cpp"
+    solutions:
+      - "exercises/solutions/exception1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run exception1'
+
+  noexcept:
+    title: "noexcept"
+    docs:
+      - "docs/topics/raii.md"
+    exercises:
+      - "exercises/topics/noexcept1.cpp"
+    solutions:
+      - "exercises/solutions/noexcept1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run noexcept1'
+
+  cache_friendly:
+    title: "缓存友好"
+    docs:
+      - "docs/topics/performance.md"
+    exercises:
+      - "exercises/topics/cachefriendly1.cpp"
+    solutions:
+      - "exercises/solutions/cachefriendly1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run cachefriendly1'
+
+  performance:
+    title: "性能优化"
+    docs:
+      - "docs/topics/performance.md"
+    exercises:
+      - "exercises/topics/perf1.cpp"
+      - "exercises/topics/perf2_branchless.cpp"
+    solutions:
+      - "exercises/solutions/perf1.cpp"
+      - "exercises/solutions/perf2_branchless.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run perf1'
+
+  template_metaprogramming:
+    title: "模板元编程"
+    docs:
+      - "docs/topics/template-metaprogramming.md"
+    exercises:
+      - "exercises/topics/tmp1.cpp"
+      - "exercises/topics/tmp2_reference_collapsing.cpp"
+      - "exercises/topics/tmp3_two_phase_lookup.cpp"
+      - "exercises/topics/tmp4_adl_swap.cpp"
+      - "exercises/topics/typelist1.cpp"
+    solutions:
+      - "exercises/solutions/tmp1.cpp"
+      - "exercises/solutions/tmp2_reference_collapsing.cpp"
+      - "exercises/solutions/tmp3_two_phase_lookup.cpp"
+      - "exercises/solutions/tmp4_adl_swap.cpp"
+      - "exercises/solutions/typelist1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run tmp1'
+
+  compile_time:
+    title: "编译期计算"
+    docs:
+      - "docs/topics/compile-time-computation.md"
+    exercises:
+      - "exercises/topics/compiletime1.cpp"
+    solutions:
+      - "exercises/solutions/compiletime1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run compiletime1'
+
+  rule_of_five:
+    title: "五法则 / 零法则"
+    docs:
+      - "docs/topics/cpp-jargon/special-members.md"
+    exercises:
+      - "exercises/topics/ruleof501.cpp"
+    solutions:
+      - "exercises/solutions/ruleof501.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run ruleof501'
+
+  design_patterns:
+    title: "设计模式"
+    docs:
+      - "docs/topics/design-patterns.md"
+    exercises:
+      - "exercises/topics/patterns1.cpp"
+    solutions:
+      - "exercises/solutions/patterns1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run patterns1'
+
+  atomics:
+    title: "原子操作"
+    docs:
+      - "docs/topics/memory-model.md"
+    exercises:
+      - "exercises/topics/atomics1.cpp"
+      - "exercises/topics/atomics2_release_sequence.cpp"
+      - "exercises/topics/atomics3_cas_failure_order.cpp"
+      - "exercises/topics/atomics4_false_sharing.cpp"
+      - "exercises/topics/atomics5_atomic_wait.cpp"
+    solutions:
+      - "exercises/solutions/atomics1.cpp"
+      - "exercises/solutions/atomics2_release_sequence.cpp"
+      - "exercises/solutions/atomics3_cas_failure_order.cpp"
+      - "exercises/solutions/atomics4_false_sharing.cpp"
+      - "exercises/solutions/atomics5_atomic_wait.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run atomics1'
+
+  memory_model:
+    title: "内存模型"
+    docs:
+      - "docs/topics/memory-model.md"
+    exercises: []
+    solutions: []
+
+  compiler_optimizations:
+    title: "编译器优化"
+    docs:
+      - "docs/topics/compiler-optimizations.md"
+    exercises: []
+    solutions: []
+
+  toolchain:
+    title: "工具链"
+    docs:
+      - "docs/topics/toolchain.md"
+    exercises: []
+    solutions: []
+
+  object_model:
+    title: "对象模型"
+    docs:
+      - "docs/topics/cpp-jargon/object-model.md"
+    exercises: []
+    solutions: []
+
+  type_system:
+    title: "类型系统"
+    docs:
+      - "docs/topics/cpp-jargon/type-system.md"
+    exercises: []
+    solutions: []
+
+  overload_resolution:
+    title: "重载决议"
+    docs:
+      - "docs/topics/cpp-jargon/overload-resolution.md"
+    exercises: []
+    solutions: []
+
+  special_members:
+    title: "特殊成员函数"
+    docs:
+      - "docs/topics/cpp-jargon/special-members.md"
+    exercises: []
+    solutions: []
+
+  compilation:
+    title: "编译过程"
+    docs:
+      - "docs/topics/cpp-jargon/compilation.md"
+    exercises: []
+    solutions: []
+
+  concurrency_terms:
+    title: "并发术语"
+    docs:
+      - "docs/topics/cpp-jargon/concurrency-terms.md"
+    exercises: []
+    solutions: []
+
+  ub_safety:
+    title: "UB 与安全"
+    docs:
+      - "docs/topics/cpp-jargon/ub-safety.md"
+    exercises: []
+    solutions: []
+
+  stdlib_idioms:
+    title: "标准库惯用法"
+    docs:
+      - "docs/topics/cpp-jargon/stdlib-idioms.md"
+    exercises: []
+    solutions: []
+
+  optimization_terms:
+    title: "优化术语"
+    docs:
+      - "docs/topics/cpp-jargon/optimization-terms.md"
+    exercises: []
+    solutions: []
+
+  template_mechanics:
+    title: "模板机制"
+    docs:
+      - "docs/topics/cpp-jargon/template-mechanics.md"
+    exercises: []
+    solutions: []
+
+# ==================== 库源码 ====================
+libraries:
+  abseil_swisstable:
+    title: "Abseil SwissTable"
+    docs:
+      - "docs/libraries/abseil/swisstable.md"
+    exercises: []
+    solutions: []
+
+  abseil_status:
+    title: "Abseil Status"
+    docs:
+      - "docs/libraries/abseil/status.md"
+    exercises: []
+    solutions: []
+
+  abseil_cord:
+    title: "Abseil Cord"
+    docs:
+      - "docs/libraries/abseil/cord.md"
+    exercises: []
+    solutions: []
+
+  abseil_strings_hash:
+    title: "Abseil 字符串与哈希"
+    docs:
+      - "docs/libraries/abseil/strings-hash.md"
+    exercises: []
+    solutions: []
+
+  abseil_time:
+    title: "Abseil Time"
+    docs:
+      - "docs/libraries/abseil/time-utility.md"
+    exercises: []
+    solutions: []
+
+  folly_f14:
+    title: "Folly F14"
+    docs:
+      - "docs/libraries/folly/f14.md"
+    exercises: []
+    solutions: []
+
+  folly_fbstring:
+    title: "Folly fbstring"
+    docs:
+      - "docs/libraries/folly/fbstring.md"
+    exercises: []
+    solutions: []
+
+  folly_iobuf:
+    title: "Folly IOBuf"
+    docs:
+      - "docs/libraries/folly/iobuf.md"
+    exercises: []
+    solutions: []
+
+  folly_future:
+    title: "Folly Future/Promise"
+    docs:
+      - "docs/libraries/folly/future-promise.md"
+    exercises: []
+    solutions: []
+
+  folly_synchronized:
+    title: "Folly Synchronized"
+    docs:
+      - "docs/libraries/folly/synchronized-tools.md"
+    exercises: []
+    solutions: []
+
+  fmt_engine:
+    title: "fmt 格式化引擎"
+    docs:
+      - "docs/libraries/fmt-spdlog/fmt-engine.md"
+    exercises: []
+    solutions: []
+
+  range_v3_views:
+    title: "range-v3 Views"
+    docs:
+      - "docs/libraries/range-v3/views.md"
+    exercises: []
+    solutions: []
+
+  range_v3_pipe:
+    title: "range-v3 管道运算符"
+    docs:
+      - "docs/libraries/range-v3/pipe-operator.md"
+    exercises: []
+    solutions: []
+
+  eastl_allocator:
+    title: "EASTL 分配器"
+    docs:
+      - "docs/libraries/eastl/allocator.md"
+    exercises: []
+    solutions: []
+
+  eastl_fixed:
+    title: "EASTL fixed 容器"
+    docs:
+      - "docs/libraries/eastl/fixed-containers.md"
+    exercises: []
+    solutions: []
+
+  eastl_intrusive:
+    title: "EASTL 侵入式容器"
+    docs:
+      - "docs/libraries/eastl/intrusive-hashtable.md"
+    exercises: []
+    solutions: []
+
+  eastl_string_sort:
+    title: "EASTL String 与排序"
+    docs:
+      - "docs/libraries/eastl/string-sort.md"
+    exercises: []
+    solutions: []
+
+  fmt_advanced:
+    title: "fmt 高级用法"
+    docs:
+      - "docs/libraries/fmt-spdlog/fmt-advanced.md"
+    exercises: []
+    solutions: []
+
+  spdlog:
+    title: "spdlog 日志库"
+    docs:
+      - "docs/libraries/fmt-spdlog/spdlog.md"
+    exercises: []
+    solutions: []
+
+  libstdcxx_string_abi:
+    title: "libstdc++ string ABI"
+    docs:
+      - "docs/libraries/libstdcxx/string-abi.md"
+    exercises: []
+    solutions: []
+
+  llvm_map_variant:
+    title: "libc++ map/set 与 variant"
+    docs:
+      - "docs/libraries/llvm/map-variant.md"
+    exercises: []
+    solutions: []
+
+  range_v3_actions:
+    title: "range-v3 Actions"
+    docs:
+      - "docs/libraries/range-v3/actions-sentinels.md"
+    exercises: []
+    solutions: []
+
+# ==================== 其他标准 ====================
+cpp03:
+  changes:
+    title: "C++03 变更"
+    docs:
+      - "docs/standards/cpp03/changes.md"
+    exercises: []
+    solutions: []
+
+cpp98:
+  features:
+    title: "C++98 特性"
+    docs:
+      - "docs/standards/cpp98/features.md"
+    exercises: []
+    solutions: []
+
+  standard_library:
+    title: "C++98 标准库"
+    docs:
+      - "docs/standards/cpp98/standard-library.md"
+    exercises: []
+    solutions: []
+
+  # 补充遗漏的 C++11-20 文档
+  cpp11_attributes:
+    title: "C++11 属性"
+    docs:
+      - "docs/standards/cpp11/attributes.md"
+    exercises: []
+    solutions: []
+
+  cpp14_shared_timed_mutex:
+    title: "std::shared_timed_mutex"
+    docs:
+      - "docs/standards/cpp14/shared-timed-mutex.md"
+    exercises: []
+    solutions: []
+
+  cpp17_nested_namespaces:
+    title: "嵌套命名空间"
+    docs:
+      - "docs/standards/cpp17/nested-namespaces.md"
+    exercises: []
+    solutions: []
+
+  cpp17_parallel_algorithms:
+    title: "并行算法"
+    docs:
+      - "docs/standards/cpp17/parallel-algorithms.md"
+    exercises: []
+    solutions: []
+
+  cpp20_expected:
+    title: "C++20 expected"
+    docs:
+      - "docs/standards/cpp20/expected.md"
+    exercises: []
+    solutions: []
+
+# ==================== P2: C++ 深潜文档 ====================
+  cpp20_coroutine_lowering:
+    title: "协程编译器 Lowering"
+    docs:
+      - "docs/standards/cpp20/coroutine-lowering.md"
+    exercises: []
+    solutions: []
+
+  cpp20_concepts_internals:
+    title: "Concepts 内部实现"
+    docs:
+      - "docs/standards/cpp20/concepts-internals.md"
+    exercises: []
+    solutions: []
+
+  cpp20_ranges_internals:
+    title: "Ranges 内部实现"
+    docs:
+      - "docs/standards/cpp20/ranges-internals.md"
+    exercises: []
+    solutions: []
+
+  cpp20_modules_build:
+    title: "Modules 构建实证"
+    docs:
+      - "docs/standards/cpp20/modules-build-evidence.md"
+    exercises: []
+    solutions: []
+
+# ==================== P2: 底层专题 ====================
+  object_model:
+    title: "C++ 对象模型"
+    docs:
+      - "docs/topics/object-model.md"
+    exercises: []
+    solutions: []
+
+  abi:
+    title: "C++ ABI"
+    docs:
+      - "docs/topics/abi.md"
+    exercises: []
+    solutions: []
+
+  lifetime:
+    title: "对象生命周期"
+    docs:
+      - "docs/topics/lifetime.md"
+    exercises: []
+    solutions: []
+
+  value_categories_deep:
+    title: "值类别深潜"
+    docs:
+      - "docs/topics/value-categories-deep-dive.md"
+    exercises: []
+    solutions: []
+
+  rtti_vtable:
+    title: "RTTI 与虚函数表"
+    docs:
+      - "docs/topics/rtti-vtable.md"
+    exercises: []
+    solutions: []
+
+  template_instantiation:
+    title: "模板实例化"
+    docs:
+      - "docs/topics/template-instantiation.md"
+    exercises: []
+    solutions: []
+
+  exception_abi:
+    title: "异常处理 ABI"
+    docs:
+      - "docs/topics/exception-abi.md"
+    exercises: []
+    solutions: []
+
+  name_lookup:
+    title: "名称查找"
+    docs:
+      - "docs/topics/name-lookup.md"
+    exercises: []
+    solutions: []
+
+  overload_resolution:
+    title: "重载决议"
+    docs:
+      - "docs/topics/overload-resolution.md"
+    exercises: []
+    solutions: []
+
+# ==================== P2: 内存模型深潜 ====================
+  memory_model_modification_order:
+    title: "修改序"
+    docs:
+      - "docs/topics/memory-model/modification-order.md"
+    exercises: []
+    solutions: []
+
+  memory_model_release_sequence:
+    title: "释放序列"
+    docs:
+      - "docs/topics/memory-model/release-sequence.md"
+    exercises: []
+    solutions: []
+
+  memory_model_fences:
+    title: "内存屏障"
+    docs:
+      - "docs/topics/memory-model/fences.md"
+    exercises: []
+    solutions: []
+
+  memory_model_cas_ordering:
+    title: "CAS 排序"
+    docs:
+      - "docs/topics/memory-model/cas-ordering.md"
+    exercises: []
+    solutions: []
+
+  memory_model_lock_free_stack:
+    title: "无锁栈与 ABA"
+    docs:
+      - "docs/topics/memory-model/lock-free-stack-aba.md"
+    exercises: []
+    solutions: []
+
+  memory_model_hazard_pointer:
+    title: "风险指针"
+    docs:
+      - "docs/topics/memory-model/hazard-pointer.md"
+    exercises: []
+    solutions: []
+
+  memory_model_false_sharing:
+    title: "伪共享"
+    docs:
+      - "docs/topics/memory-model/false-sharing.md"
+    exercises: []
+    solutions: []
+
+  memory_model_atomic_wait:
+    title: "atomic_wait 实现"
+    docs:
+      - "docs/topics/memory-model/atomic-wait-implementation.md"
+    exercises: []
+    solutions: []
+
+# ==================== P2: 编译器优化深潜 ====================
+  compiler_opt_sroa:
+    title: "SROA"
+    docs:
+      - "docs/topics/compiler-optimizations/sroa.md"
+    exercises: []
+    solutions: []
+
+  compiler_opt_inlining:
+    title: "内联优化"
+    docs:
+      - "docs/topics/compiler-optimizations/inlining.md"
+    exercises: []
+    solutions: []
+
+  compiler_opt_vectorization:
+    title: "向量化"
+    docs:
+      - "docs/topics/compiler-optimizations/vectorization.md"
+    exercises: []
+    solutions: []
+
+  compiler_opt_devirtualization:
+    title: "去虚拟化"
+    docs:
+      - "docs/topics/compiler-optimizations/devirtualization.md"
+    exercises: []
+    solutions: []
+
+  compiler_opt_lto:
+    title: "LTO"
+    docs:
+      - "docs/topics/compiler-optimizations/lto.md"
+    exercises: []
+    solutions: []
+
+  compiler_opt_pgo:
+    title: "PGO"
+    docs:
+      - "docs/topics/compiler-optimizations/pgo.md"
+    exercises: []
+    solutions: []
+
+  compiler_opt_alias:
+    title: "别名分析"
+    docs:
+      - "docs/topics/compiler-optimizations/alias-analysis.md"
+    exercises: []
+    solutions: []
+
+  compiler_opt_sanitizer:
+    title: "Sanitizer 与优化"
+    docs:
+      - "docs/topics/compiler-optimizations/sanitizer-vs-optimization.md"
+    exercises: []
+    solutions: []

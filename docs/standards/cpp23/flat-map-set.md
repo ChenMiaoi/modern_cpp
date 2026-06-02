@@ -1,3 +1,21 @@
+---
+title: std::flat_map / std::flat_set
+topic: cpp23
+feature: flat_map
+standard: C++23
+status_checked_at: 2026-06-02
+standard_refs:
+  - draft: N4950
+    clause: "[flat.map]"
+proposals:
+  - paper: P0429
+    revision: R9
+    status: accepted
+exercises:
+  - exercises/cpp23/flatmap1.cpp
+solutions:
+  - exercises/solutions/flatmap1.cpp
+---
 # std::flat_map / std::flat_set
 
 C++23 引入 `std::flat_map` 和 `std::flat_set`，底层使用排序的 `std::vector` 实现关联容器。相比红黑树实现的 `std::map`/`std::set`，它们在小型数据集和缓存敏感场景中性能更优。

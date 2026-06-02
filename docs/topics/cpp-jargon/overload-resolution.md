@@ -1,3 +1,10 @@
+---
+title: "重载决议与名字查找"
+topic: unknown
+feature: overload-resolution
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # 重载决议与名字查找
 
 ## Overload Resolution（重载决议）

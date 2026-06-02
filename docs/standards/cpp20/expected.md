@@ -1,3 +1,10 @@
+---
+title: "`std::expected`：值或错误"
+topic: unknown
+feature: expected
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # `std::expected`：值或错误
 
 ## 概述

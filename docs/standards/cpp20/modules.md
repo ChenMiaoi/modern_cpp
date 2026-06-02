@@ -1,3 +1,10 @@
+---
+title: "C++20 Modules（模块）"
+topic: unknown
+feature: modules
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++20 Modules（模块）
 
 ## 概述

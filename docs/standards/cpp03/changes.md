@@ -1,3 +1,10 @@
+---
+title: "C++03 变更与修正"
+topic: unknown
+feature: changes
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # C++03 变更与修正
 
 ## 值初始化（Value Initialization）

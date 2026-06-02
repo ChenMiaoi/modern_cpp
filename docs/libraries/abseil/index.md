@@ -1,3 +1,10 @@
+---
+title: "Abseil (Google) 源码级深度剖析"
+topic: unknown
+feature: index
+standard: N/A
+status_checked_at: 2026-06-02
+---
 # Abseil (Google) 源码级深度剖析
 
 > Abseil 是 Google 内部 C++ 代码库的开源版本，包含 Google 工程师反复使用的基础库。它不是独立工具的集合，而是 Google 大规模 C++ 代码库的**基石层**。
