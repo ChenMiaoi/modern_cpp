@@ -1,3 +1,9 @@
+---
+title: 性能优化
+topic: topics
+feature: performance
+status_checked_at: 2026-06-01
+---
 # 性能优化
 
 ## 移动语义与避免拷贝

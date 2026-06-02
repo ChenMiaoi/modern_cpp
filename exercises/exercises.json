@@ -69,6 +69,14 @@
       "title": "专题",
       "desc": "值类别、异常安全、Rule of 5/0、缓存友好、noexcept",
       "std": "c++17"
+    },
+    {
+      "id": "compile-fail",
+      "title": "编译失败测试",
+      "name": "编译失败测试",
+      "desc": "验证应该无法编译的代码",
+      "std": "c++20",
+      "description": "验证应该无法编译的代码"
     }
   ],
   "exercises": [
@@ -78,7 +86,11 @@
       "title": "auto 类型推导",
       "file": "cpp11-basics/auto1.cpp",
       "solution": "solutions/auto1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`auto` 推导类型，忽略引用和顶层 const。",
+        "level2": "`auto&` 保留引用，`const auto` 保留顶层 const。",
+        "level3": "`auto` 推导类似模板参数推导 `template<typename T> void f(T x)`。"
+      },
       "description": "auto 类型推导"
     },
     {
@@ -87,7 +99,11 @@
       "title": "constexpr 基础",
       "file": "cpp11-basics/constexpr1.cpp",
       "solution": "solutions/constexpr1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "constexpr 函数在编译期可求值。",
+        "level2": "C++11 constexpr 函数体只能有一条 return 语句。",
+        "level3": "constexpr 变量必须用常量表达式初始化。"
+      },
       "description": "constexpr 基础"
     },
     {
@@ -96,7 +112,11 @@
       "title": "enum class",
       "file": "cpp11-basics/enum1.cpp",
       "solution": "solutions/enum1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`enum class` 是强类型枚举，不会隐式转换为 int。",
+        "level2": "用 `::` 访问枚举值: `Color::Red`。",
+        "level3": "可以指定底层类型: `enum class Color : uint8_t { ... }`。"
+      },
       "description": "enum class"
     },
     {
@@ -105,7 +125,11 @@
       "title": "用户定义字面量",
       "file": "cpp11-basics/literals1.cpp",
       "solution": "solutions/literals1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "用户定义字面量通过 `operator\"\"_suffix` 定义。",
+        "level2": "整数字面量参数类型是 `unsigned long long`。",
+        "level3": "字符串字面量参数是 `const char*, size_t`。"
+      },
       "description": "用户定义字面量"
     },
     {
@@ -114,7 +138,11 @@
       "title": "nullptr vs NULL",
       "file": "cpp11-basics/nullptr1.cpp",
       "solution": "solutions/nullptr1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`nullptr` 是 `std::nullptr_t` 类型，不是 int。",
+        "level2": "`nullptr` 可隐式转换为任意指针类型，但不转换为 int。",
+        "level3": "用 `nullptr` 替代 `NULL` 可避免重载歧义。"
+      },
       "description": "nullptr vs NULL"
     },
     {
@@ -123,7 +151,11 @@
       "title": "主题: C++11 类与资源管理 — 移动语义",
       "file": "cpp11-classes/move1.cpp",
       "solution": "solutions/move1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "移动构造函数接收 `T&&`，移动赋值同理。",
+        "level2": "`std::move` 只是转换为右值引用，不移动任何东西。",
+        "level3": "移动后源对象应处于有效但未指定状态。"
+      },
       "description": "主题: C++11 类与资源管理 — 移动语义"
     },
     {
@@ -132,7 +164,11 @@
       "title": "主题: C++11 类与资源管理 — RAII",
       "file": "cpp11-classes/raii1.cpp",
       "solution": "solutions/raii1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "RAII = 资源获取即初始化，构造函数获取，析构函数释放。",
+        "level2": "用析构函数保证资源释放，即使发生异常。",
+        "level3": "`noexcept` 析构函数是标准库容器的要求。"
+      },
       "description": "主题: C++11 类与资源管理 — RAII"
     },
     {
@@ -141,7 +177,12 @@
       "title": "主题: C++11 类与资源管理 — unique_ptr",
       "file": "cpp11-classes/smartptr1.cpp",
       "solution": "solutions/smartptr1.cpp",
-      "hint": "",
+      "source_topic": "std_unique_ptr",
+      "hint": {
+        "level1": "`unique_ptr` 独占所有权，不可拷贝。",
+        "level2": "用 `std::move` 转移所有权。",
+        "level3": "自定义删除器: `unique_ptr<FILE, decltype(&fclose)>`。"
+      },
       "description": "主题: C++11 类与资源管理 — unique_ptr"
     },
     {
@@ -150,7 +191,12 @@
       "title": "主题: C++11 类与资源管理 — shared_ptr 与 weak_ptr",
       "file": "cpp11-classes/smartptr2.cpp",
       "solution": "solutions/smartptr2.cpp",
-      "hint": "",
+      "source_topic": "std_shared_ptr",
+      "hint": {
+        "level1": "`shared_ptr` 引用计数，最后一个销毁时释放。",
+        "level2": "`weak_ptr` 不增加引用计数，用 `lock()` 获取 shared_ptr。",
+        "level3": "`make_shared` 一次分配对象和控制块，比 `shared_ptr(new T)` 更高效。"
+      },
       "description": "主题: C++11 类与资源管理 — shared_ptr 与 weak_ptr"
     },
     {
@@ -159,7 +205,11 @@
       "title": "主题: C++11 模板与泛型 — Lambda 表达式",
       "file": "cpp11-templates/lambda1.cpp",
       "solution": "solutions/lambda1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`[capture](params) { body }` 捕获列表决定如何捕获外部变量。",
+        "level2": "`[=]` 值捕获，`[&]` 引用捕获，`[this]` 捕获 this 指针。",
+        "level3": "`mutable` lambda 允许修改值捕获的变量。"
+      },
       "description": "主题: C++11 模板与泛型 — Lambda 表达式"
     },
     {
@@ -168,7 +218,11 @@
       "title": "主题: C++11 模板与泛型 — SFINAE 检测成员",
       "file": "cpp11-templates/sfinae1.cpp",
       "solution": "solutions/sfinae1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "SFINAE = 替换失败不是错误，模板重载决议时忽略不匹配的特化。",
+        "level2": "`std::enable_if<Condition, Type>::type` 在 Condition 为 false 时产生替换失败。",
+        "level3": "`void_t` 检测表达式是否有效: `template<typename T, typename = void_t<decltype(T().size())>>`。"
+      },
       "description": "主题: C++11 模板与泛型 — SFINAE 检测成员"
     },
     {
@@ -177,7 +231,11 @@
       "title": "主题: C++11 模板与泛型 — 可变参数模板",
       "file": "cpp11-templates/variadic1.cpp",
       "solution": "solutions/variadic1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`template<typename... Args>` 参数包展开。",
+        "level2": "递归展开: 处理第一个参数，递归处理剩余。",
+        "level3": "`sizeof...(Args)` 获取参数包大小，`args...` 展开参数包。"
+      },
       "description": "主题: C++11 模板与泛型 — 可变参数模板"
     },
     {
@@ -186,7 +244,11 @@
       "title": "std::array",
       "file": "cpp11-std/array1.cpp",
       "solution": "solutions/array1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::array<T, N>` 固定大小，栈上分配。",
+        "level2": "`.size()` 返回 N，`.at(i)` 越界抛异常。",
+        "level3": "可以用 `std::get<I>(arr)` 访问（编译期索引）。"
+      },
       "description": "std::array"
     },
     {
@@ -195,7 +257,11 @@
       "title": "属性 (Attributes)",
       "file": "cpp11-std/attributes1.cpp",
       "solution": "solutions/attributes1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`[[nodiscard]]` 要求检查返回值。",
+        "level2": "`[[maybe_unused]]` 抑制未使用变量警告。",
+        "level3": "`[[deprecated(\"reason\")]]` 标记弃用。"
+      },
       "description": "属性 (Attributes)"
     },
     {
@@ -204,7 +270,11 @@
       "title": "chrono 时间库",
       "file": "cpp11-std/chrono1.cpp",
       "solution": "solutions/chrono1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::chrono` 提供时间点和时间段。",
+        "level2": "`duration<int, ratio<1, 1000>>` 表示毫秒。",
+        "level3": "`system_clock` 是系统时钟，`steady_clock` 单调递增。"
+      },
       "description": "chrono 时间库"
     },
     {
@@ -213,7 +283,11 @@
       "title": "条件变量与生产者-消费者模式",
       "file": "cpp11-std/condvar1.cpp",
       "solution": "solutions/condvar1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`condition_variable` 让线程等待条件满足。",
+        "level2": "`wait(lock)` 自动释放锁并阻塞，被唤醒后重新获取锁。",
+        "level3": "必须用 `while` 循环检查条件（虚假唤醒）。"
+      },
       "description": "条件变量与生产者-消费者模式"
     },
     {
@@ -222,7 +296,11 @@
       "title": "自定义哈希",
       "file": "cpp11-std/customhash1.cpp",
       "solution": "solutions/customhash1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "自定义哈希需要特化 `std::hash` 并实现 `operator==`。",
+        "level2": "哈希函数应尽量均匀分布。",
+        "level3": "组合哈希: `h1 ^ (h2 * 0x9e3779b9 + 0x9e3779b9 + (h1 << 6) + (h1 >> 2))`。"
+      },
       "description": "自定义哈希"
     },
     {
@@ -231,7 +309,11 @@
       "title": "委托构造函数 (Delegating Constructors)",
       "file": "cpp11-std/delegating1.cpp",
       "solution": "solutions/delegating1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "构造函数可以调用同类其他构造函数。",
+        "level2": "`ClassName(args) : ClassName(default_args) { }` 委托构造。",
+        "level3": "委托构造函数不能使用成员初始化列表。"
+      },
       "description": "委托构造函数 (Delegating Constructors)"
     },
     {
@@ -240,7 +322,11 @@
       "title": "完美转发 (std::forward)",
       "file": "cpp11-std/forward1.cpp",
       "solution": "solutions/forward1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::forward<T>(arg)` 保持参数的值类别。",
+        "level2": "只在模板中配合 `T&&` 使用。",
+        "level3": "`forward` 本质是 `static_cast<T&&>(arg)`。"
+      },
       "description": "完美转发 (std::forward)"
     },
     {
@@ -249,7 +335,11 @@
       "title": "随机数库 (std::random)",
       "file": "cpp11-std/random1.cpp",
       "solution": "solutions/random1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`<random>` 提供随机数引擎和分布。",
+        "level2": "`mt19937` 是常用引擎，`uniform_int_distribution` 是均匀分布。",
+        "level3": "引擎有状态，相同种子产生相同序列。"
+      },
       "description": "随机数库 (std::random)"
     },
     {
@@ -258,7 +348,11 @@
       "title": "正则表达式基础 (std::regex)",
       "file": "cpp11-std/regex1.cpp",
       "solution": "solutions/regex1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::regex` 编译正则表达式。",
+        "level2": "`std::regex_match` 匹配整个字符串，`std::regex_search` 搜索子串。",
+        "level3": "`std::smatch` 存储匹配结果，`m[1]` 是第一个捕获组。"
+      },
       "description": "正则表达式基础 (std::regex)"
     },
     {
@@ -267,7 +361,11 @@
       "title": "static_assert 编译期断言",
       "file": "cpp11-std/staticassert1.cpp",
       "solution": "solutions/staticassert1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`static_assert(expr, \"msg\")` 在编译期检查。",
+        "level2": "C++11 要求表达式是常量表达式。",
+        "level3": "C++17 起可以省略消息: `static_assert(expr)`。"
+      },
       "description": "static_assert 编译期断言"
     },
     {
@@ -276,7 +374,11 @@
       "title": "std::thread 基础",
       "file": "cpp11-std/thread1.cpp",
       "solution": "solutions/thread1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::thread t(func, args...)` 创建线程。",
+        "level2": "必须在析构前 `join()` 或 `detach()`。",
+        "level3": "线程函数参数默认按值传递，用 `std::ref` 传引用。"
+      },
       "description": "std::thread 基础"
     },
     {
@@ -285,7 +387,11 @@
       "title": "std::tuple",
       "file": "cpp11-std/tuple1.cpp",
       "solution": "solutions/tuple1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::tuple<T1, T2, ...>` 异构容器。",
+        "level2": "`std::get<0>(t)` 按索引访问，`std::get<T>(t)` 按类型访问。",
+        "level3": "`std::make_tuple` 自动推导类型。"
+      },
       "description": "std::tuple"
     },
     {
@@ -294,7 +400,11 @@
       "title": "tuple 高级操作",
       "file": "cpp11-std/tupleadv1.cpp",
       "solution": "solutions/tupleadv1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::tuple_cat` 连接多个 tuple。",
+        "level2": "`std::apply(f, t)` 将 tuple 展开为函数参数。",
+        "level3": "`std::tuple_size_v<decltype(t)>` 获取 tuple 大小。"
+      },
       "description": "tuple 高级操作"
     },
     {
@@ -303,7 +413,11 @@
       "title": "无序容器 (unordered_map / unordered_set)",
       "file": "cpp11-std/unordered1.cpp",
       "solution": "solutions/unordered1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`unordered_map` 基于哈希表，查找 O(1) 平均。",
+        "level2": "自定义类型需提供 hash 和 == 运算符。",
+        "level3": "`bucket_count()` 和 `load_factor()` 控制性能。"
+      },
       "description": "无序容器 (unordered_map / unordered_set)"
     },
     {
@@ -312,7 +426,11 @@
       "title": "二进制字面量与数字分隔符 (Binary Literals & Digit Separators)",
       "file": "cpp14/binary1.cpp",
       "solution": "solutions/binary1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`0b1010` 是二进制字面量。",
+        "level2": "`1'000'000` 数字分隔符提高可读性。",
+        "level3": "分隔符位置不影响值，`1'2'3` 等于 `123`。"
+      },
       "description": "二进制字面量与数字分隔符 (Binary Literals & Digit Separators)"
     },
     {
@@ -321,7 +439,11 @@
       "title": "数字分隔符 (Digit Separators)",
       "file": "cpp14/digitsep1.cpp",
       "solution": "solutions/digitsep1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`'` 作为数字分隔符，不影响值。",
+        "level2": "可用于整数和浮点数。",
+        "level3": "`0xff'ff'ff` 也可用于十六进制。"
+      },
       "description": "数字分隔符 (Digit Separators)"
     },
     {
@@ -330,7 +452,11 @@
       "title": "std::exchange",
       "file": "cpp14/exchange1.cpp",
       "solution": "solutions/exchange1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::exchange(old, new)` 返回旧值并赋新值。",
+        "level2": "移动赋值运算符常用: `data = std::exchange(other.data, nullptr)`。",
+        "level3": "实现: `T tmp = std::move(val); val = std::move(new_val); return tmp;`。"
+      },
       "description": "std::exchange"
     },
     {
@@ -339,7 +465,11 @@
       "title": "泛型 Lambda (Generic Lambdas)",
       "file": "cpp14/glambda1.cpp",
       "solution": "solutions/glambda1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "泛型 lambda 参数用 `auto`。",
+        "level2": "`[](auto x, auto y) { return x + y; }` 编译期生成模板。",
+        "level3": "C++14 起 lambda 可以用 `auto` 返回类型推导。"
+      },
       "description": "泛型 Lambda (Generic Lambdas)"
     },
     {
@@ -348,7 +478,11 @@
       "title": "std::make_unique",
       "file": "cpp14/makeunique1.cpp",
       "solution": "solutions/makeunique1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::make_unique<T>(args...)` 创建 unique_ptr。",
+        "level2": "优先用 make_unique 而非 `unique_ptr(new T())`。",
+        "level3": "C++14 才有 make_unique，C++11 需要自己写。"
+      },
       "description": "std::make_unique"
     },
     {
@@ -357,7 +491,11 @@
       "title": "返回类型推导 (Return Type Deduction)",
       "file": "cpp14/rettype1.cpp",
       "solution": "solutions/rettype1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "C++14 函数可以用 `auto` 返回类型推导。",
+        "level2": "递归函数不能直接用 auto 推导（需要尾置返回类型）。",
+        "level3": "`decltype(auto)` 保留引用。"
+      },
       "description": "返回类型推导 (Return Type Deduction)"
     },
     {
@@ -366,44 +504,68 @@
       "title": "变量模板 (Variable Templates)",
       "file": "cpp14/vartemplate1.cpp",
       "solution": "solutions/vartemplate1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "C++14 变量模板 `template<typename T> constexpr T pi = T(3.14159265358979323846)`。",
+        "level2": "变量模板可以特化。",
+        "level3": "变量模板在头文件中定义不会导致多重定义（隐式 inline）。"
+      },
       "description": "变量模板 (Variable Templates)"
     },
     {
       "id": "bind1",
       "topic": "cpp17-basics",
-      "title": "Title: Structured Bindings",
+      "title": "结构化绑定 (Structured Bindings)",
       "file": "cpp17-basics/bind1.cpp",
       "solution": "solutions/bind1.cpp",
-      "hint": "",
-      "description": "Title: Structured Bindings"
+      "hint": {
+        "level1": "`auto [x, y] = pair;` 结构化绑定。",
+        "level2": "可绑定 struct 成员、pair、tuple、数组。",
+        "level3": "绑定的是引用或值，不是拷贝（取决于声明方式）。"
+      },
+      "description": "结构化绑定 (Structured Bindings)"
     },
     {
       "id": "ifconstexpr1",
       "topic": "cpp17-basics",
-      "title": "Title: if constexpr",
+      "title": "if constexpr 编译期分支",
       "file": "cpp17-basics/ifconstexpr1.cpp",
       "solution": "solutions/ifconstexpr1.cpp",
-      "hint": "",
-      "description": "Title: if constexpr"
+      "hint": {
+        "level1": "`if constexpr (condition)` 编译期分支。",
+        "level2": "不满足的分支不实例化，避免编译错误。",
+        "level3": "必须至少有一个分支对所有模板参数有效。"
+      },
+      "description": "if constexpr 编译期分支"
     },
     {
       "id": "optional1",
       "topic": "cpp17-basics",
-      "title": "Title: std::optional",
+      "title": "std::optional 可选值容器",
       "file": "cpp17-basics/optional1.cpp",
       "solution": "solutions/optional1.cpp",
-      "hint": "",
-      "description": "Title: std::optional"
+      "source_topic": "std_optional",
+      "hint": {
+        "level1": "`std::optional<T>` 可能有值，也可能没有。",
+        "level2": "`opt.value()` 有值时返回，无值时抛 `bad_optional_access`。",
+        "level3": "`opt.value_or(default)` 安全获取值。"
+      },
+      "description": "std::optional 可选值容器"
     },
     {
       "id": "any1",
       "topic": "cpp17",
-      "title": "any1 — std::any",
+      "kind": "run-pass",
+      "title": "std::any API 与类型擦除基础",
       "file": "cpp17/any1.cpp",
       "solution": "solutions/any1.cpp",
-      "hint": "",
-      "description": "any1 — std::any"
+      "doc": "docs/standards/cpp17/any.md",
+      "source_topic": "std_any",
+      "hint": {
+        "level1": "先检查 has_value() 和 type()。",
+        "level2": "std::any_cast<T>(a) 类型不匹配时会抛 std::bad_any_cast。",
+        "level3": "指针形式 std::any_cast<T>(&a) 失败时返回 nullptr。"
+      },
+      "description": "std::any API 与类型擦除基础"
     },
     {
       "id": "ctad1",
@@ -411,7 +573,11 @@
       "title": "ctad1 — 类模板参数推导 (CTAD)",
       "file": "cpp17/ctad1.cpp",
       "solution": "solutions/ctad1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "C++17 类模板参数推导，`pair p(1, 2)` 自动推导。",
+        "level2": "可以自定义推导指南 `deduction_guide`。",
+        "level3": "CTAD 让模板类不需要 `make_xxx` 辅助函数。"
+      },
       "description": "ctad1 — 类模板参数推导 (CTAD)"
     },
     {
@@ -420,7 +586,11 @@
       "title": "filesystem1 — 文件系统基础",
       "file": "cpp17/filesystem1.cpp",
       "solution": "solutions/filesystem1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::filesystem` 操作文件和目录。",
+        "level2": "`path` 表示路径，`exists()` 检查存在，`create_directory` 创建目录。",
+        "level3": "`directory_iterator` 遍历目录，`recursive_directory_iterator` 递归遍历。"
+      },
       "description": "filesystem1 — 文件系统基础"
     },
     {
@@ -429,7 +599,11 @@
       "title": "foldexpr1 — 折叠表达式",
       "file": "cpp17/foldexpr1.cpp",
       "solution": "solutions/foldexpr1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "折叠表达式 `(... op pack)` 展开参数包。",
+        "level2": "`(... + args)` 是左折叠，`(args + ...)` 是右折叠。",
+        "level3": "空包: `(... + args)` 对 `+` 是编译错误，`(args + ...)` 需要初始值。"
+      },
       "description": "foldexpr1 — 折叠表达式"
     },
     {
@@ -438,7 +612,11 @@
       "title": "inlinevars1 — 内联变量",
       "file": "cpp17/inlinevars1.cpp",
       "solution": "solutions/inlinevars1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`inline` 变量允许多个翻译单元中定义同名变量。",
+        "level2": "头文件中的 `inline` 变量不会导致多重定义。",
+        "level3": "`inline constexpr` 是推荐的常量定义方式。"
+      },
       "description": "inlinevars1 — 内联变量"
     },
     {
@@ -447,53 +625,81 @@
       "title": "nodiscard1 — [[nodiscard]] 等属性",
       "file": "cpp17/niscard1.cpp",
       "solution": "solutions/niscard1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`[[nodiscard]]` 要求调用者检查返回值。",
+        "level2": "忽略 `[[nodiscard]]` 返回值会产生编译警告。",
+        "level3": "可以加消息: `[[nodiscard(\"error code must be checked\")]]`。"
+      },
       "description": "nodiscard1 — [[nodiscard]] 等属性"
     },
     {
       "id": "stringview1",
       "topic": "cpp17",
-      "title": "stringview1 — std::string_view",
+      "title": "std::string_view 非拥有字符串视图",
       "file": "cpp17/stringview1.cpp",
       "solution": "solutions/stringview1.cpp",
-      "hint": "",
-      "description": "stringview1 — std::string_view"
+      "source_topic": "std_string_view",
+      "hint": {
+        "level1": "string_view 不拥有数据，只存储指针和长度。",
+        "level2": "注意生命周期：指向的数据必须在 string_view 使用期间有效。"
+      },
+      "description": "std::string_view 非拥有字符串视图"
     },
     {
       "id": "variant1",
       "topic": "cpp17",
-      "title": "variant1 — std::variant",
+      "kind": "run-pass",
+      "title": "std::variant 访问与类型安全联合",
       "file": "cpp17/variant1.cpp",
       "solution": "solutions/variant1.cpp",
-      "hint": "",
-      "description": "variant1 — std::variant"
+      "doc": "docs/standards/cpp17/variant.md",
+      "source_topic": "std_variant",
+      "hint": {
+        "level1": "std::visit + overloaded lambda 是访问 variant 的惯用方式。",
+        "level2": "std::get_if<T>(&v) 返回指针，失败返回 nullptr。",
+        "level3": "std::holds_alternative<T>(v) 检查当前活跃类型。"
+      },
+      "description": "std::variant 访问与类型安全联合"
     },
     {
       "id": "concepts1",
       "topic": "cpp20-basics",
-      "title": "Title: C++20 Concepts",
+      "title": "C++20 Concepts 概念约束",
       "file": "cpp20-basics/concepts1.cpp",
       "solution": "solutions/concepts1.cpp",
-      "hint": "",
-      "description": "Title: C++20 Concepts"
+      "source_topic": "cpp20_concepts",
+      "hint": {
+        "level1": "`concept` 定义类型约束。",
+        "level2": "`requires` 表达式检查操作是否有效。",
+        "level3": "`Sortable<T>` 约束要求 `T` 支持 `<` 比较。"
+      },
+      "description": "C++20 Concepts 概念约束"
     },
     {
       "id": "spaceship1",
       "topic": "cpp20-basics",
-      "title": "Title: Three-way Comparison (operator<=>)",
+      "title": "三路比较运算符 (operator<=>)",
       "file": "cpp20-basics/spaceship1.cpp",
       "solution": "solutions/spaceship1.cpp",
-      "hint": "",
-      "description": "Title: Three-way Comparison (operator<=>)"
+      "hint": {
+        "level1": "`operator<=>` 三路比较，返回 `std::strong_ordering`。",
+        "level2": "`<=>` 自动生成 `==`, `!=`, `<`, `>`, `<=`, `>=`。",
+        "level3": "`auto operator<=>(const T&) const = default;` 自动生成所有比较。"
+      },
+      "description": "三路比较运算符 (operator<=>)"
     },
     {
       "id": "aggregate1",
       "topic": "cpp20",
-      "title": "Title: 聚合初始化增强",
+      "title": "聚合初始化增强",
       "file": "cpp20/aggregate1.cpp",
       "solution": "solutions/aggregate1.cpp",
-      "hint": "",
-      "description": "Title: 聚合初始化增强"
+      "hint": {
+        "level1": "C++20 允许聚合类有用户声明的构造函数。",
+        "level2": "聚合初始化 `T{args...}` 不调用构造函数。",
+        "level3": "聚合类型不能有虚函数、虚基类、private/protected 非静态成员。"
+      },
+      "description": "聚合初始化增强"
     },
     {
       "id": "calendar1",
@@ -501,17 +707,25 @@
       "title": "主题: C++20 — 日历与时间区",
       "file": "cpp20/calendar1.cpp",
       "solution": "solutions/calendar1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::chrono` C++20 扩展支持日历和时区。",
+        "level2": "`year_month_day` 表示日期，`hh_mm_ss` 表示时间。",
+        "level3": "`std::chrono::zoned_time` 结合时区和时间点。"
+      },
       "description": "主题: C++20 — 日历与时间区"
     },
     {
       "id": "consteval1",
       "topic": "cpp20",
-      "title": "Title: consteval 与 constinit",
+      "title": "consteval 与 constinit",
       "file": "cpp20/consteval1.cpp",
       "solution": "solutions/consteval1.cpp",
-      "hint": "",
-      "description": "Title: consteval 与 constinit"
+      "hint": {
+        "level1": "`consteval` 函数必须在编译期求值。",
+        "level2": "`constinit` 保证常量初始化（不一定是 constexpr）。",
+        "level3": "`consteval` 函数不能在运行期调用。"
+      },
+      "description": "consteval 与 constinit"
     },
     {
       "id": "coroutine1",
@@ -519,89 +733,150 @@
       "title": "主题: C++20 — 协程基础（手写 Generator）",
       "file": "cpp20/coroutine1.cpp",
       "solution": "solutions/coroutine1.cpp",
-      "hint": "",
+      "source_topic": "cpp20_coroutine",
+      "hint": {
+        "level1": "C++20 协程用 `co_await`, `co_yield`, `co_return`。",
+        "level2": "`Generator` 用 `co_yield` 逐个产出值。",
+        "level3": "协程帧在堆上分配（编译器可优化掉）。"
+      },
       "description": "主题: C++20 — 协程基础（手写 Generator）"
     },
     {
       "id": "format1",
       "topic": "cpp20",
-      "title": "Title: std::format 格式化",
+      "title": "std::format 格式化",
       "file": "cpp20/format1.cpp",
       "solution": "solutions/format1.cpp",
-      "hint": "",
-      "description": "Title: std::format 格式化"
+      "source_topic": "cpp20_format",
+      "hint": {
+        "level1": "`std::format(\"{}\", value)` 类似 Python f-string。",
+        "level2": "格式说明符: `{:.2f}` 浮点精度，`{:>10}` 右对齐。",
+        "level3": "自定义类型需特化 `std::formatter<T>`。"
+      },
+      "description": "std::format 格式化"
     },
     {
       "id": "jthread1",
       "topic": "cpp20",
-      "title": "Title: std::jthread 与 stop_token",
+      "title": "std::jthread 与 stop_token",
       "file": "cpp20/jthread1.cpp",
       "solution": "solutions/jthread1.cpp",
-      "hint": "",
-      "description": "Title: std::jthread 与 stop_token"
+      "hint": {
+        "level1": "`std::jthread` 析构时自动 join。",
+        "level2": "`stop_token` 检查停止请求，`stop_source` 发起停止。",
+        "level3": "`jthread` 的析构函数先请求 stop 再 join。"
+      },
+      "description": "std::jthread 与 stop_token"
     },
     {
       "id": "ranges1",
       "topic": "cpp20",
-      "title": "Title: Ranges 基础 — Views and Algorithms",
+      "title": "Ranges 基础 — Views and Algorithms",
       "file": "cpp20/ranges1.cpp",
       "solution": "solutions/ranges1.cpp",
-      "hint": "",
-      "description": "Title: Ranges 基础 — Views and Algorithms"
+      "source_topic": "cpp20_ranges",
+      "hint": {
+        "level1": "`std::ranges` 提供范围感知的算法和视图。",
+        "level2": "`views::filter`, `views::transform` 惰性求值。",
+        "level3": "管道语法: `vec | views::filter(pred) | views::transform(f)`。"
+      },
+      "description": "Ranges 基础 — Views and Algorithms"
     },
     {
       "id": "requires1",
       "topic": "cpp20",
-      "title": "Title: requires 表达式与约束",
+      "title": "requires 表达式与约束",
       "file": "cpp20/requires1.cpp",
       "solution": "solutions/requires1.cpp",
-      "hint": "",
-      "description": "Title: requires 表达式与约束"
+      "hint": {
+        "level1": "`requires` 表达式检查操作是否合法。",
+        "level2": "`requires(T a, T b) { a + b; }` 检查 `+` 运算符。",
+        "level3": "简单约束 vs 复合约束 vs 嵌套需求。"
+      },
+      "description": "requires 表达式与约束"
     },
     {
       "id": "spaceship_ext",
       "topic": "cpp20",
-      "title": "Title: <=> 运算符扩展 — 字符串与容器比较",
+      "title": "<=> 运算符扩展 — 字符串与容器比较",
       "file": "cpp20/spaceship_ext.cpp",
       "solution": "solutions/spaceship_ext.cpp",
-      "hint": "",
-      "description": "Title: <=> 运算符扩展 — 字符串与容器比较"
+      "hint": {
+        "level1": "`<=>` 扩展到 string、vector 等标准库类型。",
+        "level2": "`std::strong_ordering` vs `std::weak_ordering` vs `std::partial_ordering`。",
+        "level3": "浮点数用 `partial_ordering`（NaN 不可比较）。"
+      },
+      "description": "<=> 运算符扩展 — 字符串与容器比较"
     },
     {
       "id": "span1",
       "topic": "cpp20",
-      "title": "Title: std::span 非拥有视图",
+      "title": "std::span 非拥有视图",
       "file": "cpp20/span1.cpp",
       "solution": "solutions/span1.cpp",
-      "hint": "",
-      "description": "Title: std::span 非拥有视图"
+      "hint": {
+        "level1": "`std::span<T>` 非拥有的连续内存视图。",
+        "level2": "`span<T, N>` 固定大小，`span<T>` 动态大小。",
+        "level3": "可以从 `array`, `vector`, C 数组构造。"
+      },
+      "description": "std::span 非拥有视图"
+    },
+    {
+      "id": "deducingthis0",
+      "topic": "cpp23",
+      "kind": "run-pass",
+      "title": "传统重载与 CRTP — Deducing this 的前置知识",
+      "file": "cpp23/deducingthis0.cpp",
+      "solution": "solutions/deducingthis0.cpp",
+      "hint": {
+        "level1": "const 对象调用 const 成员函数，非 const 对象优先调用非 const 版本。",
+        "level2": "CRTP 通过模板基类参数捕获派生类型，基类通过 static_cast<Derived*>(this) 向下调用。",
+        "level3": "递归 lambda 可以用 std::function 包装自身引用实现。"
+      },
+      "description": "传统重载与 CRTP — Deducing this 的前置知识"
     },
     {
       "id": "deducingthis1",
       "topic": "cpp23",
-      "title": "主题: C++23 — Deducing this (显式对象参数)",
+      "kind": "run-pass",
+      "title": "C++23 显式对象参数 (Deducing this)",
       "file": "cpp23/deducingthis1.cpp",
       "solution": "solutions/deducingthis1.cpp",
-      "hint": "",
-      "description": "主题: C++23 — Deducing this (显式对象参数)"
+      "source_topic": "cpp23_deducing_this",
+      "hint": {
+        "level1": "template <typename Self> auto get(this Self&& self) — Self 推导对象的值类别。",
+        "level2": "用 std::is_const_v<std::remove_reference_t<Self>> 区分 const/mutable。",
+        "level3": "递归 lambda: auto fib = [](this auto&& self, int n) -> int { ... };"
+      },
+      "description": "C++23 显式对象参数 (Deducing this)"
     },
     {
       "id": "expected23",
       "topic": "cpp23",
-      "title": "主题: C++23 — std::expected 错误处理",
+      "kind": "run-pass",
+      "title": "std::expected 错误处理",
       "file": "cpp23/expected23.cpp",
       "solution": "solutions/expected23.cpp",
-      "hint": "",
-      "description": "主题: C++23 — std::expected 错误处理"
+      "hint": {
+        "level1": "std::expected<T, E> 是类型安全的值或错误容器。",
+        "level2": "用 .value() 获取值（失败抛异常），.error() 获取错误。"
+      },
+      "description": "std::expected 错误处理"
     },
     {
       "id": "flatmap1",
       "topic": "cpp23",
-      "title": "主题: C++23 — std::flat_map / std::flat_set",
+      "kind": "run-pass",
+      "title": "std::flat_map / std::flat_set — 有序 flat 容器",
       "file": "cpp23/flatmap1.cpp",
       "solution": "solutions/flatmap1.cpp",
-      "hint": "",
-      "description": "主题: C++23 — std::flat_map / std::flat_set"
+      "source_topic": "cpp23_flat_map",
+      "hint": {
+        "level1": "std::flat_map 底层是 sorted vector + binary search，不是哈希表。",
+        "level2": "插入 O(n) 因为要移动元素，查找 O(log n)，缓存友好。",
+        "level3": "来源是 Boost.Container flat_map 和 P0429 提案，不是 absl::flat_hash_map。"
+      },
+      "description": "std::flat_map / std::flat_set — 有序 flat 容器"
     },
     {
       "id": "ifconsteval1",
@@ -609,17 +884,27 @@
       "title": "主题: C++23 — if consteval 编译期/运行期分支",
       "file": "cpp23/ifconsteval1.cpp",
       "solution": "solutions/ifconsteval1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`if consteval { }` 检查当前是否在常量求值上下文。",
+        "level2": "比 `if constexpr` 更精确——区分编译期和运行期。",
+        "level3": "常用于优化: 编译期用慢速安全路径，运行期用快速路径。"
+      },
       "description": "主题: C++23 — if consteval 编译期/运行期分支"
     },
     {
       "id": "mdspan1",
       "topic": "cpp23",
-      "title": "主题: C++23 — 多维数组视图 (std::mdspan)",
+      "kind": "run-pass",
+      "title": "std::mdspan 多维数组视图",
       "file": "cpp23/mdspan1.cpp",
       "solution": "solutions/mdspan1.cpp",
-      "hint": "",
-      "description": "主题: C++23 — 多维数组视图 (std::mdspan)"
+      "source_topic": "cpp23_mdspan",
+      "hint": {
+        "level1": "mdspan 是非拥有的多维数组视图，类似 string_view 对 string。",
+        "level2": "dextents<size_t, N> 创建动态 extent，extents<size_t, M, N> 创建静态 extent。",
+        "level3": "layout_stride 用于访问非连续维度（如列遍历行主序矩阵）。"
+      },
+      "description": "std::mdspan 多维数组视图"
     },
     {
       "id": "movonlyfunc1",
@@ -627,17 +912,27 @@
       "title": "主题: C++23 — move_only_function 移动专用可调用包装器",
       "file": "cpp23/movonlyfunc1.cpp",
       "solution": "solutions/movonlyfunc1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::move_only_function` 是不可拷贝的 `std::function`。",
+        "level2": "适合存储捕获了 `unique_ptr` 的 lambda。",
+        "level3": "C++23 引入，C++20 需要手动实现。"
+      },
       "description": "主题: C++23 — move_only_function 移动专用可调用包装器"
     },
     {
       "id": "print23",
       "topic": "cpp23",
-      "title": "主题: C++23 — std::print / std::println 格式化输出",
+      "kind": "run-pass",
+      "title": "std::print / std::println 格式化输出",
       "file": "cpp23/print23.cpp",
       "solution": "solutions/print23.cpp",
-      "hint": "",
-      "description": "主题: C++23 — std::print / std::println 格式化输出"
+      "source_topic": "cpp23_print",
+      "hint": {
+        "level1": "std::print(\"{}\", value) 直接输出到 stdout，std::format 只返回字符串。",
+        "level2": "自定义类型需要特化 std::formatter<T>。",
+        "level3": "如果编译器不支持 <print>，练习走 fallback 路径用 snprintf 模拟。"
+      },
+      "description": "std::print / std::println 格式化输出"
     },
     {
       "id": "atomics1",
@@ -645,7 +940,11 @@
       "title": "主题: 原子操作与内存序 — std::atomic, memory_order",
       "file": "topics/atomics1.cpp",
       "solution": "solutions/atomics1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::atomic<T>` 提供原子操作。",
+        "level2": "`memory_order_relaxed` 最弱，`memory_order_seq_cst` 最强。",
+        "level3": "`memory_order_acquire` 保证看到 release 之前的写入。"
+      },
       "description": "主题: 原子操作与内存序 — std::atomic, memory_order"
     },
     {
@@ -654,7 +953,11 @@
       "title": "主题: 缓存友好的数据结构 — AoS vs SoA, alignment, flat_map",
       "file": "topics/cachefriendly1.cpp",
       "solution": "solutions/cachefriendly1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "缓存行通常 64 字节。",
+        "level2": "AoS (Array of Structures) vs SoA (Structure of Arrays) 影响缓存命中率。",
+        "level3": "`alignas(64)` 对齐避免 false sharing。"
+      },
       "description": "主题: 缓存友好的数据结构 — AoS vs SoA, alignment, flat_map"
     },
     {
@@ -663,7 +966,11 @@
       "title": "主题: 编译期计算 — constexpr/consteval 数据结构与算法",
       "file": "topics/compiletime1.cpp",
       "solution": "solutions/compiletime1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`constexpr` 函数和变量在编译期求值。",
+        "level2": "C++20 `consteval` 强制编译期。",
+        "level3": "`constexpr` 容器（如 vector）可在编译期使用。"
+      },
       "description": "主题: 编译期计算 — constexpr/consteval 数据结构与算法"
     },
     {
@@ -672,7 +979,11 @@
       "title": "主题: 异常安全 — 三大保证、swap 惯用法、RAII、noexcept",
       "file": "topics/exception1.cpp",
       "solution": "solutions/exception1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "异常安全三保证: 基本、强、不抛出。",
+        "level2": "RAII 是实现强异常安全的关键。",
+        "level3": "`noexcept` 告诉编译器和标准库此函数不抛异常。"
+      },
       "description": "主题: 异常安全 — 三大保证、swap 惯用法、RAII、noexcept"
     },
     {
@@ -681,7 +992,11 @@
       "title": "主题: noexcept 的影响 — specifier, operator, 移动语义与 vector",
       "file": "topics/noexcept1.cpp",
       "solution": "solutions/noexcept1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`noexcept` 声明函数不抛异常。",
+        "level2": "`noexcept(expr)` 条件性 noexcept。",
+        "level3": "移动操作标记 noexcept 会让 `std::vector` 在扩容时用移动而非拷贝。"
+      },
       "description": "主题: noexcept 的影响 — specifier, operator, 移动语义与 vector"
     },
     {
@@ -690,7 +1005,11 @@
       "title": "主题: 设计模式 — RAII Guard, 类型擦除, CRTP, Observer",
       "file": "topics/patterns1.cpp",
       "solution": "solutions/patterns1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "RAII Guard: 构造获取资源，析构释放。",
+        "level2": "类型擦除: `std::function` 擦除可调用对象类型。",
+        "level3": "CRTP: 基类用模板参数访问派生类。"
+      },
       "description": "主题: 设计模式 — RAII Guard, 类型擦除, CRTP, Observer"
     },
     {
@@ -699,8 +1018,26 @@
       "title": "主题: 性能优化技巧 — 移动语义, SBO, 缓存友好, string_view",
       "file": "topics/perf1.cpp",
       "solution": "solutions/perf1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "移动语义避免不必要拷贝。",
+        "level2": "SBO (Small Buffer Optimization) 避免小对象堆分配。",
+        "level3": "`string_view` 避免字符串拷贝。"
+      },
       "description": "主题: 性能优化技巧 — 移动语义, SBO, 缓存友好, string_view"
+    },
+    {
+      "id": "perf2",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "分支预测与 branchless 编程",
+      "file": "topics/perf2_branchless.cpp",
+      "solution": "solutions/perf2_branchless.cpp",
+      "hint": {
+        "level1": "branchless abs: (x ^ (x >> 31)) - (x >> 31)",
+        "level2": "clamp 用 std::max/std::min 通常编译为 cmov。",
+        "level3": "mask = -(condition); sum += x & mask; 实现无分支条件累加。"
+      },
+      "description": "分支预测与 branchless 编程"
     },
     {
       "id": "ruleof501",
@@ -708,7 +1045,11 @@
       "title": "主题: Rule of 5 与 Rule of 0",
       "file": "topics/ruleof501.cpp",
       "solution": "solutions/ruleof501.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "Rule of 5: 如果自定义了拷贝/移动/析构中的任一个，应定义全部五个。",
+        "level2": "Rule of 0: 让编译器生成所有特殊成员函数。",
+        "level3": "用 RAII 成员管理资源，避免手动定义特殊成员。"
+      },
       "description": "主题: Rule of 5 与 Rule of 0"
     },
     {
@@ -717,7 +1058,11 @@
       "title": "主题: 模板元编程 — type_list, SFINAE, void_t 检测",
       "file": "topics/tmp1.cpp",
       "solution": "solutions/tmp1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "`std::enable_if<Cond, T>::type` 条件启用重载。",
+        "level2": "`void_t` 检测表达式有效性。",
+        "level3": "递归模板 + 特化终止 = 编译期算法。"
+      },
       "description": "主题: 模板元编程 — type_list, SFINAE, void_t 检测"
     },
     {
@@ -726,8 +1071,167 @@
       "title": "主题: 值类别 (Value Categories) — lvalue, prvalue, xvalue",
       "file": "topics/valuecat1.cpp",
       "solution": "solutions/valuecat1.cpp",
-      "hint": "",
+      "hint": {
+        "level1": "lvalue 有地址，prvalue 是临时值，xvalue 是将亡值。",
+        "level2": "`T&` 绑定 lvalue，`T&&` 绑定 rvalue。",
+        "level3": "`std::move(x)` 将 x 转换为 xvalue。"
+      },
       "description": "主题: 值类别 (Value Categories) — lvalue, prvalue, xvalue"
+    },
+    {
+      "id": "atomics2",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "release sequence 与 acquire-release 语义",
+      "file": "topics/atomics2_release_sequence.cpp",
+      "solution": "solutions/atomics2_release_sequence.cpp",
+      "hint": {
+        "level1": "lock() 用 exchange(true, acquire)，unlock() 用 store(false, release)。",
+        "level2": "acquire 保证看到 release 之前的所有写入。",
+        "level3": "exchange 的 acquire 语义 + store 的 release 语义构成 happens-before。"
+      },
+      "description": "release sequence 与 acquire-release 语义"
+    },
+    {
+      "id": "atomics3",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "CAS compare_exchange_weak/strong 失败序",
+      "file": "topics/atomics3_cas_failure_order.cpp",
+      "solution": "solutions/atomics3_cas_failure_order.cpp",
+      "hint": {
+        "level1": "compare_exchange_weak 可能 spurious failure，适合循环中使用。",
+        "level2": "失败序用 relaxed 就够，成功序用 release/acquire。",
+        "level3": "无锁栈 push: do { node->next = old; } while (!head.compare_exchange_weak(old, node, release, relaxed))"
+      },
+      "description": "CAS compare_exchange_weak/strong 失败序"
+    },
+    {
+      "id": "atomics4",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "False sharing 与缓存行对齐",
+      "file": "topics/atomics4_false_sharing.cpp",
+      "solution": "solutions/atomics4_false_sharing.cpp",
+      "hint": {
+        "level1": "false sharing: 不同核心访问同一缓存行的不同变量，导致缓存失效。",
+        "level2": "用 alignas(64) 保证变量在不同缓存行。",
+        "level3": "std::hardware_destructive_interference_size 提供平台相关缓存行大小。"
+      },
+      "description": "False sharing 与缓存行对齐"
+    },
+    {
+      "id": "atomics5",
+      "topic": "topics",
+      "kind": "run-pass",
+      "std": "c++20",
+      "title": "atomic wait/notify (C++20)",
+      "file": "topics/atomics5_atomic_wait.cpp",
+      "solution": "solutions/atomics5_atomic_wait.cpp",
+      "hint": {
+        "level1": "wait(old) 阻塞直到值 != old。",
+        "level2": "notify_one() 唤醒一个等待者，notify_all() 唤醒所有。",
+        "level3": "wait 语义保证不丢失通知 (spurious wakeup 安全)。"
+      },
+      "description": "atomic wait/notify (C++20)"
+    },
+    {
+      "id": "tmp2",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "引用折叠 (Reference Collapsing)",
+      "file": "topics/tmp2_reference_collapsing.cpp",
+      "solution": "solutions/tmp2_reference_collapsing.cpp",
+      "hint": {
+        "level1": "T& & -> T&，T&& && -> T&&，其余都是 T&。",
+        "level2": "引用折叠只发生在模板推导、auto、typedef、decltype 中。",
+        "level3": "完美转发 T&& 在 T=int& 时折叠为 int&。"
+      },
+      "description": "引用折叠 (Reference Collapsing)"
+    },
+    {
+      "id": "tmp3",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "两阶段查找 (Two-phase Lookup)",
+      "file": "topics/tmp3_two_phase_lookup.cpp",
+      "solution": "solutions/tmp3_two_phase_lookup.cpp",
+      "hint": {
+        "level1": "非依赖名在模板定义时查找，依赖名在实例化时查找。",
+        "level2": "依赖名: 依赖于模板参数的表达式。",
+        "level3": "ADL 在阶段 2 也会被考虑。"
+      },
+      "description": "两阶段查找 (Two-phase Lookup)"
+    },
+    {
+      "id": "tmp4",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "ADL 与 swap 惯用法",
+      "file": "topics/tmp4_adl_swap.cpp",
+      "solution": "solutions/tmp4_adl_swap.cpp",
+      "hint": {
+        "level1": "swap 惯用法: using std::swap; swap(a, b);",
+        "level2": "ADL 根据参数类型在同名 namespace 中查找函数。",
+        "level3": "用户自定义 swap 优先级高于 std::swap (ADL)。"
+      },
+      "description": "ADL 与 swap 惯用法"
+    },
+    {
+      "id": "typelist1",
+      "topic": "topics",
+      "kind": "run-pass",
+      "title": "type_list 基础操作",
+      "file": "topics/typelist1.cpp",
+      "solution": "solutions/typelist1.cpp",
+      "hint": {
+        "level1": "type_list<Ts...> 是编译期类型容器。",
+        "level2": "push_front 用模板特化: type_list<T, Ts...>。",
+        "level3": "at 用递归特化: at<type_list<T0, T1, ...>, N> = at<type_list<T1, ...>, N-1>。"
+      },
+      "description": "type_list 基础操作"
+    },
+    {
+      "id": "concepts_fail1",
+      "topic": "compile-fail",
+      "kind": "compile-fail",
+      "title": "Concept 约束不满足应编译失败",
+      "file": "compile-fail/concepts_fail1.cpp",
+      "expected_error": "constraints not satisfied",
+      "hint": {
+        "level1": "这个练习验证 concept 约束检查。",
+        "level2": "Sortable concept 要求 operator< 存在。",
+        "level3": "NotSortable 没有 operator<，所以 sort_it(ns) 应该编译失败。"
+      },
+      "description": "Concept 约束不满足应编译失败"
+    },
+    {
+      "id": "deleted_copy",
+      "topic": "compile-fail",
+      "kind": "compile-fail",
+      "title": "拷贝不可拷贝类型应编译失败",
+      "file": "compile-fail/deleted_copy.cpp",
+      "expected_error": "deleted function",
+      "hint": {
+        "level1": "unique_ptr 使包含它的类型不可拷贝。",
+        "level2": "拷贝构造函数被 = delete。",
+        "level3": "尝试拷贝 MoveOnly 应触发 use of deleted function 错误。"
+      },
+      "description": "拷贝不可拷贝类型应编译失败"
+    },
+    {
+      "id": "narrowing_fail",
+      "topic": "compile-fail",
+      "kind": "compile-fail",
+      "title": "列表初始化窄化转换应编译失败",
+      "file": "compile-fail/narrowing.cpp",
+      "expected_error": "narrowing conversion",
+      "hint": {
+        "level1": "列表初始化 {} 比赋值初始化 = 更严格。",
+        "level2": "int 到 char 的隐式转换在 {} 中是窄化。",
+        "level3": "char c{x} 在 C++11+ 中应触发 narrowing conversion 错误。"
+      },
+      "description": "列表初始化窄化转换应编译失败"
     }
   ]
 }

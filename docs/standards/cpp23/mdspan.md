@@ -1,3 +1,14 @@
+---
+title: std::mdspan
+topic: cpp23
+feature: mdspan
+standard: C++23
+status_checked_at: 2026-06-01
+exercises:
+  - exercises/cpp23/mdspan1.cpp
+solutions:
+  - exercises/solutions/mdspan1.cpp
+---
 # std::mdspan
 
 `std::mdspan` 是 C++23 引入的多维数组视图，提供对连续内存的多维访问。它不拥有内存，仅描述如何将线性索引映射到多维坐标。

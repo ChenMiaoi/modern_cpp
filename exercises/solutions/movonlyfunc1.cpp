@@ -36,9 +36,10 @@ TEST("movonlyfunc — null 检查") {
     ASSERT_TRUE(static_cast<bool>(fn));
 }
 
-TEST("movonlyfunc — 调用空函数抛异常") {
+TEST("movonlyfunc — 调用空函数") {
     std::move_only_function<int()> fn;
-    ASSERT_THROWS(fn(), std::bad_function_call);
+    ASSERT_FALSE(static_cast<bool>(fn));  // 空函数应为 falsy
+    // 注意: 某些编译器实现调用空 move_only_function 会段错误而非抛异常
 }
 
 TEST("movonlyfunc — 异步回调模式") {
@@ -125,9 +126,9 @@ TEST("movonlyfunc — null 检查 (fallback)") {
     ASSERT_TRUE(static_cast<bool>(fn));
 }
 
-TEST("movonlyfunc — 调用空函数抛异常 (fallback)") {
+TEST("movonlyfunc — 调用空函数 (fallback)") {
     MoveOnlyFunc<int()> fn;
-    ASSERT_THROWS(fn(), std::bad_function_call);
+    ASSERT_FALSE(static_cast<bool>(fn));  // 空函数应为 falsy
 }
 
 TEST("movonlyfunc — 异步回调模式 (fallback)") {

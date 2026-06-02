@@ -1,3 +1,14 @@
+---
+title: C++17 std::variant
+topic: cpp17
+feature: variant
+standard: C++17
+status_checked_at: 2026-06-01
+exercises:
+  - exercises/cpp17/variant1.cpp
+solutions:
+  - exercises/solutions/variant1.cpp
+---
 # C++17 std::variant
 
 ## 概述

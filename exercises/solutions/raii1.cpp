@@ -66,15 +66,15 @@ TEST("RAII 失败时返回空句柄") {
 }
 
 TEST("RAII 禁止拷贝") {
-    static_assert(!std::is_copy_constructible_v<FileGuard>,
+    static_assert(!std::is_copy_constructible<FileGuard>::value,
                   "FileGuard 不可拷贝构造");
-    static_assert(!std::is_copy_assignable_v<FileGuard>,
+    static_assert(!std::is_copy_assignable<FileGuard>::value,
                   "FileGuard 不可拷贝赋值");
     ASSERT_TRUE(true);
 }
 
 TEST("RAII 允许移动") {
-    static_assert(std::is_move_constructible_v<FileGuard>,
+    static_assert(std::is_move_constructible<FileGuard>::value,
                   "FileGuard 应可移动构造");
 
     FileGuard fg("cpplings_move_test.txt", "w");

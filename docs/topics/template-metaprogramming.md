@@ -1,3 +1,9 @@
+---
+title: 模板元编程
+topic: topics
+feature: template-metaprogramming
+status_checked_at: 2026-06-01
+---
 # 模板元编程
 
 ## TMP 的起源

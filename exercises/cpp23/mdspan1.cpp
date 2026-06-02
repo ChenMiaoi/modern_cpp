@@ -12,8 +12,13 @@
 
 #include "cpplings.h"
 
-#if __cpp_lib_mdspan >= 202207L
-#include <mdspan>
+#include <version>
+
+#if __has_include(<mdspan>)
+  #include <mdspan>
+#endif
+
+#if defined(__cpp_lib_mdspan) && __cpp_lib_mdspan >= 202207L
 #include <vector>
 #include <array>
 #include <cstddef>

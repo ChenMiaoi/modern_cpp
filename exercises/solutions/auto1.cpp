@@ -25,7 +25,7 @@ TEST("auto 与 const") {
 
     ASSERT_EQ(copy, 10);
     ASSERT_EQ(cref, 10);
-    static_assert(std::is_same_v<decltype(cref), const int>,
+    static_assert(std::is_same<decltype(cref), const int>::value,
                   "cref 应该是 const int");
 }
 

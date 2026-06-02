@@ -306,6 +306,6 @@ export default defineConfig({
     outline: { label: '页面导航', level: [2, 3] },
     docFooter: { prev: '上一篇', next: '下一篇' },
     lastUpdated: { text: '最后更新于' },
-    editLink: { pattern: 'https://github.com/yourname/modern-cpp/edit/main/docs/:path', text: '在 GitHub 上编辑此页面' },
+    editLink: { pattern: 'https://github.com/ChenMiaoi/modern_cpp/edit/main/docs/:path', text: '在 GitHub 上编辑此页面' },
   },
 })

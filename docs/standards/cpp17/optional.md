@@ -1,3 +1,14 @@
+---
+title: C++17 std::optional
+topic: cpp17-basics
+feature: optional
+standard: C++17
+status_checked_at: 2026-06-01
+exercises:
+  - exercises/cpp17-basics/optional1.cpp
+solutions:
+  - exercises/solutions/optional1.cpp
+---
 # C++17 std::optional
 
 ## 概述

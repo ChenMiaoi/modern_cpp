@@ -201,3 +201,68 @@ Char* mutableDataLarge() {
 **fbstring 的优势**：最大的 SSO 容量（23 vs 22/15）、Large 模式的 COW 节省大字符串复制开销。
 
 **fbstring 的劣势**：COW 在多线程环境下的 atomic 引用计数有竞争开销；COW 与 C++11 的引用稳定性要求不完全兼容（与 libstdc++ COW string 相同的问题）。
+
+## 用户 API
+
+用户侧看到的是 `fbstring` 的构造、拼接、共享/拷贝与 `data()/c_str()` 访问；本文现有正文主要聚焦其 small/medium/large 三态实现。
+
+## 标准语义
+
+待补：补上 `fbstring` 相对标准 `std::string` 的兼容语义，以及 large 模式 COW 与现代标准要求之间的张力。
+
+## 对象布局
+
+上文已经详细覆盖 small/medium/large 三态布局；后续补一张按偏移整理的 24-byte 统一视图。
+
+## 核心源码路径
+
+本文开头已给出 `FBString.h`；后续补 `fbstring_core`、`RefCounted`、`initSmall`、`mutableDataLarge` 等实现入口。
+
+## 核心类 / 函数
+
+待补：统一整理 `fbstring_core`、`Category`、`RefCounted`、`initSmall`、`copyMedium`、`copyLarge`、`mutableDataLarge`。
+
+## 关键算法
+
+上文已经覆盖 small size 编码、跨页 memcpy 优化、large 模式 COW；后续补“构造 / 拷贝 / 写时分离 / 扩容”路径摘要。
+
+## ABI 约束
+
+待补：说明 24-byte 对象布局、类别位编码与公开 API 之间的耦合，以及与标准库 `basic_string` ABI 的差异。
+
+## 异常安全
+
+待补：补充分配失败、COW fork 失败、medium/large 切换失败时的保证等级。
+
+## iterator / reference invalidation
+
+待补：明确 small→medium、medium→large、large unshare 后 `data()`、iterator、reference 的失效边界。
+
+## 性能模型
+
+正文已经给出 23-byte SSO、medium eager copy、large COW 的核心权衡；后续补 atomic refcount 与页面局部性对性能的影响。
+
+## libstdc++ vs libc++ vs MSVC
+
+正文已有 string 实现对照；后续在这里补齐 `fbstring` 与三家标准库 string 在 SSO 容量、COW、对象大小与复制成本上的统一表格。
+
+## 最小复现代码
+
+```cpp
+#include <folly/FBString.h>
+
+int main() {
+  folly::fbstring s = "hello";
+  s += " world";
+  return static_cast<int>(s.size());
+}
+```
+
+## 编译 / 反汇编 / benchmark 证据
+
+待补：补上 small/medium/large 分界、COW fork 热路径与标准库 string 的 benchmark/反汇编证据。
+
+## cpplings 练习入口
+
+- [`stringview1` — std::string_view 非拥有字符串视图](../../../exercises/cpp17/stringview1.cpp)
+- [`perf1` — 性能优化技巧：SBO、缓存友好、string_view](../../../exercises/topics/perf1.cpp)

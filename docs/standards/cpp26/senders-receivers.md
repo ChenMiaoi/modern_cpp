@@ -1,3 +1,8 @@
+---
+title: C++26 Senders/Receivers
+status_checked_at: 2026-06-01
+---
+
 # C++26 Senders/Receivers
 
 ## 概述

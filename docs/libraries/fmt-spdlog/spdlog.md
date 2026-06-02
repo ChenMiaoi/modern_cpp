@@ -69,3 +69,67 @@ async_logger->info("Non-blocking message");
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_INFO
 // TRACE 和 DEBUG 级别的日志在编译期被消除——零运行时开销
 ```
+
+## 用户 API
+
+用户通常通过 `spdlog::info`、命名 logger、sink 组合与异步 logger 工厂接触 spdlog；现有正文已经给出 logger/formatter/sink 三层结构。
+
+## 标准语义
+
+待补：补上 spdlog 相对 iostream / `std::print` / `std::format` 的语义边界，以及同步/异步日志 API 的行为约定。
+
+## 对象布局
+
+待补：补 logger、sink 列表、formatter 持有方式与异步队列消息对象的结构关系图。
+
+## 核心源码路径
+
+本文开头已给出 `include/spdlog/`；后续补 `logger.h`、`async_logger.h`、`details/thread_pool.h`、常见 sink 头文件的入口链。
+
+## 核心类 / 函数
+
+待补：统一整理 `logger`、`sink`、`formatter`、`async_logger`、`thread_pool`、`log_msg`、`log_msg_buffer`。
+
+## 关键算法
+
+待补：补充级别过滤、格式化分发、sink 广播、异步入队/出队与丢弃策略的关键路径。
+
+## ABI 约束
+
+待补：说明 spdlog 主要依赖头文件模板与内联实现，兼容性更多受 API 与配置宏影响，而不是稳定 ABI。
+
+## 异常安全
+
+待补：补充 sink 写出失败、格式化失败、异步队列满以及后台线程异常时的传播策略。
+
+## iterator / reference invalidation
+
+待补：本文主题不是容器 iterator；后续这里补 logger 内部 sink 列表变更、格式化缓冲区复用与异步消息对象生命周期的有效期规则。
+
+## 性能模型
+
+正文已经给出编译期级别裁剪与异步模式；后续补格式化成本、sink fan-out、队列争用与后台线程批量写出的性能模型。
+
+## libstdc++ vs libc++ vs MSVC
+
+待补：这里主要与标准库输出设施对照，并说明 spdlog 在不同标准库上的 fmt/线程实现差异与兼容点。
+
+## 最小复现代码
+
+```cpp
+#include <spdlog/spdlog.h>
+
+int main() {
+  spdlog::info("value = {}", 42);
+}
+```
+
+## 编译 / 反汇编 / benchmark 证据
+
+待补：补上同步/异步 logger 热路径、级别裁剪后的代码生成，以及不同 sink 组合的 benchmark 证据。
+
+## cpplings 练习入口
+
+- [`format1` — std::format 格式化](../../../exercises/cpp20/format1.cpp)
+- [`print23` — std::print / std::println 格式化输出](../../../exercises/cpp23/print23.cpp)
+- [`jthread1` — std::jthread 与 stop_token](../../../exercises/cpp20/jthread1.cpp)

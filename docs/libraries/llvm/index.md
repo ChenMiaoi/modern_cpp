@@ -24,6 +24,6 @@ LLVM 的 C++ 标准库实现，以最紧凑的内存布局和最新 C++ 标准�
 | unique_ptr | 8B | 8B | 8B |
 | trivial_abi | **支持** | 不支持 | 不支持 |
 | function SBO | 24B (虚函数) | 24B (函数指针) | 不同 |
-| unordered_map | 链式 | **SwissTable** | 链式 |
+| unordered_map | 链式 | 节点式 _Hashtable | 链式 |
 
 **选 libc++**：macOS/iOS/Android、最紧凑内存布局、trivially relocatable memcpy、最新 C++ 标准。

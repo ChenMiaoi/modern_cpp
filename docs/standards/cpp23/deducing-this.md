@@ -1,3 +1,14 @@
+---
+title: Deducing this（推导 this）
+topic: cpp23
+feature: deducing-this
+standard: C++23
+status_checked_at: 2026-06-01
+exercises:
+  - exercises/cpp23/deducingthis1.cpp
+solutions:
+  - exercises/solutions/deducingthis1.cpp
+---
 # Deducing this（推导 this）
 
 C++23 引入显式对象参数（explicit object parameter），允许通过 `this` 参数的类型推导来简化 CRTP、消除引用限定重载的重复代码，并支持递归 lambda。

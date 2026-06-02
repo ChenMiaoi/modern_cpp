@@ -235,3 +235,70 @@ libstdc++ 的 `std::unordered_map` 使用节点式 `_Hashtable`（bucket + `_Has
 | 迭代器稳定性 | ✗（rehash 后失效） | ✓（节点独立分配） |
 | 引用稳定性 | ✗ | ✓ |
 | 适用场景 | 高性能查询密集场景 | 需要迭代器/引用稳定性的场景 |
+
+## 用户 API
+
+本文对应的用户侧容器主要是 `absl::flat_hash_map` / `absl::flat_hash_set`；现有正文已经直接下钻到它们共享的底层 `raw_hash_set`。
+
+## 标准语义
+
+待补：补上 SwissTable 与标准 `unordered_*` 语义的重合面、差异点以及 Abseil 扩展能力在本文中的定位。
+
+## 对象布局
+
+上文已经覆盖 ctrl bytes、slots、sentinel 与 clones 的布局；后续补一张按字节偏移展开的 `BackingArray` 视图。
+
+## 核心源码路径
+
+本文开头已给出 `raw_hash_set.h`；后续补 `flat_hash_map.h` / `node_hash_map.h` 到 `container_internal` 的入口链路。
+
+## 核心类 / 函数
+
+待补：统一整理 `raw_hash_set`、`ctrl_t`、`GroupSse2Impl`、`probe_seq`、`find_or_prepare_insert` 等关键类型与函数。
+
+## 关键算法
+
+上文已经覆盖 H1/H2 拆分、SIMD probing、墓碑处理与 rehash；后续补一张“查找 / 插入 / 擦除”的算法路径摘要。
+
+## ABI 约束
+
+待补：说明 Abseil 容器更依赖头文件内联与模板实例化约束，而不是标准库那种长期稳定 ABI 承诺。
+
+## 异常安全
+
+待补：补充 slot 构造失败、rehash 期间搬移失败以及 allocator 抛异常时的回滚边界。
+
+## iterator / reference invalidation
+
+待补：明确 `flat_hash_*` 在插入、erase、rehash 后的 iterator/reference 失效边界，并对比 `node_hash_*` 的稳定性。
+
+## 性能模型
+
+正文已经给出 ctrl/slot 分离、16-byte SIMD group 与 7/8 负载因子的核心思路；后续补 cache miss、探测长度与 tombstone 密度的量化模型。
+
+## libstdc++ vs libc++ vs MSVC
+
+待补：这里补齐 SwissTable 与三家标准库 `unordered_*` 的 bucket 组织、负载因子、节点稳定性与调试模式差异。
+
+## 最小复现代码
+
+```cpp
+#include "absl/container/flat_hash_map.h"
+
+int main() {
+  absl::flat_hash_map<int, int> table;
+  table.emplace(1, 42);
+  return table.find(1)->second;
+}
+```
+
+## 编译 / 反汇编 / benchmark 证据
+
+待补：补上 `find` / `erase` / `rehash` 的反汇编与 microbenchmark，对照标准库节点式哈希表。
+
+## cpplings 练习入口
+
+- [`unordered1` — 无序容器 (unordered_map / unordered_set)](../../../exercises/cpp11-std/unordered1.cpp)
+- [`customhash1` — 自定义哈希](../../../exercises/cpp11-std/customhash1.cpp)
+- [`cachefriendly1` — 缓存友好的数据结构](../../../exercises/topics/cachefriendly1.cpp)
+- [`perf1` — 性能优化技巧：缓存友好与 string_view](../../../exercises/topics/perf1.cpp)

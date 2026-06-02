@@ -15,7 +15,7 @@
 TEST("any — 存储和取回 int") {
     std::any a = 42;
     ASSERT_TRUE(a.has_value());
-    ASSERT_EQ(a.type(), typeid(int));
+    ASSERT_TRUE(a.type() == typeid(int));
 
     // TODO: 使用 std::any_cast<int> 取回值
     int _todo_ = "请删除此行，实现上面的 TODO";

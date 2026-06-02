@@ -1,3 +1,9 @@
+---
+title: RAII 与资源管理
+topic: topics
+feature: raii
+status_checked_at: 2026-06-01
+---
 # RAII 与资源管理
 
 ## RAII 原则

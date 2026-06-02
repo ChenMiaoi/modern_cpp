@@ -16,9 +16,9 @@ void process(void* ptr) {
 TEST("nullptr 选择正确的重载") {
     process(nullptr);
 
-    static_assert(!std::is_same_v<decltype(nullptr), int>,
+    static_assert(!std::is_same<decltype(nullptr), int>::value,
                   "nullptr 不应该是 int 类型");
-    static_assert(std::is_same_v<decltype(nullptr), std::nullptr_t>,
+    static_assert(std::is_same<decltype(nullptr), std::nullptr_t>::value,
                   "nullptr 应该是 std::nullptr_t 类型");
     ASSERT_TRUE(true);
 }
@@ -44,7 +44,7 @@ TEST("nullptr 隐式转换") {
     ASSERT_TRUE(dp == nullptr);
     ASSERT_TRUE(sp == nullptr);
 
-    static_assert(!std::is_convertible_v<std::nullptr_t, int>,
+    static_assert(!std::is_convertible<std::nullptr_t, int>::value,
                   "nullptr 不能转换为 int");
 }
 

@@ -1,3 +1,8 @@
+---
+title: C++26 契约 (Contracts)
+status_checked_at: 2026-06-01
+---
+
 # C++26 契约 (Contracts)
 
 ## 概述

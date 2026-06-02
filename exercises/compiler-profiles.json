@@ -1,0 +1,39 @@
+{
+  "profiles": {
+    "gcc-cpp17": {
+      "compiler": "g++",
+      "std": "c++17",
+      "flags": ["-Wall", "-Wextra", "-Wpedantic", "-O0"]
+    },
+    "gcc-cpp20": {
+      "compiler": "g++",
+      "std": "c++20",
+      "flags": ["-Wall", "-Wextra", "-Wpedantic", "-O0"]
+    },
+    "gcc-cpp23": {
+      "compiler": "g++",
+      "std": "c++23",
+      "flags": ["-Wall", "-Wextra", "-Wpedantic", "-O0"]
+    },
+    "clang-cpp17": {
+      "compiler": "clang++",
+      "std": "c++17",
+      "flags": ["-Wall", "-Wextra", "-Wpedantic", "-O0"]
+    },
+    "clang-cpp20": {
+      "compiler": "clang++",
+      "std": "c++20",
+      "flags": ["-Wall", "-Wextra", "-Wpedantic", "-O0"]
+    },
+    "gcc-asan-cpp20": {
+      "compiler": "g++",
+      "std": "c++20",
+      "flags": ["-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-O1"]
+    },
+    "gcc-tsan-cpp20": {
+      "compiler": "g++",
+      "std": "c++20",
+      "flags": ["-fsanitize=thread", "-O1"]
+    }
+  }
+}

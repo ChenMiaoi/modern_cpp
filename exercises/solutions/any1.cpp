@@ -6,7 +6,7 @@
 TEST("any — 存储和取回 int") {
     std::any a = 42;
     ASSERT_TRUE(a.has_value());
-    ASSERT_EQ(a.type(), typeid(int));
+    ASSERT_TRUE(a.type() == typeid(int));
 
     int val = std::any_cast<int>(a);
     ASSERT_EQ(val, 42);

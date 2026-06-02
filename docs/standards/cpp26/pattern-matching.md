@@ -1,3 +1,8 @@
+---
+title: C++26 模式匹配 (Pattern Matching)
+status_checked_at: 2026-06-01
+---
+
 # C++26 模式匹配 (Pattern Matching)
 
 ## 概述

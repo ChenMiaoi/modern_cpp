@@ -20,7 +20,7 @@
 | `std::filesystem` | `boost::filesystem` | C++17 |
 | `std::format` | fmt 库 | C++20 |
 | `std::expected` | `absl::StatusOr` | C++23 |
-| `std::flat_map` | `absl::flat_hash_map` (SwissTable) | C++23 |
+| `std::flat_map` / `std::flat_set` | Boost.Container flat_map / sorted-vector associative containers / P0429 | C++23 |
 | `std::execution` | Folly Executor 模型 | C++26 |
 | Ranges | range-v3 | C++20 |
 
@@ -46,7 +46,7 @@ GCC 的 C++ 标准库实现，Linux 生态的事实标准，以 ABI 稳定性著
 | 章节 | 主题 |
 |------|------|
 | [string ABI 迁移](/libraries/libstdcxx/string-abi) | COW → SSO 迁移、双 ABI 共存、`__cxx11` 命名空间 |
-| [vector 与 SwissTable](/libraries/libstdcxx/vector-swisstable) | vector 增长策略、GCC 11+ SwissTable unordered_map |
+| [vector 与 _Hashtable](/libraries/libstdcxx/vector-hashtable) | vector 增长策略、unordered_map 节点式 _Hashtable |
 | [shared_ptr/RB-tree/function](/libraries/libstdcxx/shared-ptr-tree-function) | 控制块设计、`_Rb_tree` 哨兵、函数指针 SBO |
 
 ---

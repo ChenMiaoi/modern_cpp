@@ -72,23 +72,26 @@ struct ManagedRecord {
     std::string tag;
 
     ManagedRecord(const std::string& n, std::vector<int> s, const std::string& t)
-        : name(std::make_unique<std::string>(n)),
+        : name(new std::string(n)),
           scores(std::move(s)), tag(t) {}
 
     ManagedRecord(const ManagedRecord& other)
-        : name(other.name ? std::make_unique<std::string>(*other.name) : nullptr),
+        : name(other.name ? new std::string(*other.name) : nullptr),
           scores(other.scores), tag(other.tag) {}
 
     ManagedRecord& operator=(const ManagedRecord& other) {
         if (this != &other) {
-            name = other.name ? std::make_unique<std::string>(*other.name) : nullptr;
+            name.reset(other.name ? new std::string(*other.name) : nullptr);
             scores = other.scores;
             tag = other.tag;
         }
         return *this;
     }
 
-    // 移动构造和移动赋值由编译器自动生成
+    ManagedRecord(ManagedRecord&& other) noexcept = default;
+    ManagedRecord& operator=(ManagedRecord&& other) noexcept = default;
+
+    // 移动构造和移动赋值需要显式恢复；自定义拷贝操作会抑制它们
 
     std::string get_name() const {
         return name ? *name : "";
@@ -149,24 +152,24 @@ TEST("ManagedRecord 移动构造") {
 }
 
 TEST("ManagedRecord Rule of 0 trait 检查") {
-    static_assert(std::is_move_constructible_v<ManagedRecord>,
+    static_assert(std::is_move_constructible<ManagedRecord>::value,
                   "ManagedRecord 应可移动构造");
-    static_assert(std::is_move_assignable_v<ManagedRecord>,
+    static_assert(std::is_move_assignable<ManagedRecord>::value,
                   "ManagedRecord 应可移动赋值");
-    static_assert(std::is_nothrow_move_constructible_v<ManagedRecord>,
+    static_assert(std::is_nothrow_move_constructible<ManagedRecord>::value,
                   "ManagedRecord 应可 noexcept 移动构造");
     ASSERT_TRUE(true);
 }
 
 TEST("Buffer 不是 trivially_copyable（有自定义特殊成员）") {
-    static_assert(!std::is_trivially_copyable_v<Buffer>,
+    static_assert(!std::is_trivially_copyable<Buffer>::value,
                   "Buffer 有自定义 dtor/copy/move，不是 trivially copyable");
     ASSERT_TRUE(true);
 }
 
 TEST("Buffer 支持移动构造") {
-    static_assert(std::is_move_constructible_v<Buffer>);
-    static_assert(std::is_move_assignable_v<Buffer>);
+    static_assert(std::is_move_constructible<Buffer>::value);
+    static_assert(std::is_move_assignable<Buffer>::value);
     ASSERT_TRUE(true);
 }
 

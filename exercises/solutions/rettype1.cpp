@@ -2,11 +2,18 @@
 
 #include "cpplings.h"
 
+auto factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+auto fib(int n) {
+    if (n <= 0) return 0;
+    if (n == 1) return 1;
+    return fib(n - 1) + fib(n - 2);
+}
+
 TEST("factorial with auto return") {
-    auto factorial = [](auto n) -> auto {
-        if (n <= 1) return 1;
-        return n * factorial(n - 1);
-    };
     ASSERT_EQ(factorial(0), 1);
     ASSERT_EQ(factorial(1), 1);
     ASSERT_EQ(factorial(5), 120);
@@ -14,11 +21,6 @@ TEST("factorial with auto return") {
 }
 
 TEST("fibonacci with auto return") {
-    auto fib = [](auto n) -> auto {
-        if (n <= 0) return 0;
-        if (n == 1) return 1;
-        return fib(n - 1) + fib(n - 2);
-    };
     ASSERT_EQ(fib(0), 0);
     ASSERT_EQ(fib(1), 1);
     ASSERT_EQ(fib(6), 8);

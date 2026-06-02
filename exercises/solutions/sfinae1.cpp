@@ -3,8 +3,14 @@
 
 #include "cpplings.h"
 #include <type_traits>
+#include <utility>
 #include <vector>
 #include <string>
+
+template <typename...>
+struct void_t {
+    using type = void;
+};
 
 struct HasSize {
     std::size_t size() const { return 42; }
@@ -19,7 +25,7 @@ template <typename T, typename = void>
 struct has_size : std::false_type {};
 
 template <typename T>
-struct has_size<T, std::void_t<decltype(std::declval<T>().size())>>
+struct has_size<T, typename void_t<decltype(std::declval<T>().size())>::type>
     : std::true_type {};
 
 TEST("has_size 检测有 size() 的类型") {
@@ -47,7 +53,7 @@ template <typename T, typename = void>
 struct has_begin : std::false_type {};
 
 template <typename T>
-struct has_begin<T, std::void_t<decltype(std::declval<T>().begin())>>
+struct has_begin<T, typename void_t<decltype(std::declval<T>().begin())>::type>
     : std::true_type {};
 
 TEST("has_begin 检测容器") {
@@ -61,13 +67,13 @@ TEST("has_begin 检测容器") {
 
 // safe_size: SFINAE 条件启用函数重载
 template <typename T>
-std::enable_if_t<has_size<T>::value, std::size_t>
+typename std::enable_if<has_size<T>::value, std::size_t>::type
 safe_size(const T& container) {
     return container.size();
 }
 
 template <typename T>
-std::enable_if_t<!has_size<T>::value, std::size_t>
+typename std::enable_if<!has_size<T>::value, std::size_t>::type
 safe_size(const T&) {
     return 0;
 }

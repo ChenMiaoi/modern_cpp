@@ -11,13 +11,16 @@
  *   cpplings watch         监听模式（自动重编译）
  *   cpplings progress      显示学习进度
  *   cpplings verify        验证所有已完成的练习
+ *   cpplings verify --solutions  验证所有 solution 文件
+ *   cpplings verify --all        验证全部练习
+ *   cpplings verify --ci         机器可读输出
  *   cpplings next          运行下一个未完成的练习
  *   cpplings reset <id>    重置练习状态
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, watch, statSync } from 'fs';
 import { join, dirname, resolve, basename } from 'path';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { homedir } from 'os';
 
@@ -53,12 +56,18 @@ function line(ch = '─', w = 60) { return clr(ch.repeat(w), C.dim); }
 // ── State ─────────────────────────────────────────────────────────────
 function loadState() {
     try { return JSON.parse(readFileSync(STATE_FILE, 'utf-8')); }
-    catch { return { completed: {} }; }
+    catch { return { completed: {}, meta: {} }; }
 }
 
 function saveState(state) {
     const dir = dirname(STATE_FILE);
     if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    state.meta = state.meta || {};
+    state.meta.repo_path = EXERCISES_DIR;
+    state.meta.last_updated = new Date().toISOString();
+    try {
+        state.meta.git_commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: EXERCISES_DIR, stdio: 'pipe' }).toString().trim();
+    } catch {}
     writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 }
 
@@ -77,6 +86,26 @@ function loadManifest() {
     return JSON.parse(readFileSync(MANIFEST, 'utf-8'));
 }
 
+const PROFILES_FILE = join(EXERCISES_DIR, 'compiler-profiles.json');
+
+function loadProfiles() {
+    if (!existsSync(PROFILES_FILE)) return {};
+    return JSON.parse(readFileSync(PROFILES_FILE, 'utf-8')).profiles || {};
+}
+
+function resolveProfile(flags) {
+    const profiles = loadProfiles();
+    const name = flags.profile;
+    if (!name) return {};
+    const p = profiles[name];
+    if (!p) {
+        console.error(clr(`  未知 profile: ${name}`, C.red));
+        console.error(clr(`  可用: ${Object.keys(profiles).join(', ')}`, C.dim));
+        process.exit(1);
+    }
+    return p;
+}
+
 function getExercises(m) {
     return m.exercises.map(ex => ({
         ...ex,
@@ -90,26 +119,28 @@ function findEx(id) {
 }
 
 // ── Compile & Run ─────────────────────────────────────────────────────
-function compile(filePath, exercise) {
+function compile(filePath, exercise, opts = {}) {
     const m = loadManifest();
-    const compiler = m.compiler || 'g++';
-    const std = exercise.topicInfo?.std || m.std || 'c++17';
+    const compiler = opts.compiler || m.compiler || 'g++';
+    const std = opts.std || exercise.std || exercise.topicInfo?.std || m.std || 'c++17';
+    const extraFlags = opts.flags || [];
     const buildDir = join(EXERCISES_DIR, '.build');
     if (!existsSync(buildDir)) mkdirSync(buildDir, { recursive: true });
     const outExt = process.platform === 'win32' ? '.exe' : '';
     const outFile = join(buildDir, exercise.id + outExt);
 
     const args = [
-        `"${filePath}"`,
+        filePath,
         `-std=${std}`,
-        `-I"${INCLUDE_DIR}"`,
-        `-o "${outFile}"`,
+        `-I${INCLUDE_DIR}`,
+        '-o', outFile,
         '-Wall', '-Wextra', '-Wpedantic',
         '-O0',
+        ...extraFlags,
     ];
 
     try {
-        execSync(`${compiler} ${args.join(' ')}`, {
+        execFileSync(compiler, args, {
             cwd: EXERCISES_DIR,
             stdio: 'pipe',
             timeout: 30000,
@@ -122,7 +153,7 @@ function compile(filePath, exercise) {
 
 function runExe(exePath) {
     try {
-        const out = execSync(`"${exePath}"`, {
+        const out = execFileSync(exePath, [], {
             cwd: EXERCISES_DIR,
             stdio: 'pipe',
             timeout: 10000,
@@ -202,6 +233,11 @@ function cmdWelcome() {
     console.log(clr('    progress    ', C.green) + '显示详细进度');
     console.log(clr('    next        ', C.green) + '运行下一个练习');
     console.log(clr('    verify      ', C.green) + '验证所有已完成的练习');
+    console.log(clr('    verify --solutions  ', C.green) + '验证所有 solution 文件');
+    console.log(clr('    verify --all        ', C.green) + '验证全部练习');
+    console.log(clr('    verify --ci         ', C.green) + '机器可读输出');
+    console.log(clr('    verify --profile <name> ', C.green) + '使用编译器 profile 验证');
+    console.log(clr('    matrix --solutions     ', C.green) + '多 profile 矩阵验证');
     console.log(clr('    reset <id>  ', C.green) + '重置练习');
     console.log();
 }
@@ -369,11 +405,21 @@ function cmdNext() {
     cmdRun(next.id);
 }
 
-function cmdVerify() {
+function cmdVerify(flags = {}) {
     const m = loadManifest();
     const exercises = getExercises(m);
     const state = loadState();
-    const completed = exercises.filter(e => state.completed[e.id]);
+    const profile = resolveProfile(flags);
+    const compileOpts = {
+        compiler: flags.compiler || profile.compiler,
+        std: flags.std || profile.std,
+        flags: profile.flags || [],
+    };
+
+    let completed = exercises.filter(e => state.completed[e.id]);
+    if (flags.topic) {
+        completed = completed.filter(e => e.topic === flags.topic);
+    }
 
     if (completed.length === 0) {
         console.log(clr('\n  还没有完成任何练习\n', C.dim));
@@ -385,13 +431,155 @@ function cmdVerify() {
     console.log();
 
     let pass = 0, fail = 0;
+    const failures = [];
     for (const ex of completed) {
         const filePath = join(EXERCISES_DIR, ex.file);
-        const comp = compile(filePath, ex);
+        if (!existsSync(filePath)) {
+            fail++;
+            failures.push({ id: ex.id, reason: '文件不存在' });
+            console.log(clr(`  ✗ ${ex.id} — 文件不存在`, C.red));
+            continue;
+        }
+        const comp = compile(filePath, ex, compileOpts);
+        if (!comp.ok) {
+            fail++;
+            failures.push({ id: ex.id, reason: '编译失败', errors: comp.errors });
+            console.log(clr(`  ✗ ${ex.id} — 编译失败`, C.red));
+            continue;
+        }
+        const result = runExe(comp.exe);
+        if (result.code === 0 && !result.stderr.includes('FAIL')) {
+            pass++;
+            console.log(clr(`  ✓ ${ex.id}`, C.green));
+        } else {
+            fail++;
+            failures.push({ id: ex.id, reason: '测试失败' });
+            console.log(clr(`  ✗ ${ex.id} — 测试失败`, C.red));
+        }
+    }
+
+    console.log();
+    const color = fail > 0 ? C.red : C.green;
+    console.log(clr(`  结果: ${pass} 通过, ${fail} 失败`, color));
+    console.log();
+
+    if (flags.ci) {
+        console.log(JSON.stringify({ pass, fail, failures }, null, 2));
+    }
+
+    if (fail > 0 && flags.ci) {
+        process.exit(1);
+    }
+}
+
+function cmdVerifySolutions(flags = {}) {
+    const m = loadManifest();
+    const exercises = getExercises(m);
+    const profile = resolveProfile(flags);
+    const compileOpts = {
+        compiler: flags.compiler || profile.compiler,
+        std: flags.std || profile.std,
+        flags: profile.flags || [],
+    };
+
+    let target = exercises;
+    if (flags.topic) {
+        target = exercises.filter(e => e.topic === flags.topic);
+    }
+
+    target = target.filter(e => (e.kind || 'run-pass') === 'run-pass');
+
+    console.log();
+    console.log(clr(`  验证 ${target.length} 个练习的 solution 文件...`, C.bold));
+    console.log();
+
+    let pass = 0, fail = 0, skip = 0;
+    const failures = [];
+
+    for (const ex of target) {
+        if (!ex.solution) {
+            skip++;
+            if (flags.verbose) console.log(clr(`  ⏭ ${ex.id} — 无 solution 文件`, C.dim));
+            continue;
+        }
+        const solPath = join(EXERCISES_DIR, ex.solution);
+        if (!existsSync(solPath)) {
+            skip++;
+            if (flags.verbose) console.log(clr(`  ⏭ ${ex.id} — solution 文件不存在`, C.dim));
+            continue;
+        }
+
+        const comp = compile(solPath, ex, compileOpts);
+        if (!comp.ok) {
+            fail++;
+            failures.push({ id: ex.id, reason: '编译失败', errors: comp.errors });
+            console.log(clr(`  ✗ ${ex.id} — 编译失败`, C.red));
+            continue;
+        }
+        const result = runExe(comp.exe);
+        if (result.code === 0 && !result.stderr.includes('FAIL')) {
+            pass++;
+            console.log(clr(`  ✓ ${ex.id}`, C.green));
+        } else {
+            fail++;
+            failures.push({ id: ex.id, reason: '测试失败' });
+            console.log(clr(`  ✗ ${ex.id} — 测试失败`, C.red));
+        }
+    }
+
+    console.log();
+    const color = fail > 0 ? C.red : C.green;
+    console.log(clr(`  结果: ${pass} 通过, ${fail} 失败, ${skip} 跳过`, color));
+    console.log();
+
+    if (flags.ci) {
+        console.log(JSON.stringify({ pass, fail, skip, failures }, null, 2));
+    }
+
+    if (fail > 0 && flags.ci) {
+        process.exit(1);
+    }
+}
+
+function cmdVerifyAll(flags = {}) {
+    const m = loadManifest();
+    const exercises = getExercises(m);
+    const profile = resolveProfile(flags);
+    const compileOpts = {
+        compiler: flags.compiler || profile.compiler,
+        std: flags.std || profile.std,
+        flags: profile.flags || [],
+    };
+
+    let target = exercises;
+    if (flags.topic) {
+        target = exercises.filter(e => e.topic === flags.topic);
+    }
+
+    const runPass = target.filter(e => (e.kind || 'run-pass') === 'run-pass');
+    const compileFail = target.filter(e => e.kind === 'compile-fail');
+
+    console.log();
+    console.log(clr(`  验证全部 ${target.length} 个练习...`, C.bold));
+    console.log();
+
+    let pass = 0, fail = 0;
+
+    for (const ex of runPass) {
+        const filePath = join(EXERCISES_DIR, ex.file);
+        const solPath = ex.solution ? join(EXERCISES_DIR, ex.solution) : null;
+        const testPath = (solPath && existsSync(solPath)) ? solPath : filePath;
+
+        if (!existsSync(testPath)) {
+            fail++;
+            console.log(clr(`  ✗ ${ex.id} — 文件不存在: ${basename(testPath)}`, C.red));
+            continue;
+        }
+
+        const comp = compile(testPath, ex, compileOpts);
         if (!comp.ok) {
             fail++;
             console.log(clr(`  ✗ ${ex.id} — 编译失败`, C.red));
-            delete state.completed[ex.id];
             continue;
         }
         const result = runExe(comp.exe);
@@ -401,15 +589,80 @@ function cmdVerify() {
         } else {
             fail++;
             console.log(clr(`  ✗ ${ex.id} — 测试失败`, C.red));
-            delete state.completed[ex.id];
         }
     }
 
-    saveState(state);
+    for (const ex of compileFail) {
+        const filePath = join(EXERCISES_DIR, ex.file);
+        if (!existsSync(filePath)) {
+            fail++;
+            console.log(clr(`  ✗ ${ex.id} — 文件不存在`, C.red));
+            continue;
+        }
+
+        const comp = compile(filePath, ex, compileOpts);
+        if (comp.ok) {
+            fail++;
+            console.log(clr(`  ✗ ${ex.id} — compile-fail 但编译成功了`, C.red));
+        } else if (ex.expected_error && !comp.errors.includes(ex.expected_error)) {
+            fail++;
+            console.log(clr(`  ✗ ${ex.id} — 编译失败但未包含预期错误: ${ex.expected_error}`, C.red));
+        } else {
+            pass++;
+            console.log(clr(`  ✓ ${ex.id} (compile-fail 通过)`, C.green));
+        }
+    }
+
     console.log();
     const color = fail > 0 ? C.red : C.green;
     console.log(clr(`  结果: ${pass} 通过, ${fail} 失败`, color));
     console.log();
+
+    if (fail > 0 && flags.ci) {
+        if (flags.ci) console.log(JSON.stringify({ pass, fail }));
+        process.exit(1);
+    }
+}
+
+function cmdMatrix(flags = {}) {
+    const m = loadManifest();
+    const exercises = getExercises(m);
+    const profiles = loadProfiles();
+    const profileNames = flags.profiles
+        ? flags.profiles.split(',').map(s => s.trim())
+        : Object.keys(profiles);
+
+    const target = flags.solutions
+        ? exercises.filter(e => e.solution && (e.kind || 'run-pass') === 'run-pass')
+        : exercises.filter(e => (e.kind || 'run-pass') === 'run-pass');
+
+    console.log();
+    console.log(clr(`  Matrix: ${target.length} exercises × ${profileNames.length} profiles`, C.bold));
+    console.log();
+
+    const results = {};
+    for (const pname of profileNames) {
+        const p = profiles[pname];
+        if (!p) { console.log(clr(`  ⏭ ${pname} — 未知 profile`, C.dim)); continue; }
+        console.log(clr(`  ▸ ${pname} (${p.compiler} ${p.std})`, C.cyan));
+        let pass = 0, fail = 0;
+        for (const ex of target) {
+            const testPath = flags.solutions
+                ? join(EXERCISES_DIR, ex.solution)
+                : join(EXERCISES_DIR, ex.file);
+            if (!existsSync(testPath)) { fail++; continue; }
+            const comp = compile(testPath, ex, { compiler: p.compiler, std: p.std, flags: p.flags || [] });
+            if (!comp.ok) { fail++; continue; }
+            const result = runExe(comp.exe);
+            if (result.code === 0 && !result.stderr.includes('FAIL')) pass++;
+            else fail++;
+        }
+        results[pname] = { pass, fail };
+        const color = fail > 0 ? C.red : C.green;
+        console.log(clr(`    ${pass} ✓  ${fail} ✗`, color));
+    }
+    console.log();
+    if (flags.ci) console.log(JSON.stringify(results, null, 2));
 }
 
 function cmdWatch() {
@@ -442,7 +695,7 @@ function cmdWatch() {
         debounce = setTimeout(() => {
             // Find which exercise this file belongs to
             const normalized = filename.replace(/\\/g, '/');
-            const ex = exercises.find(e => normalized.endsWith(basename(e.file)));
+            const ex = exercises.find(e => normalized.endsWith(e.file));
             if (!ex) return;
 
             console.clear();
@@ -486,10 +739,30 @@ function cmdReset(id) {
     console.log(clr(`\n  ✓ 已重置: ${id}\n`, C.green));
 }
 
+function parseArgs(args) {
+    const flags = {};
+    const positional = [];
+    for (let i = 0; i < args.length; i++) {
+        const a = args[i];
+        if (a === '--solutions') { flags.solutions = true; }
+        else if (a === '--all') { flags.all = true; }
+        else if (a === '--ci') { flags.ci = true; }
+        else if (a === '--topic' && i + 1 < args.length) { flags.topic = args[++i]; }
+        else if (a === '--profile' && i + 1 < args.length) { flags.profile = args[++i]; }
+        else if (a === '--profiles' && i + 1 < args.length) { flags.profiles = args[++i]; }
+        else if (a === '--verbose') { flags.verbose = true; }
+        else if (a === '--compiler' && i + 1 < args.length) { flags.compiler = args[++i]; }
+        else if (a === '--std' && i + 1 < args.length) { flags.std = args[++i]; }
+        else if (!a.startsWith('-')) { positional.push(a); }
+    }
+    return { flags, positional };
+}
+
 // ── Main ──────────────────────────────────────────────────────────────
-const args = process.argv.slice(2);
-const cmd = args[0];
-const arg = args[1];
+const rawArgs = process.argv.slice(2);
+const { flags, positional } = parseArgs(rawArgs);
+const cmd = positional[0];
+const arg = positional[1];
 
 switch (cmd) {
     case 'list':   case 'ls': cmdList(); break;
@@ -497,8 +770,17 @@ switch (cmd) {
     case 'hint':   case 'h':  cmdHint(arg); break;
     case 'watch':  case 'w':  cmdWatch(); break;
     case 'progress': case 'p': cmdProgress(); break;
-    case 'verify': case 'v':  cmdVerify(); break;
+    case 'verify': case 'v':
+        if (flags.solutions) {
+            cmdVerifySolutions(flags);
+        } else if (flags.all) {
+            cmdVerifyAll(flags);
+        } else {
+            cmdVerify(flags);
+        }
+        break;
     case 'next':   case 'n':  cmdNext(); break;
     case 'reset':             cmdReset(arg); break;
+    case 'matrix': case 'm': cmdMatrix(flags); break;
     default:                  cmdWelcome(); break;
 }

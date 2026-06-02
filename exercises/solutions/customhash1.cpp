@@ -7,6 +7,7 @@
 #include <string>
 #include <functional>
 #include <cctype>
+#include <cstddef>
 
 struct Point {
     int x;
@@ -21,9 +22,9 @@ struct Point {
 namespace std {
 template <>
 struct hash<Point> {
-    size_t operator()(const Point& p) const {
-        size_t h1 = std::hash<int>()(p.x);
-        size_t h2 = std::hash<int>()(p.y);
+    std::size_t operator()(const Point& p) const {
+        std::size_t h1 = std::hash<int>()(p.x);
+        std::size_t h2 = std::hash<int>()(p.y);
         return h1 ^ (h2 << 1);
     }
 };
@@ -31,8 +32,8 @@ struct hash<Point> {
 
 // 自定义哈希器 — 大小写不敏感
 struct CaseInsensitiveHash {
-    size_t operator()(const std::string& s) const {
-        size_t hash = 0;
+    std::size_t operator()(const std::string& s) const {
+        std::size_t hash = 0;
         for (char c : s) {
             hash = hash * 31 + std::tolower(static_cast<unsigned char>(c));
         }
@@ -44,7 +45,7 @@ struct CaseInsensitiveHash {
 struct CaseInsensitiveEqual {
     bool operator()(const std::string& a, const std::string& b) const {
         if (a.size() != b.size()) return false;
-        for (size_t i = 0; i < a.size(); ++i) {
+        for (std::size_t i = 0; i < a.size(); ++i) {
             if (std::tolower(static_cast<unsigned char>(a[i])) !=
                 std::tolower(static_cast<unsigned char>(b[i])))
                 return false;
@@ -58,13 +59,15 @@ struct CaseInsensitiveEqual {
 TEST("Point 哈希可用 unordered_map") {
     std::unordered_map<Point, std::string> locations;
 
-    locations[{0, 0}] = "origin";
-    locations[{1, 2}] = "point_a";
-    locations[{3, 4}] = "point_b";
+    locations[Point{0, 0}] = "origin";
+    locations[Point{1, 2}] = "point_a";
+    locations[Point{3, 4}] = "point_b";
 
     ASSERT_EQ(locations.size(), 3u);
-    ASSERT_EQ(locations[{0, 0}], std::string("origin"));
-    ASSERT_EQ(locations[{1, 2}], std::string("point_a"));
+    Point origin{0, 0};
+    Point pa{1, 2};
+    ASSERT_EQ(locations[origin], std::string("origin"));
+    ASSERT_EQ(locations[pa], std::string("point_a"));
 }
 
 TEST("Point find 和 insert") {

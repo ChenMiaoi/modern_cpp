@@ -7,23 +7,26 @@
 #include <string>
 #include <type_traits>
 #include <sstream>
+#include <cstddef>
+#include <functional>
+#include <utility>
 
 // C++11 手动实现 index_sequence
-template <size_t... Is>
+template <std::size_t... Is>
 struct index_sequence {};
 
-template <size_t N, size_t... Is>
+template <std::size_t N, std::size_t... Is>
 struct make_index_sequence : make_index_sequence<N - 1, N - 1, Is...> {};
 
-template <size_t... Is>
+template <std::size_t... Is>
 struct make_index_sequence<0, Is...> {
     using type = index_sequence<Is...>;
 };
 
 // tuple_cat 拼接
-auto tuple_cat_result() {
-    auto t1 = std::make_tuple(1, 3.14);
-    auto t2 = std::make_tuple('a', std::string("hello"));
+std::tuple<int, double, char, std::string> tuple_cat_result() {
+    std::tuple<int, double> t1 = std::make_tuple(1, 3.14);
+    std::tuple<char, std::string> t2 = std::make_tuple('a', std::string("hello"));
     return std::tuple_cat(t1, t2);
 }
 
@@ -36,7 +39,7 @@ auto make_ref_tuple(Args&&... args)
 }
 
 // for_each_in_tuple 辅助实现
-template <typename Tuple, typename F, size_t... Is>
+template <typename Tuple, typename F, std::size_t... Is>
 void for_each_impl(Tuple&& t, F&& func, index_sequence<Is...>) {
     using swallow = int[];
     (void)swallow{0, (func(std::get<Is>(std::forward<Tuple>(t))), 0)...};
@@ -45,12 +48,11 @@ void for_each_impl(Tuple&& t, F&& func, index_sequence<Is...>) {
 // for_each_in_tuple — 遍历 tuple 中的每个元素
 template <typename Tuple, typename F>
 void for_each_in_tuple(Tuple&& t, F&& func) {
-    constexpr size_t size = std::tuple_size<
-        typename std::decay<Tuple>::type
-    >::value;
     for_each_impl(std::forward<Tuple>(t),
                   std::forward<F>(func),
-                  typename make_index_sequence<size>::type{});
+                  typename make_index_sequence<
+                      std::tuple_size<typename std::decay<Tuple>::type>::value
+                  >::type());
 }
 
 // get_type_name_at_0 — 利用 tuple_element 获取类型名

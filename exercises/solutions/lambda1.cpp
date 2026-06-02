@@ -8,6 +8,13 @@
 #include <functional>
 #include <string>
 
+struct GenericAdd {
+    template <typename T, typename U>
+    auto operator()(T a, U b) const -> decltype(a + b) {
+        return a + b;
+    }
+};
+
 TEST("基本 lambda 语法") {
     auto add = [](int a, int b) { return a + b; };
 
@@ -66,7 +73,7 @@ TEST("lambda 用于累加") {
 }
 
 TEST("泛型 lambda（C++14）") {
-    auto generic_add = [](auto a, auto b) { return a + b; };
+    GenericAdd generic_add;
 
     ASSERT_EQ(generic_add(3, 4), 7);
     ASSERT_EQ(generic_add(1.5, 2.5), 4.0);

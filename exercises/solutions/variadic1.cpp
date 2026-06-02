@@ -4,19 +4,22 @@
 #include "cpplings.h"
 #include <sstream>
 #include <string>
+#include <type_traits>
 
 // print_all: 递归展开参数包
 void print_all(std::ostream& os) {
     os << "\n";
 }
 
-template <typename T, typename... Args>
-void print_all(std::ostream& os, const T& first, const Args&... rest) {
-    os << first;
-    if constexpr (sizeof...(rest) > 0) {
-        os << " ";
-    }
-    print_all(os, rest...);
+template <typename T>
+void print_all(std::ostream& os, const T& last) {
+    os << last << "\n";
+}
+
+template <typename T, typename U, typename... Args>
+void print_all(std::ostream& os, const T& first, const U& second, const Args&... rest) {
+    os << first << " ";
+    print_all(os, second, rest...);
 }
 
 TEST("print_all 打印单个值") {
@@ -39,13 +42,14 @@ TEST("print_all 空参数列表") {
 
 // sum: 递归展开实现参数求和
 template <typename T>
-auto sum(const T& val) {
+T sum(const T& val) {
     return val;
 }
 
-template <typename T, typename... Args>
-auto sum(const T& first, const Args&... rest) {
-    return first + sum(rest...);
+template <typename T, typename U, typename... Args>
+typename std::common_type<T, U, Args...>::type
+sum(const T& first, const U& second, const Args&... rest) {
+    return first + sum(second, rest...);
 }
 
 TEST("sum 计算整数和") {

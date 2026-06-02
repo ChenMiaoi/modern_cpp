@@ -19,7 +19,7 @@ Folly 的核心组件覆盖了字符串、哈希表、零拷贝缓冲区、异�
 | 组件 | Folly | 标准库 | 核心差异 |
 |------|-------|--------|---------|
 | string | fbstring 三级 (Small/Medium/Large COW) | std::string 两级 (Small/Long) | SSO=23 vs 15/22 |
-| hash_map | F14 (chunk + SIMD) | unordered_map (链式) 或 SwissTable | F14 缓存更友好 |
+| hash_map | F14 (chunk + SIMD) | unordered_map（节点式链表） | F14 缓存更友好 |
 | byte_buffer | IOBuf (引用计数 + 链式) | vector\<char\> (拷贝语义) | 零拷贝 |
 | async | Future/Promise + Executor | std::future (阻塞) | 全 continuation |
 | thread_safe | Synchronized\<T\> (RAII) | 手动 mutex + lock_guard | 编译期强制加锁 |

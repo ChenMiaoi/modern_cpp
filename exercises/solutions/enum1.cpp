@@ -18,7 +18,7 @@ TEST("enum class 提供类型安全") {
     Color c = Color::Green;
     Direction d = Direction::North;
 
-    static_assert(!std::is_same_v<Color, Direction>,
+    static_assert(!std::is_same<Color, Direction>::value,
                   "Color 和 Direction 应该是不同类型");
     ASSERT_TRUE(true);
 }

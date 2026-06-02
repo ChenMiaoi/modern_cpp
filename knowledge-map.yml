@@ -1,0 +1,388 @@
+cpp11:
+  shared_ptr:
+    title: "std::shared_ptr"
+    docs:
+      - "docs/standards/cpp11/smart-pointers.md"
+      - "docs/libraries/libstdcxx/shared-ptr-tree-function.md"
+      - "docs/libraries/llvm/function-shared-ptr.md"
+    exercises:
+      - "exercises/cpp11-classes/smartptr2.cpp"
+    solutions:
+      - "exercises/solutions/smartptr2.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/bits/shared_ptr_base.h"
+        symbols:
+          - "std::shared_ptr"
+          - "_Sp_counted_base"
+          - "_Sp_counted_ptr_inplace"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/__memory/shared_ptr.h"
+        symbols:
+          - "std::shared_ptr"
+          - "__shared_ptr_pointer"
+          - "__shared_ptr_emplace"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run smartptr2'
+      source:
+        - 'grep -R "_Sp_counted_base" references/impl/gcc/libstdc++-v3/include/bits/shared_ptr_base.h'
+        - 'grep -R "__shared_ptr_emplace" references/impl/llvm-project/libcxx/include/__memory/shared_ptr.h'
+
+  unique_ptr:
+    title: "std::unique_ptr"
+    docs:
+      - "docs/standards/cpp11/smart-pointers.md"
+      - "docs/libraries/llvm/ranges-unique-ptr.md"
+    exercises:
+      - "exercises/cpp11-classes/smartptr1.cpp"
+    solutions:
+      - "exercises/solutions/smartptr1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/bits/unique_ptr.h"
+        symbols:
+          - "std::unique_ptr"
+          - "default_delete"
+          - "__uniq_ptr_impl"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/__memory/unique_ptr.h"
+        symbols:
+          - "std::unique_ptr"
+          - "default_delete"
+          - "__unique_ptr_deleter_sfinae"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run smartptr1'
+      source:
+        - 'grep -R "__uniq_ptr_impl" references/impl/gcc/libstdc++-v3/include/bits/unique_ptr.h'
+        - 'grep -R "__unique_ptr_deleter_sfinae" references/impl/llvm-project/libcxx/include/__memory/unique_ptr.h'
+
+  function:
+    title: "std::function"
+    docs:
+      - "docs/libraries/libstdcxx/shared-ptr-tree-function.md"
+      - "docs/libraries/llvm/function-shared-ptr.md"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/bits/std_function.h"
+        symbols:
+          - "std::function"
+          - "_Function_base"
+          - "_Function_handler"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/__functional/function.h"
+        symbols:
+          - "std::function"
+          - "__value_func"
+          - "__policy_func"
+    verification:
+      source:
+        - 'grep -R "_Function_handler" references/impl/gcc/libstdc++-v3/include/bits/std_function.h'
+        - 'grep -R "__policy_func" references/impl/llvm-project/libcxx/include/__functional/function.h'
+
+  vector:
+    title: "std::vector"
+    docs:
+      - "docs/libraries/libstdcxx/vector-hashtable.md"
+      - "docs/libraries/llvm/vector-string.md"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/bits/stl_vector.h"
+        symbols:
+          - "std::vector"
+          - "_Vector_impl_data"
+          - "_Vector_impl"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/__vector/vector.h"
+        symbols:
+          - "std::vector"
+          - "_SplitBuffer"
+          - "__recommend"
+    verification:
+      source:
+        - 'grep -R "_Vector_impl" references/impl/gcc/libstdc++-v3/include/bits/stl_vector.h'
+        - 'grep -R "__recommend" references/impl/llvm-project/libcxx/include/__vector/vector.h'
+
+cpp17:
+  any:
+    title: "std::any"
+    docs:
+      - "docs/standards/cpp17/any.md"
+    exercises:
+      - "exercises/cpp17/any1.cpp"
+    solutions:
+      - "exercises/solutions/any1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/any"
+        symbols:
+          - "std::any"
+          - "_Manager_internal"
+          - "_Manager_external"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/any"
+        symbols:
+          - "std::any"
+          - "__any_imp::_SmallHandler"
+          - "__any_imp::_LargeHandler"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run any1'
+      source:
+        - 'grep -R "_Manager_internal" references/impl/gcc/libstdc++-v3/include/std/any'
+        - 'grep -R "_SmallHandler" references/impl/llvm-project/libcxx/include/any'
+
+  optional:
+    title: "std::optional"
+    docs:
+      - "docs/standards/cpp17/optional.md"
+    exercises:
+      - "exercises/cpp17-basics/optional1.cpp"
+    solutions:
+      - "exercises/solutions/optional1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/optional"
+        symbols:
+          - "std::optional"
+          - "_Optional_payload_base"
+          - "_Optional_payload"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/optional"
+        symbols:
+          - "std::optional"
+          - "__optional_destruct_base"
+          - "__optional_storage_base"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run optional1'
+      source:
+        - 'grep -R "_Optional_payload_base" references/impl/gcc/libstdc++-v3/include/std/optional'
+        - 'grep -R "__optional_storage_base" references/impl/llvm-project/libcxx/include/optional'
+
+  variant:
+    title: "std::variant"
+    docs:
+      - "docs/standards/cpp17/variant.md"
+    exercises:
+      - "exercises/cpp17/variant1.cpp"
+    solutions:
+      - "exercises/solutions/variant1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/variant"
+        symbols:
+          - "std::variant"
+          - "__variant::__raw_visit"
+          - "_Variadic_union"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/variant"
+        symbols:
+          - "std::variant"
+          - "__variant_detail::__traits"
+          - "__visit_alt_at"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run variant1'
+      source:
+        - 'grep -R "_Variadic_union" references/impl/gcc/libstdc++-v3/include/std/variant'
+        - 'grep -R "__visit_alt_at" references/impl/llvm-project/libcxx/include/variant'
+
+  string_view:
+    title: "std::string_view"
+    docs:
+      - "docs/standards/cpp17/string-view.md"
+    exercises:
+      - "exercises/cpp17/stringview1.cpp"
+    solutions:
+      - "exercises/solutions/stringview1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/string_view"
+        symbols:
+          - "std::basic_string_view"
+          - "std::string_view"
+          - "__sv_check"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/string_view"
+        symbols:
+          - "std::basic_string_view"
+          - "std::string_view"
+          - "__char_traits_length_checked"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run stringview1'
+      source:
+        - 'grep -R "__sv_check" references/impl/gcc/libstdc++-v3/include/std/string_view'
+        - 'grep -R "__char_traits_length_checked" references/impl/llvm-project/libcxx/include/string_view'
+
+cpp20:
+  coroutine:
+    title: "C++20 coroutines"
+    docs:
+      - "docs/standards/cpp20/coroutines.md"
+    exercises:
+      - "exercises/cpp20/coroutine1.cpp"
+    solutions:
+      - "exercises/solutions/coroutine1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/coroutine"
+        symbols:
+          - "std::coroutine_handle"
+          - "std::noop_coroutine"
+          - "std::suspend_always"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/coroutine"
+        symbols:
+          - "std::coroutine_handle"
+          - "std::noop_coroutine_handle"
+          - "std::suspend_always"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run coroutine1'
+      source:
+        - 'grep -R "suspend_always" references/impl/gcc/libstdc++-v3/include/std/coroutine'
+        - 'grep -R "noop_coroutine_handle" references/impl/llvm-project/libcxx/include/coroutine'
+
+  ranges:
+    title: "Ranges"
+    docs:
+      - "docs/standards/cpp20/ranges.md"
+    exercises:
+      - "exercises/cpp20/ranges1.cpp"
+    solutions:
+      - "exercises/solutions/ranges1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/ranges"
+        symbols:
+          - "std::ranges::transform_view"
+          - "std::views::transform"
+          - "std::range_adaptor_closure"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/ranges"
+        symbols:
+          - "std::ranges::transform_view"
+          - "std::ranges::zip_view"
+          - "std::ranges::view_interface"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run ranges1'
+      source:
+        - 'grep -R "transform_view" references/impl/gcc/libstdc++-v3/include/std/ranges'
+        - 'grep -R "transform_view" references/impl/llvm-project/libcxx/include/ranges'
+
+cpp23:
+  deducing_this:
+    title: "Deducing this"
+    docs:
+      - "docs/standards/cpp23/deducing-this.md"
+    exercises:
+      - "exercises/cpp23/deducingthis0.cpp"
+      - "exercises/cpp23/deducingthis1.cpp"
+    solutions:
+      - "exercises/solutions/deducingthis0.cpp"
+      - "exercises/solutions/deducingthis1.cpp"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run deducingthis0'
+        - 'node exercises/cpplings.mjs run deducingthis1'
+
+  mdspan:
+    title: "std::mdspan"
+    docs:
+      - "docs/standards/cpp23/mdspan.md"
+    exercises:
+      - "exercises/cpp23/mdspan1.cpp"
+    solutions:
+      - "exercises/solutions/mdspan1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/mdspan"
+        symbols:
+          - "std::mdspan"
+          - "std::extents"
+          - "submdspan_mapping_result"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/mdspan"
+        symbols:
+          - "std::mdspan"
+          - "std::extents"
+          - "std::layout_right::mapping"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run mdspan1'
+      source:
+        - 'grep -R "submdspan_mapping_result" references/impl/gcc/libstdc++-v3/include/std/mdspan'
+        - 'grep -R "layout_right::mapping" references/impl/llvm-project/libcxx/include/mdspan'
+
+  flat_map:
+    title: "std::flat_map"
+    docs:
+      - "docs/standards/cpp23/flat-map-set.md"
+    exercises:
+      - "exercises/cpp23/flatmap1.cpp"
+    solutions:
+      - "exercises/solutions/flatmap1.cpp"
+    implementation:
+      libstdcxx:
+        path: "references/impl/gcc/libstdc++-v3/include/std/flat_map"
+        symbols:
+          - "std::flat_map"
+          - "_Flat_map_impl"
+          - "std::views::zip"
+      libcxx:
+        path: "references/impl/llvm-project/libcxx/include/flat_map"
+        symbols:
+          - "std::flat_map"
+          - "std::sorted_unique_t"
+          - "std::sorted_unique"
+    verification:
+      api:
+        - 'node exercises/cpplings.mjs run flatmap1'
+      source:
+        - 'grep -R "_Flat_map_impl" references/impl/gcc/libstdc++-v3/include/std/flat_map'
+        - 'grep -R "sorted_unique_t" references/impl/llvm-project/libcxx/include/flat_map'
+
+modules:
+  basic:
+    title: C++ Modules 基础
+    docs:
+      - examples/modules/modules1_basic/math.cppm
+      - examples/modules/modules1_basic/main.cpp
+  partition:
+    title: 模块分区
+    docs:
+      - examples/modules/modules2_partition/
+  header_unit:
+    title: Header Unit
+    docs:
+      - examples/modules/modules3_header_unit/
+  macro_migration:
+    title: 宏迁移
+    docs:
+      - examples/modules/modules4_macro_migration/
+  templates:
+    title: 模块中的模板与 Concepts
+    docs:
+      - examples/modules/modules5_templates/
+
+compiler_optimization:
+  sroa:
+    title: SROA (Scalar Replacement of Aggregates)
+    docs:
+      - docs/topics/compiler-optimizations/examples/sroa.cpp
+  licm:
+    title: LICM (Loop-Invariant Code Motion)
+    docs:
+      - docs/topics/compiler-optimizations/examples/licm.cpp
+  vectorize:
+    title: 自动向量化
+    docs:
+      - docs/topics/compiler-optimizations/examples/vectorize.cpp
+  devirt:
+    title: 去虚拟化 (Devirtualization)
+    docs:
+      - docs/topics/compiler-optimizations/examples/devirt.cpp

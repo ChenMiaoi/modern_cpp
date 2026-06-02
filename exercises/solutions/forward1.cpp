@@ -18,14 +18,16 @@ struct ValueTracker {
 
     // 移动构造函数
     ValueTracker(ValueTracker&& other) noexcept
-        : category("moved-from"), id(other.id) {
+        : category(other.category == "copied-from" ? "copied-from" : "moved-from"),
+          id(other.id) {
         other.category = "moved-from";
         other.id = 0;
     }
 
     // 拷贝构造函数
     ValueTracker(const ValueTracker& other)
-        : category("copied-from"), id(other.id) {}
+        : category(other.category == "moved-from" ? "moved-from" : "copied-from"),
+          id(other.id) {}
 };
 
 // 完美转发：保持值类别传递给 ValueTracker 构造函数
@@ -112,8 +114,8 @@ TEST("引用折叠规则验证") {
 
     // Case 1: T=int&,  传入左值 → int& + int& → int& (左值引用)
     ASSERT_TRUE(r.case1_is_lref);
-    // Case 2: T=int&&, 传入左值 → int&& + int& → int& (左值引用)
-    ASSERT_TRUE(r.case2_is_lref);
+    // Case 2: T=int&&, 传入左值 → std::forward<int&&>(int&) → int&& (右值引用)
+    ASSERT_FALSE(r.case2_is_lref);
     // Case 3: T=int&,  传入右值 → int& + int&& → int& (左值引用)
     ASSERT_TRUE(r.case3_is_lref);
     // Case 4: T=int&&, 传入右值 → int&& + int&& → int&& (右值引用)

@@ -1,3 +1,8 @@
+---
+title: C++26 constexpr 扩展
+status_checked_at: 2026-06-01
+---
+
 # C++26 constexpr 扩展
 
 ## 概述

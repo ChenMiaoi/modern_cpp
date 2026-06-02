@@ -1,3 +1,14 @@
+---
+title: C++20 Ranges（范围库）
+topic: cpp20
+feature: ranges
+standard: C++20
+status_checked_at: 2026-06-01
+exercises:
+  - exercises/cpp20/ranges1.cpp
+solutions:
+  - exercises/solutions/ranges1.cpp
+---
 # C++20 Ranges（范围库）
 
 ## 概述

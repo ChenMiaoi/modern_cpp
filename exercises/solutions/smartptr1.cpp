@@ -4,6 +4,7 @@
 #include "cpplings.h"
 #include <memory>
 #include <string>
+#include <utility>
 
 struct Animal {
     std::string name;
@@ -30,14 +31,14 @@ struct Spider : Animal {
 
 // 工厂函数：根据 type 返回对应的 unique_ptr<Animal>
 std::unique_ptr<Animal> make_animal(const std::string& type, const std::string& name) {
-    if (type == "dog")    return std::make_unique<Dog>(name);
-    if (type == "cat")    return std::make_unique<Cat>(name);
-    if (type == "spider") return std::make_unique<Spider>(name);
+    if (type == "dog")    return std::unique_ptr<Animal>(new Dog(name));
+    if (type == "cat")    return std::unique_ptr<Animal>(new Cat(name));
+    if (type == "spider") return std::unique_ptr<Animal>(new Spider(name));
     return nullptr;
 }
 
 TEST("make_unique 创建对象") {
-    auto p = std::make_unique<Dog>("Rex");
+    auto p = std::unique_ptr<Dog>(new Dog("Rex"));
     ASSERT_EQ(p->name, "Rex");
     ASSERT_EQ(p->legs, 4);
     ASSERT_EQ(p->speak(), "Woof!");
@@ -54,7 +55,7 @@ TEST("工厂函数返回 unique_ptr") {
 }
 
 TEST("unique_ptr 所有权转移") {
-    auto p1 = std::make_unique<Spider>("Charlotte");
+    auto p1 = std::unique_ptr<Spider>(new Spider("Charlotte"));
     ASSERT_TRUE(p1 != nullptr);
 
     auto p2 = std::move(p1);
@@ -65,7 +66,7 @@ TEST("unique_ptr 所有权转移") {
 }
 
 TEST("make_unique 防止泄漏") {
-    auto p = std::make_unique<Dog>("Fido");
+    auto p = std::unique_ptr<Dog>(new Dog("Fido"));
     ASSERT_EQ(p->name, "Fido");
 }
 

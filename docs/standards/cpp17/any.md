@@ -1,3 +1,14 @@
+---
+title: C++17 std::any
+topic: cpp17
+feature: any
+standard: C++17
+status_checked_at: 2026-06-01
+exercises:
+  - exercises/cpp17/any1.cpp
+solutions:
+  - exercises/solutions/any1.cpp
+---
 # C++17 std::any
 
 ## 概述

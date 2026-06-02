@@ -1,0 +1,34 @@
+name: cpplings
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run build
+
+  exercises-gcc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install g++
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++
+      - run: npm ci
+      - name: Verify all solutions
+        run: node exercises/cpplings.mjs verify --solutions --ci

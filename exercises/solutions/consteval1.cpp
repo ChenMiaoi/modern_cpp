@@ -37,7 +37,7 @@ constinit int global_counter = 0;
 constinit static const char* prefix = "hello";
 
 TEST("constinit variable") {
-    constinit int local_init = 42;
+    static constinit int local_init = 42;
     ASSERT_EQ(local_init, 42);
     local_init = 100;
     ASSERT_EQ(local_init, 100);
