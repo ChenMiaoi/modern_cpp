@@ -14,6 +14,8 @@
  *   cpplings verify --solutions  验证所有 solution 文件
  *   cpplings verify --all        验证全部练习
  *   cpplings verify --ci         机器可读输出
+ *   cpplings asm <id>            查看优化后的汇编输出
+ *   cpplings asm <id> --opt=O3   指定优化级别
  *   cpplings next          运行下一个未完成的练习
  *   cpplings reset <id>    重置练习状态
  */
@@ -148,6 +150,150 @@ function compile(filePath, exercise, opts = {}) {
         return { ok: true, exe: outFile, errors: '' };
     } catch (err) {
         return { ok: false, exe: '', errors: err.stderr?.toString() || '' };
+    }
+}
+
+function compileAsm(filePath, exercise, opts = {}) {
+    const m = loadManifest();
+    const compiler = opts.compiler || m.compiler || 'g++';
+    const std = opts.std || exercise.std || exercise.topicInfo?.std || m.std || 'c++17';
+    const optLevel = opts.optLevel || '-O2';
+    const buildDir = join(EXERCISES_DIR, '.build');
+    if (!existsSync(buildDir)) mkdirSync(buildDir, { recursive: true });
+    const asmFile = join(buildDir, exercise.id + '.s');
+
+    const isClang = compiler.includes('clang');
+    const isMsvc = compiler.includes('cl');
+
+    const args = [
+        filePath,
+        `-std=${std}`,
+        `-I${INCLUDE_DIR}`,
+        optLevel,
+        '-S',
+        '-masm=intel',
+        '-o', asmFile,
+    ];
+
+    // GCC: add -fno-asynchronous-unwind-tables to strip .cfi noise
+    if (!isClang && !isMsvc) {
+        args.push('-fno-asynchronous-unwind-tables');
+    }
+
+    try {
+        execFileSync(compiler, args, {
+            cwd: EXERCISES_DIR,
+            stdio: 'pipe',
+            timeout: 30000,
+        });
+        return { ok: true, asmFile, errors: '' };
+    } catch (err) {
+        const stderr = err.stderr?.toString() || '';
+        return { ok: false, asmFile: '', errors: stderr || err.message || '编译器未找到' };
+    }
+}
+
+// Strip assembler directives, keep only labels + instructions + comments
+function cleanAsmLine(line) {
+    const t = line.trim();
+    if (!t) return null;
+    // Keep code labels (.L5, .LBB0_1:) but not DWARF/section markers
+    if (/^\.L[a-zA-Z0-9_]*:/.test(t)) {
+        // Skip DWARF markers, section markers, LSDA, exception labels
+        if (/^\.L(FB|FE|C[0-9]|HOTB|COLDB|EH|LSDA|FSB|FS)/.test(t)) return null;
+        return t;
+    }
+    // Keep comments
+    if (t.startsWith('#') || t.startsWith(';')) return t;
+    // Skip all other directives (lines starting with .)
+    if (t.startsWith('.')) return null;
+    return t;
+}
+
+// Detect function label in assembly (mangled name)
+// Excludes local labels (.LBB, .LFB, .LFE, etc.)
+function isFuncLabel(line) {
+    const t = line.trim();
+    return /^[a-zA-Z_$][a-zA-Z0-9_.$]*:/.test(t) && !t.startsWith('.L');
+}
+
+// Extract function bodies from cleaned assembly lines
+function extractFunctions(asmLines) {
+    const funcs = [];
+    let current = null;
+
+    for (const line of asmLines) {
+        if (isFuncLabel(line)) {
+            if (current) funcs.push(current);
+            const name = line.trim().replace(/:$/, '');
+            current = { name, lines: [] };
+        } else if (current) {
+            current.lines.push(line);
+        }
+    }
+    if (current) funcs.push(current);
+    return funcs;
+}
+
+// Extract user-defined function names from C++ source
+// Returns array of { name, returnType, line }
+function extractUserFunctions(sourcePath) {
+    const src = readFileSync(sourcePath, 'utf-8').split('\n');
+    const funcs = [];
+    let braceDepth = 0;
+    let inTest = false;
+
+    for (let i = 0; i < src.length; i++) {
+        const line = src[i];
+        // Skip preprocessor, comments, includes
+        if (/^\s*(#|\/\/)/.test(line)) continue;
+
+        // Track TEST blocks to skip
+        if (/^\s*TEST\s*\(/.test(line)) { inTest = true; }
+
+        // Track brace depth
+        for (const ch of line) {
+            if (ch === '{') braceDepth++;
+            if (ch === '}') {
+                braceDepth--;
+                if (braceDepth <= 0 && inTest) { inTest = false; braceDepth = 0; }
+            }
+        }
+
+        if (inTest) continue;
+
+        // Match function definitions: return_type function_name(params) {
+        // Also handle: inline, static, template, constexpr, etc.
+        const fnMatch = line.match(
+            /^(?:\s*(?:inline|static|constexpr|virtual|explicit|friend|template\s*<[^>]*>|__attribute__\s*\(\([^)]*\)\)|\[\[gnu::[^\]]*\]\])\s+)*[\w:~*&<>, ]+?\s+(\*?[\w~]+)\s*\([^;]*$/);
+        if (fnMatch) {
+            const name = fnMatch[1].replace(/^[*&]+/, '');
+            // Skip main, CPPLINGS_MAIN, namespace, class, struct
+            if (['main', 'CPPLINGS_MAIN', 'namespace', 'class', 'struct'].some(
+                k => line.includes(k + ' ') || line.includes(k + '{'))) continue;
+            funcs.push({ name, line: i + 1 });
+        }
+    }
+    return funcs;
+}
+
+// Batch demangle C++ symbols using c++filt
+function demangleAll(names) {
+    if (names.length === 0) return {};
+    try {
+        const result = execFileSync('c++filt', names, {
+            stdio: 'pipe', timeout: 5000,
+        }).toString().trim().split('\n');
+        const map = {};
+        for (let i = 0; i < names.length; i++) {
+            map[names[i]] = result[i] || names[i];
+        }
+        return map;
+    } catch {
+        // c++filt not available — return identity map
+        const map = {};
+        for (const n of names) map[n] = n;
+        return map;
     }
 }
 
@@ -353,8 +499,188 @@ function cmdHint(id) {
     console.log(clr(`  💡 ${ex.title}`, C.bold, C.yellow));
     console.log();
     console.log(`  ${ex.hint}`);
-    console.log();
     console.log(clr(`  文件: ${ex.file}`, C.dim));
+    console.log();
+}
+
+function cmdAsm(id, flags = {}) {
+    if (!id) {
+        console.error(clr('\n  用法: cpplings asm <id> [--opt=LEVEL] [--all]', C.red));
+        console.error(clr('  LEVEL: O0, O1, O2 (默认), O3, Os, Oz', C.dim));
+        console.error(clr('  --all: 显示所有函数（默认只显示用户定义的函数）', C.dim));
+        console.error(clr('\n  示例:', C.dim));
+        console.error(clr('    cpplings asm format1', C.dim));
+        console.error(clr('    cpplings asm branchless1 --opt=O3', C.dim));
+        console.error(clr('    cpplings asm format1 --all', C.dim));
+        console.error();
+        process.exit(1);
+    }
+
+    const ex = findEx(id);
+    if (!ex) {
+        console.error(clr(`\n  ✗ 未找到练习: ${id}\n`, C.red));
+        process.exit(1);
+    }
+
+    // Use solution file if available, otherwise exercise file
+    const solPath = ex.solution ? join(EXERCISES_DIR, ex.solution) : null;
+    const filePath = (solPath && existsSync(solPath))
+        ? solPath
+        : join(EXERCISES_DIR, ex.file);
+
+    if (!existsSync(filePath)) {
+        console.error(clr(`\n  ✗ 文件不存在: ${filePath}\n`, C.red));
+        process.exit(1);
+    }
+
+    const optLevel = flags.opt ? `-${flags.opt.replace(/^-/, '')}` : '-O2';
+    console.log();
+    console.log(clr(`  ─── ${ex.id}: ${ex.title} ───`, C.bold));
+    console.log(clr(`  优化级别: ${optLevel}  语法: Intel`, C.dim));
+    console.log();
+
+    // Compile to assembly
+    const comp = compileAsm(filePath, ex, { optLevel });
+    if (!comp.ok) {
+        console.log(clr('  ✗ 编译失败', C.red, C.bold));
+        console.log();
+        console.log(fmtErrors(comp.errors));
+        console.log();
+        return;
+    }
+
+    // Read and parse assembly
+    const asmText = readFileSync(comp.asmFile, 'utf-8');
+    const rawLines = asmText.split('\n');
+
+    // Clean lines and extract function blocks
+    const cleanedLines = [];
+    const globlMap = new Map(); // mangled name → true if .globl
+    let pendingGlobl = null;
+
+    for (const line of rawLines) {
+        const t = line.trim();
+        // Track .globl declarations
+        if (t.startsWith('.globl ')) {
+            pendingGlobl = t.replace('.globl ', '').trim();
+            continue;
+        }
+
+        const cleaned = cleanAsmLine(line);
+        if (cleaned !== null) {
+            // Check if this is a function label that had a preceding .globl
+            if (isFuncLabel(cleaned) && pendingGlobl) {
+                const labelName = cleaned.replace(/:$/, '');
+                if (labelName === pendingGlobl) {
+                    globlMap.set(labelName, true);
+                }
+                pendingGlobl = null;
+            } else {
+                pendingGlobl = null;
+            }
+            cleanedLines.push(cleaned);
+        }
+    }
+
+    const funcs = extractFunctions(cleanedLines);
+
+    if (funcs.length === 0) {
+        console.log(clr('  ✗ 未找到函数体', C.red));
+        console.log(clr('  提示: 文件可能只包含内联/模板代码', C.dim));
+        console.log();
+        return;
+    }
+
+    // Demangle all function names
+    const mangledNames = funcs.map(f => f.name);
+    const demangledMap = demangleAll(mangledNames);
+
+    // Extract user function names from source
+    const userFuncs = extractUserFunctions(filePath);
+    const userFuncNames = new Set(userFuncs.map(f => f.name));
+    // Pre-filter: exclude static init, cold-path, RTTI, and empty functions
+    const filteredFuncs = funcs.filter(f => {
+        if (f.name.startsWith('_GLOBAL__') || f.name.startsWith('__static_initialization')) return false;
+        if (f.name.endsWith('.cold')) return false;
+        if (f.lines.length === 0) return false;
+        // Skip RTTI symbols (typeinfo, vtable, guard variables)
+        const d = demangledMap[f.name] || f.name;
+        if (/^(typeinfo|vtable|guard variable|VTT for)/.test(d)) return false;
+        return true;
+    });
+
+    let importantFuncs;
+
+    if (flags.all) {
+        // --all: show all functions
+        importantFuncs = filteredFuncs;
+    } else {
+        // Filter: show only user-defined functions (matching by demangled name)
+        importantFuncs = filteredFuncs.filter(f => {
+            const demangled = demangledMap[f.name] || f.name;
+            for (const ufn of userFuncNames) {
+                if (demangled.includes(ufn)) return true;
+            }
+            return false;
+        });
+
+        // If no user functions matched, show all exported (globl) functions
+        if (importantFuncs.length === 0 && userFuncNames.size > 0) {
+            importantFuncs = filteredFuncs.filter(f => globlMap.has(f.name));
+        }
+
+        // Still nothing? Show all non-internal functions
+        if (importantFuncs.length === 0) {
+            importantFuncs = filteredFuncs.filter(f => !f.name.startsWith('.'));
+        }
+    }
+
+    // Display
+    if (importantFuncs.length === 0) {
+        console.log(clr('  ✗ 优化后无可见函数（可能全部被内联消除）', C.yellow));
+        console.log();
+        return;
+    }
+
+    for (const func of importantFuncs) {
+        const demangled = demangledMap[func.name] || func.name;
+        const isExported = globlMap.has(func.name);
+
+        // Function header
+        console.log(clr(`  ┌─ ${demangled}`, C.bold, C.cyan)
+            + (isExported ? '' : clr(' [local]', C.dim)));
+        if (demangled !== func.name) {
+            console.log(clr(`  │  ${func.name}`, C.dim));
+        }
+        console.log(clr('  │', C.dim));
+
+        // Instructions
+        for (const line of func.lines) {
+            const stripped = line.trim();
+
+            // Highlight: labels in yellow, comments in dim, instructions normal
+            let colored;
+            if (stripped.startsWith('.')) {
+                // Local label (.LBB0_1:)
+                colored = clr(`  │  ${line}`, C.yellow);
+            } else if (stripped.startsWith('#') || stripped.startsWith(';')) {
+                // Comment
+                colored = clr(`  │  ${line}`, C.dim);
+            } else if (/^\s*(ret|jmp|je|jne|jg|jl|jge|jle|ja|jb|jae|jbe|call|loop)/.test(stripped)) {
+                // Branch/call/ret in magenta
+                colored = clr(`  │  ${line}`, C.magenta);
+            } else {
+                colored = `  │  ${line}`;
+            }
+            console.log(colored);
+        }
+
+        console.log(clr('  └─', C.dim));
+        console.log();
+    }
+
+    console.log(clr(`  ${importantFuncs.length} 个函数`, C.dim)
+        + clr(`  (${funcs.length} 总计, ${optLevel})`, C.dim));
     console.log();
 }
 
@@ -753,6 +1079,8 @@ function parseArgs(args) {
         else if (a === '--verbose') { flags.verbose = true; }
         else if (a === '--compiler' && i + 1 < args.length) { flags.compiler = args[++i]; }
         else if (a === '--std' && i + 1 < args.length) { flags.std = args[++i]; }
+        else if (a.startsWith('--opt=') && a.length > 6) { flags.opt = a.slice(6); }
+        else if (a.startsWith('--opt') && i + 1 < args.length) { flags.opt = args[++i]; }
         else if (!a.startsWith('-')) { positional.push(a); }
     }
     return { flags, positional };
@@ -782,5 +1110,6 @@ switch (cmd) {
     case 'next':   case 'n':  cmdNext(); break;
     case 'reset':             cmdReset(arg); break;
     case 'matrix': case 'm': cmdMatrix(flags); break;
+    case 'asm':    case 'a': cmdAsm(arg, flags); break;
     default:                  cmdWelcome(); break;
 }
