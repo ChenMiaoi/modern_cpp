@@ -8,6 +8,8 @@ Modern C++ 知识库，覆盖 C++98 到 C++29 的标准演进、专题文章、�
 
 - macOS 14+
 - Xcode Command Line Tools
+- Homebrew
+- Homebrew LLVM / Clang
 - Node.js 22 LTS（CI 使用 Node 22；GitHub Pages 部署工作流使用 Node 20）
 - npm 10+
 
@@ -15,6 +17,20 @@ Modern C++ 知识库，覆盖 C++98 到 C++29 的标准演进、专题文章、�
 
 ```bash
 xcode-select --install
+```
+
+安装 Homebrew LLVM 工具链：
+
+```bash
+brew install llvm
+```
+
+Homebrew LLVM 默认不会覆盖系统 `/usr/bin/clang`。在当前 shell 中优先使用 Homebrew 工具链：
+
+```bash
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export CC=/opt/homebrew/opt/llvm/bin/clang
+export CXX=/opt/homebrew/opt/llvm/bin/clang++
 ```
 
 安装 Node.js（二选一）：
@@ -31,9 +47,11 @@ nvm use 22
 确认工具链：
 
 ```bash
+/opt/homebrew/opt/llvm/bin/clang --version
+/opt/homebrew/opt/llvm/bin/clang++ --version
+/opt/homebrew/opt/llvm/bin/llvm-config --version
 node -v
 npm -v
-c++ --version
 ```
 
 ## 安装依赖
@@ -84,13 +102,15 @@ http://127.0.0.1:4173/modern_cpp/
 
 ## 练习验证
 
-验证所有 solution 文件：
+验证所有 solution 文件，并显式使用 Homebrew clang++：
 
 ```bash
-node exercises/cpplings.mjs verify --solutions --ci
+env PATH="/opt/homebrew/opt/llvm/bin:$PATH" \
+  node exercises/cpplings.mjs verify --solutions --ci \
+  --compiler /opt/homebrew/opt/llvm/bin/clang++
 ```
 
-说明：CI 在 Ubuntu + GCC 上验证练习。macOS 的 Apple clang / libc++ 对部分较新的 C++23 库特性支持可能不同，例如 `std::mdspan` 的访问 API；如果本地练习验证失败，优先用 CI 的 Ubuntu + GCC 结果作为发布门禁。
+说明：CI 在 Ubuntu + GCC 上验证练习。macOS 的 Homebrew LLVM 仍使用 libc++，对部分较新的 C++23 库特性支持可能不同，例如 `std::mdspan` 的访问 API；如果本地练习验证失败，优先用 CI 的 Ubuntu + GCC 结果作为发布门禁。
 
 ## 文档检查
 
@@ -143,11 +163,11 @@ docs/.vitepress/dist
 ## 常用命令
 
 ```bash
-npm ci                                      # 安装锁定依赖
-npm run dev                                 # 本地开发
-npm run build                               # 生产构建
-npm run preview -- --host 127.0.0.1         # 预览构建产物
-node exercises/cpplings.mjs verify --solutions --ci
+npm ci
+env PATH="/opt/homebrew/opt/llvm/bin:$PATH" CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ npm run dev
+env PATH="/opt/homebrew/opt/llvm/bin:$PATH" CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ npm run build
+npm run preview -- --host 127.0.0.1
+env PATH="/opt/homebrew/opt/llvm/bin:$PATH" node exercises/cpplings.mjs verify --solutions --ci --compiler /opt/homebrew/opt/llvm/bin/clang++
 python3 scripts/check_frontmatter.py
 python3 scripts/check_knowledge_map_coverage.py
 ```
