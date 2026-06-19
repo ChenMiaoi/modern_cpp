@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { useData } from 'vitepress'
 
-const { lang } = useData()
-const isZh = computed(() => lang.value.startsWith('zh'))
+function isZh(): boolean {
+  return typeof document === 'undefined' || document.documentElement.lang.startsWith('zh')
+}
 
 const i18n = {
   btnRun:     { zh: '在 Compiler Explorer 中运行', en: 'Run in Compiler Explorer' },
@@ -18,7 +18,7 @@ const i18n = {
 } as const
 
 function t(key: keyof typeof i18n): string {
-  return isZh.value ? i18n[key].zh : i18n[key].en
+  return isZh() ? i18n[key].zh : i18n[key].en
 }
 
 const props = defineProps<{ code?: string }>()

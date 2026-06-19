@@ -28,14 +28,22 @@ if (typeof window !== 'undefined') {
     })
   }
 
-  mountAll(document)
+  function installCompilerExplorerMounts() {
+    mountAll(document)
 
-  const observer = new MutationObserver((mutations) => {
-    for (const m of mutations) {
-      for (const node of m.addedNodes) {
-        if (node instanceof HTMLElement) mountAll(node)
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const node of m.addedNodes) {
+          if (node instanceof HTMLElement) mountAll(node)
+        }
       }
-    }
-  })
-  observer.observe(document.body, { childList: true, subtree: true })
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', installCompilerExplorerMounts, { once: true })
+  } else {
+    installCompilerExplorerMounts()
+  }
 }
