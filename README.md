@@ -1,173 +1,172 @@
 # Modern C++ Knowledge Base
 
-Modern C++ 知识库，覆盖 C++98 到 C++29 的标准演进、专题文章、库实现参考和可编译练习。站点使用 VitePress 构建，练习由 `exercises/cpplings.mjs` 管理。
+[![cpplings](https://github.com/ChenMiaoi/modern_cpp/actions/workflows/cpplings.yml/badge.svg)](https://github.com/ChenMiaoi/modern_cpp/actions/workflows/cpplings.yml)
+[![Deploy to GitHub Pages](https://github.com/ChenMiaoi/modern_cpp/actions/workflows/deploy.yml/badge.svg)](https://github.com/ChenMiaoi/modern_cpp/actions/workflows/deploy.yml)
 
-## macOS 环境准备
+Modern C++ Knowledge Base is a bilingual C++ learning and reference project covering language evolution from C++98 through C++29, implementation notes, library internals, and runnable exercises.
 
-推荐环境：
+The documentation site is built with VitePress. Exercises are managed by `exercises/cpplings.mjs` and are verified in CI on Linux/GCC and macOS/Homebrew LLVM.
 
-- macOS 14+
-- Xcode Command Line Tools
-- Homebrew
-- Homebrew LLVM / Clang
-- Node.js 22 LTS（CI 使用 Node 22；GitHub Pages 部署工作流使用 Node 20）
+## Contents
+
+- Versioned C++ standard notes from C++98 to C++29.
+- Deep dives on object model, templates, overload resolution, memory model, optimization, ABI, and standard library behavior.
+- Implementation references for major C++ libraries and toolchains.
+- Compile-and-run exercises with checked solutions.
+- GitHub Pages deployment configuration.
+
+## Requirements
+
+### Documentation site
+
+- Node.js 22 LTS
 - npm 10+
 
-安装基础工具：
+### Exercise verification
 
-```bash
-xcode-select --install
-```
+Linux CI uses GCC on Ubuntu 24.04.
 
-安装 Homebrew LLVM 工具链：
+macOS development and CI use Homebrew LLVM:
 
 ```bash
 brew install llvm
 ```
 
-Homebrew LLVM 默认不会覆盖系统 `/usr/bin/clang`。在当前 shell 中优先使用 Homebrew 工具链：
+On Apple Silicon, Homebrew installs LLVM under `/opt/homebrew/opt/llvm`. On Intel macOS, use `brew --prefix llvm` instead of hard-coding the prefix.
 
-```bash
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export CC=/opt/homebrew/opt/llvm/bin/clang
-export CXX=/opt/homebrew/opt/llvm/bin/clang++
-```
-
-安装 Node.js（二选一）：
-
-```bash
-# Homebrew
-brew install node@22
-
-# 或使用 nvm
-nvm install 22
-nvm use 22
-```
-
-确认工具链：
-
-```bash
-/opt/homebrew/opt/llvm/bin/clang --version
-/opt/homebrew/opt/llvm/bin/clang++ --version
-/opt/homebrew/opt/llvm/bin/llvm-config --version
-node -v
-npm -v
-```
-
-## 安装依赖
+## Quick start
 
 ```bash
 npm ci
-```
-
-## 本地开发
-
-启动 VitePress 开发服务器：
-
-```bash
 npm run dev
 ```
 
-默认访问地址通常为：
+Open the VitePress site at the URL printed by the dev server. For this repository, the configured base path is `/modern_cpp/`.
 
-```text
-http://localhost:5173/modern_cpp/
-```
-
-## 构建
-
-生成静态站点：
+## Build
 
 ```bash
 npm run build
 ```
 
-构建产物目录：
+The static site is emitted to:
 
 ```text
 docs/.vitepress/dist
 ```
 
-本地预览构建产物：
+Preview the production build locally:
 
 ```bash
 npm run preview -- --host 127.0.0.1
 ```
 
-访问：
+## Exercises
 
-```text
-http://127.0.0.1:4173/modern_cpp/
-```
-
-## 练习验证
-
-验证所有 solution 文件，并显式使用 Homebrew clang++：
+Verify all checked solutions with the default compiler available on `PATH`:
 
 ```bash
-env PATH="/opt/homebrew/opt/llvm/bin:$PATH" \
-  node exercises/cpplings.mjs verify --solutions --ci \
-  --compiler /opt/homebrew/opt/llvm/bin/clang++
+node exercises/cpplings.mjs verify --solutions --ci
 ```
 
-说明：CI 在 Ubuntu + GCC 上验证练习；macOS 本地验证使用 Homebrew LLVM + libc++。`std::mdspan` 在不同标准库实现间存在 `operator()` 与多参数 `operator[]` 的访问形式差异，本仓库的 mdspan 练习已通过 `mdspan_at` 适配两种实现。
+Verify with Homebrew LLVM on macOS:
 
-## 文档检查
+```bash
+LLVM_PREFIX="$(brew --prefix llvm)"
+env PATH="$LLVM_PREFIX/bin:$PATH" \
+  node exercises/cpplings.mjs verify --solutions --ci \
+  --compiler "$LLVM_PREFIX/bin/clang++"
+```
 
-检查 frontmatter：
+`std::mdspan` has an implementation-facing compatibility difference across standard libraries: some expose element access through `operator()`, while libc++ uses the C++23 multidimensional `operator[]` form. The mdspan exercise uses `mdspan_at` so the same solution works on GCC/libstdc++ and Homebrew LLVM/libc++.
+
+## Quality checks
+
+Run the documentation build:
+
+```bash
+npm run build
+```
+
+Check Markdown frontmatter:
 
 ```bash
 python3 scripts/check_frontmatter.py
 ```
 
-检查知识图谱覆盖率：
+Check knowledge map coverage:
 
 ```bash
 python3 scripts/check_knowledge_map_coverage.py
 ```
 
-## 部署
+The coverage check is intentionally stricter than the current corpus coverage. Treat failures as a content coverage signal, not as a site build failure.
 
-本仓库通过 GitHub Pages 自动部署。
+## Continuous integration
 
-工作流文件：
+The main CI workflow is `.github/workflows/cpplings.yml`.
 
-```text
-.github/workflows/deploy.yml
-```
+It runs on pull requests and pushes to `main`:
 
-触发方式：
+- Documentation build on Ubuntu with Node.js 22.
+- Exercise verification on Ubuntu 24.04 with GCC.
+- Exercise verification on macOS with Homebrew LLVM/clang++.
 
-- push 到 `main`
-- 在 GitHub Actions 页面手动触发 `Deploy to GitHub Pages`
+## Deployment
 
-部署流程：
+GitHub Pages deployment is defined in `.github/workflows/deploy.yml`.
+
+Deployment is triggered by:
+
+- Pushes to `main`.
+- Manual `workflow_dispatch` from GitHub Actions.
+
+The deployment workflow runs:
 
 ```bash
 npm ci
 npm run build
 ```
 
-GitHub Actions 上传的 Pages artifact 路径：
+and uploads:
 
 ```text
 docs/.vitepress/dist
 ```
 
-站点配置中的 base path 为：
+The production site base path is configured in `docs/.vitepress/config.ts` as:
 
 ```text
 /modern_cpp/
 ```
 
-## 常用命令
+## Repository layout
 
-```bash
-npm ci
-env PATH="/opt/homebrew/opt/llvm/bin:$PATH" CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ npm run dev
-env PATH="/opt/homebrew/opt/llvm/bin:$PATH" CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ npm run build
-npm run preview -- --host 127.0.0.1
-env PATH="/opt/homebrew/opt/llvm/bin:$PATH" node exercises/cpplings.mjs verify --solutions --ci --compiler /opt/homebrew/opt/llvm/bin/clang++
-python3 scripts/check_frontmatter.py
-python3 scripts/check_knowledge_map_coverage.py
+```text
+docs/                 VitePress documentation source
+exercises/            cpplings exercises, solutions, and runner
+examples/             standalone C++ examples
+benchmarks/           performance benchmark sources
+references/           local reference material and implementation notes
+scripts/              repository validation scripts
+.github/workflows/    CI and GitHub Pages deployment
 ```
+
+## Contributing
+
+For content changes:
+
+1. Update the relevant Markdown files under `docs/`.
+2. Run `npm run build`.
+3. Run `python3 scripts/check_frontmatter.py`.
+4. If the change affects knowledge map coverage, update `knowledge-map.yml` and run `python3 scripts/check_knowledge_map_coverage.py`.
+
+For exercise changes:
+
+1. Update the exercise and matching solution.
+2. Verify the solution with `node exercises/cpplings.mjs verify --solutions --ci`.
+3. On macOS, also verify with Homebrew LLVM as shown above.
+
+## License
+
+No license file is currently present in this repository. Add one before distributing the project as open-source software.

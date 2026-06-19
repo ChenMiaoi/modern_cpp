@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - run: npm ci
       - run: npm run build
 
@@ -25,6 +26,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - name: Install g++
         run: |
           sudo apt-get update
@@ -32,3 +34,20 @@ jobs:
       - run: npm ci
       - name: Verify all solutions
         run: node exercises/cpplings.mjs verify --solutions --ci
+
+  exercises-macos-llvm:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install Homebrew LLVM
+        run: brew install llvm
+      - run: npm ci
+      - name: Verify all solutions with Homebrew clang++
+        run: |
+          LLVM_PREFIX="$(brew --prefix llvm)"
+          echo "$LLVM_PREFIX/bin" >> "$GITHUB_PATH"
+          node exercises/cpplings.mjs verify --solutions --ci --compiler "$LLVM_PREFIX/bin/clang++"
