@@ -69,16 +69,25 @@ TEST("CAS 无锁栈 — push/pop 基本操作") {
 TEST("CAS 无锁栈 — 多线程") {
     LockFreeStack<int> stack;
     constexpr int N = 10000;
+    std::atomic<bool> producer_done{false};
+    int count = 0;
 
     std::thread producer([&]() {
         for (int i = 0; i < N; ++i) {
             stack.push(i);
         }
+        producer_done.store(true, std::memory_order_release);
     });
 
-    int count = 0;
     std::thread consumer([&]() {
         int val;
+        while (!producer_done.load(std::memory_order_acquire)) {
+            if (stack.pop(val)) {
+                ++count;
+            } else {
+                std::this_thread::yield();
+            }
+        }
         while (stack.pop(val)) {
             ++count;
         }
@@ -86,8 +95,7 @@ TEST("CAS 无锁栈 — 多线程") {
 
     producer.join();
     consumer.join();
-    // count 可能小于 N，因为 consumer 可能先跑完
-    ASSERT_TRUE(count > 0);
+    ASSERT_EQ(count, N);
 }
 
 CPPLINGS_MAIN
