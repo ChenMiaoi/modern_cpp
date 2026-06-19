@@ -110,7 +110,7 @@ env PATH="/opt/homebrew/opt/llvm/bin:$PATH" \
   --compiler /opt/homebrew/opt/llvm/bin/clang++
 ```
 
-说明：CI 在 Ubuntu + GCC 上验证练习。macOS 的 Homebrew LLVM 仍使用 libc++，对部分较新的 C++23 库特性支持可能不同，例如 `std::mdspan` 的访问 API；如果本地练习验证失败，优先用 CI 的 Ubuntu + GCC 结果作为发布门禁。
+说明：CI 在 Ubuntu + GCC 上验证练习；macOS 本地验证使用 Homebrew LLVM + libc++。`std::mdspan` 在不同标准库实现间存在 `operator()` 与多参数 `operator[]` 的访问形式差异，本仓库的 mdspan 练习已通过 `mdspan_at` 适配两种实现。
 
 ## 文档检查
 

@@ -10,14 +10,24 @@
 #if defined(__cpp_lib_mdspan) && __cpp_lib_mdspan >= 202207L
 #include <array>
 #include <cstddef>
+#include <utility>
+
+template <class M, class... Index>
+decltype(auto) mdspan_at(M&& m, Index... index) {
+    if constexpr (requires { std::forward<M>(m)(index...); }) {
+        return std::forward<M>(m)(index...);
+    } else {
+        return std::forward<M>(m)[index...];
+    }
+}
 
 TEST("mdspan — 二维元素访问 (row-major)") {
     std::array<int, 12> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     std::mdspan m(data.data(), 4, 3);
-    ASSERT_EQ(m(0, 0), 1);
-    ASSERT_EQ(m(0, 2), 3);
-    ASSERT_EQ(m(1, 0), 4);
-    ASSERT_EQ(m(3, 2), 12);
+    ASSERT_EQ(mdspan_at(m, 0, 0), 1);
+    ASSERT_EQ(mdspan_at(m, 0, 2), 3);
+    ASSERT_EQ(mdspan_at(m, 1, 0), 4);
+    ASSERT_EQ(mdspan_at(m, 3, 2), 12);
 }
 
 TEST("mdspan — extent 查询") {
@@ -32,17 +42,17 @@ TEST("mdspan — 静态 extent") {
     std::array<int, 6> data = {1, 2, 3, 4, 5, 6};
     std::mdspan<int, std::extents<size_t, 2, 3>> m(data.data());
     ASSERT_EQ(m.extent(0), 2u);
-    ASSERT_EQ(m(1, 2), 6);
+    ASSERT_EQ(mdspan_at(m, 1, 2), 6);
 }
 
 TEST("mdspan — 行遍历 (通过指针算术)") {
     std::array<int, 12> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     std::mdspan m(data.data(), 4, 3);
     // Row 1: elements [4, 5, 6]
-    std::mdspan row1(&m(1, 0), 3);
-    ASSERT_EQ(row1(0), 4);
-    ASSERT_EQ(row1(1), 5);
-    ASSERT_EQ(row1(2), 6);
+    std::mdspan row1(&mdspan_at(m, 1, 0), 3);
+    ASSERT_EQ(mdspan_at(row1, 0), 4);
+    ASSERT_EQ(mdspan_at(row1, 1), 5);
+    ASSERT_EQ(mdspan_at(row1, 2), 6);
 }
 
 TEST("mdspan — 列遍历 (layout_stride)") {
@@ -51,18 +61,19 @@ TEST("mdspan — 列遍历 (layout_stride)") {
     // Column 1: elements [2, 5, 8, 11]
     std::extents<size_t, std::dynamic_extent> col_ext(4);
     std::array<size_t, 1> strides = {3};
+    std::layout_stride::mapping<decltype(col_ext)> col_map(col_ext, strides);
     std::mdspan<int, decltype(col_ext), std::layout_stride> col(
-        &m(0, 1), col_ext, strides);
-    ASSERT_EQ(col(0), 2);
-    ASSERT_EQ(col(1), 5);
-    ASSERT_EQ(col(2), 8);
-    ASSERT_EQ(col(3), 11);
+        &mdspan_at(m, 0, 1), col_map);
+    ASSERT_EQ(mdspan_at(col, 0), 2);
+    ASSERT_EQ(mdspan_at(col, 1), 5);
+    ASSERT_EQ(mdspan_at(col, 2), 8);
+    ASSERT_EQ(mdspan_at(col, 3), 11);
 }
 
 TEST("mdspan — 通过 mdspan 修改数据") {
     std::array<int, 6> data = {1, 2, 3, 4, 5, 6};
     std::mdspan m(data.data(), 2, 3);
-    m(1, 1) = 99;
+    mdspan_at(m, 1, 1) = 99;
     ASSERT_EQ(data[4], 99);  // row 1, col 1 → flat index 4
 }
 
