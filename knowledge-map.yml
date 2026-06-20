@@ -1873,3 +1873,439 @@ cpp98:
       - "docs/topics/compiler-optimizations/sanitizer-vs-optimization.md"
     exercises: []
     solutions: []
+
+# ==================== C++ 内部原理 ====================
+internals:
+  runtime_object_model:
+    title: "对象模型与内存布局"
+    docs:
+      - "docs/internals/runtime/object-model.md"
+    exercises: []
+    solutions: []
+
+  runtime_vtable:
+    title: "虚函数表实现"
+    docs:
+      - "docs/internals/runtime/vtable.md"
+    exercises: []
+    solutions: []
+
+  runtime_rtti:
+    title: "RTTI 与 dynamic_cast"
+    docs:
+      - "docs/internals/runtime/rtti.md"
+    exercises: []
+    solutions: []
+
+  runtime_exception:
+    title: "异常处理 ABI"
+    docs:
+      - "docs/internals/runtime/exception-handling.md"
+    exercises: []
+    solutions: []
+
+  runtime_name_mangling:
+    title: "名称修饰"
+    docs:
+      - "docs/internals/runtime/name-mangling.md"
+    exercises: []
+    solutions: []
+
+  runtime_calling_conventions:
+    title: "调用约定"
+    docs:
+      - "docs/internals/runtime/calling-conventions.md"
+    exercises: []
+    solutions: []
+
+  container_vector:
+    title: "std::vector 实现"
+    docs:
+      - "docs/internals/containers/vector.md"
+    exercises: []
+    solutions: []
+
+  container_string:
+    title: "std::string 实现"
+    docs:
+      - "docs/internals/containers/string.md"
+    exercises: []
+    solutions: []
+
+  container_list:
+    title: "std::list 实现"
+    docs:
+      - "docs/internals/containers/list.md"
+    exercises: []
+    solutions: []
+
+  container_forward_list:
+    title: "std::forward_list 实现"
+    docs:
+      - "docs/internals/containers/forward-list.md"
+    exercises: []
+    solutions: []
+
+  container_deque:
+    title: "std::deque 实现"
+    docs:
+      - "docs/internals/containers/deque.md"
+    exercises: []
+    solutions: []
+
+  container_map_set:
+    title: "std::map/set 实现"
+    docs:
+      - "docs/internals/containers/map-set.md"
+    exercises: []
+    solutions: []
+
+  container_unordered_map:
+    title: "std::unordered_map 实现"
+    docs:
+      - "docs/internals/containers/unordered-map.md"
+    exercises: []
+    solutions: []
+
+  container_array:
+    title: "std::array 实现"
+    docs:
+      - "docs/internals/containers/array.md"
+    exercises: []
+    solutions: []
+
+  container_stack_queue:
+    title: "std::stack/queue 适配器"
+    docs:
+      - "docs/internals/containers/stack-queue.md"
+    exercises: []
+    solutions: []
+
+  container_flat_map:
+    title: "std::flat_map 实现"
+    docs:
+      - "docs/internals/containers/flat-map.md"
+    exercises: []
+    solutions: []
+
+  container_inplace_vector:
+    title: "std::inplace_vector 实现"
+    docs:
+      - "docs/internals/containers/inplace-vector.md"
+    exercises: []
+    solutions: []
+
+  memory_unique_ptr:
+    title: "std::unique_ptr 实现"
+    docs:
+      - "docs/internals/memory/unique-ptr.md"
+    exercises: []
+    solutions: []
+
+  memory_shared_ptr:
+    title: "std::shared_ptr 实现"
+    docs:
+      - "docs/internals/memory/shared-ptr.md"
+    exercises: []
+    solutions: []
+
+  memory_weak_ptr:
+    title: "std::weak_ptr 实现"
+    docs:
+      - "docs/internals/memory/weak-ptr.md"
+    exercises: []
+    solutions: []
+
+  memory_allocator:
+    title: "分配器模型"
+    docs:
+      - "docs/internals/memory/allocator.md"
+    exercises: []
+    solutions: []
+
+  memory_pmr:
+    title: "PMR 多态内存资源"
+    docs:
+      - "docs/internals/memory/pmr.md"
+    exercises: []
+    solutions: []
+
+  memory_ext_allocators:
+    title: "GNU 扩展分配器"
+    docs:
+      - "docs/internals/memory/ext-allocators.md"
+    exercises: []
+    solutions: []
+
+  memory_operations:
+    title: "内存操作基础设施"
+    docs:
+      - "docs/internals/memory/operations.md"
+    exercises: []
+    solutions: []
+
+  utility_function:
+    title: "std::function 实现"
+    docs:
+      - "docs/internals/utilities/function.md"
+    exercises: []
+    solutions: []
+
+  utility_any:
+    title: "std::any 实现"
+    docs:
+      - "docs/internals/utilities/any.md"
+    exercises: []
+    solutions: []
+
+  utility_variant:
+    title: "std::variant 实现"
+    docs:
+      - "docs/internals/utilities/variant.md"
+    exercises: []
+    solutions: []
+
+  utility_optional:
+    title: "std::optional 实现"
+    docs:
+      - "docs/internals/utilities/optional.md"
+    exercises: []
+    solutions: []
+
+  utility_tuple:
+    title: "std::tuple 实现"
+    docs:
+      - "docs/internals/utilities/tuple.md"
+    exercises: []
+    solutions: []
+
+  utility_pair:
+    title: "std::pair 实现"
+    docs:
+      - "docs/internals/utilities/pair.md"
+    exercises: []
+    solutions: []
+
+  utility_bitset:
+    title: "std::bitset 实现"
+    docs:
+      - "docs/internals/utilities/bitset.md"
+    exercises: []
+    solutions: []
+
+  template_type_traits:
+    title: "Type Traits 实现"
+    docs:
+      - "docs/internals/templates/type-traits.md"
+    exercises: []
+    solutions: []
+
+  template_sfinae:
+    title: "SFINAE 与 enable_if"
+    docs:
+      - "docs/internals/templates/sfinae.md"
+    exercises: []
+    solutions: []
+
+  template_concepts:
+    title: "Concepts 实现"
+    docs:
+      - "docs/internals/templates/concepts.md"
+    exercises: []
+    solutions: []
+
+  template_constexpr:
+    title: "constexpr 求值引擎"
+    docs:
+      - "docs/internals/templates/constexpr.md"
+    exercises: []
+    solutions: []
+
+  template_instantiation:
+    title: "模板实例化机制"
+    docs:
+      - "docs/internals/templates/instantiation.md"
+    exercises: []
+    solutions: []
+
+  algorithm_iterators:
+    title: "迭代器体系"
+    docs:
+      - "docs/internals/algorithms/iterators.md"
+    exercises: []
+    solutions: []
+
+  algorithm_sorting:
+    title: "排序算法实现"
+    docs:
+      - "docs/internals/algorithms/sorting.md"
+    exercises: []
+    solutions: []
+
+  algorithm_ranges:
+    title: "Ranges 框架"
+    docs:
+      - "docs/internals/algorithms/ranges.md"
+    exercises: []
+    solutions: []
+
+  algorithm_parallel:
+    title: "并行算法"
+    docs:
+      - "docs/internals/algorithms/parallel.md"
+    exercises: []
+    solutions: []
+
+  concurrency_atomic:
+    title: "std::atomic 实现"
+    docs:
+      - "docs/internals/concurrency/atomic.md"
+    exercises: []
+    solutions: []
+
+  concurrency_thread:
+    title: "std::thread 实现"
+    docs:
+      - "docs/internals/concurrency/thread.md"
+    exercises: []
+    solutions: []
+
+  concurrency_mutex:
+    title: "std::mutex 实现"
+    docs:
+      - "docs/internals/concurrency/mutex.md"
+    exercises: []
+    solutions: []
+
+  concurrency_condition_variable:
+    title: "std::condition_variable 实现"
+    docs:
+      - "docs/internals/concurrency/condition-variable.md"
+    exercises: []
+    solutions: []
+
+  concurrency_future:
+    title: "std::future/promise 实现"
+    docs:
+      - "docs/internals/concurrency/future.md"
+    exercises: []
+    solutions: []
+
+  concurrency_jthread:
+    title: "std::jthread 实现"
+    docs:
+      - "docs/internals/concurrency/jthread.md"
+    exercises: []
+    solutions: []
+
+  io_format:
+    title: "std::format 实现"
+    docs:
+      - "docs/internals/io/format.md"
+    exercises: []
+    solutions: []
+
+  io_print:
+    title: "std::print 实现"
+    docs:
+      - "docs/internals/io/print.md"
+    exercises: []
+    solutions: []
+
+  io_streams:
+    title: "流类体系"
+    docs:
+      - "docs/internals/io/streams.md"
+    exercises: []
+    solutions: []
+
+  cpp20_coroutines:
+    title: "协程 Lowering"
+    docs:
+      - "docs/internals/cpp20/coroutines.md"
+    exercises: []
+    solutions: []
+
+  cpp20_modules:
+    title: "Modules 实现"
+    docs:
+      - "docs/internals/cpp20/modules.md"
+    exercises: []
+    solutions: []
+
+  cpp23_expected:
+    title: "std::expected 实现"
+    docs:
+      - "docs/internals/cpp23/expected.md"
+    exercises: []
+    solutions: []
+
+  cpp23_generator:
+    title: "std::generator 实现"
+    docs:
+      - "docs/internals/cpp23/generator.md"
+    exercises: []
+    solutions: []
+
+  cpp23_mdspan:
+    title: "std::mdspan 实现"
+    docs:
+      - "docs/internals/cpp23/mdspan.md"
+    exercises: []
+    solutions: []
+
+  compiler_gcc:
+    title: "GCC 编译器内部"
+    docs:
+      - "docs/internals/compiler/gcc-internals.md"
+    exercises: []
+    solutions: []
+
+  compiler_clang:
+    title: "Clang/LLVM 编译器内部"
+    docs:
+      - "docs/internals/compiler/clang-internals.md"
+    exercises: []
+    solutions: []
+
+  compiler_devirtualization:
+    title: "去虚拟化实现"
+    docs:
+      - "docs/internals/compiler/devirtualization.md"
+    exercises: []
+    solutions: []
+
+  compiler_optimization_pipeline:
+    title: "编译器优化管线"
+    docs:
+      - "docs/internals/compiler/optimization-pipeline.md"
+    exercises: []
+    solutions: []
+
+  comparison_containers:
+    title: "容器实现对比"
+    docs:
+      - "docs/internals/comparison/containers.md"
+    exercises: []
+    solutions: []
+
+  comparison_smart_pointers:
+    title: "智能指针对比"
+    docs:
+      - "docs/internals/comparison/smart-pointers.md"
+    exercises: []
+    solutions: []
+
+  comparison_string_abi:
+    title: "字符串 ABI 对比"
+    docs:
+      - "docs/internals/comparison/string-abi.md"
+    exercises: []
+    solutions: []
+
+  comparison_concurrency:
+    title: "并发实现对比"
+    docs:
+      - "docs/internals/comparison/concurrency.md"
+    exercises: []
+    solutions: []
