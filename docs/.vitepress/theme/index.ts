@@ -1,12 +1,14 @@
 import DefaultTheme from 'vitepress/theme'
 import { createApp, h } from 'vue'
 import CompilerExplorer from './components/CompilerExplorer.vue'
+import AboutMe from './components/AboutMe.vue'
 import type { Theme } from 'vitepress'
 
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     app.component('CompilerExplorer', CompilerExplorer)
+    app.component('AboutMe', AboutMe)
   },
 } satisfies Theme
 

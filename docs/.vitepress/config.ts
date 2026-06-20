@@ -156,8 +156,8 @@ function sidebar(zh: boolean, prefix = '') {
     '/references/': [{ text: zh ? '参考资料' : 'References', items: [
       { text: zh ? '总览' : 'Overview', link: L('/references/') },
     ]}],
-    '/blog/': [{ text: zh ? '博客' : 'Blog', items: [
-      { text: zh ? '文章列表' : 'Posts', link: L('/blog/') },
+    '/blog/': [{ text: zh ? '关于我' : 'About Me', items: [
+      { text: zh ? '个人简介' : 'Profile', link: L('/blog/') },
     ]}],
     '/libraries/': [{ text: zh ? 'STL 与标准库实现' : 'STL & Standard Library Implementations', items: [
       { text: zh ? '总览' : 'Overview', link: L('/libraries/') },
@@ -309,7 +309,7 @@ export default defineConfig({
           { text: '内部原理', link: '/internals/' },
           { text: '知名库', link: '/libraries/' },
           { text: '参考资料', link: '/references/' },
-          { text: '博客', link: '/blog/' },
+          { text: '关于我', link: '/blog/' },
         ],
         sidebar: sidebar(true),
         outline: { label: '页面导航', level: [2, 3] as [number, number] },
@@ -357,7 +357,7 @@ export default defineConfig({
           { text: 'Internals', link: '/en/internals/' },
           { text: 'Libraries', link: '/en/libraries/' },
           { text: 'References', link: '/en/references/' },
-          { text: 'Blog', link: '/en/blog/' },
+          { text: 'About Me', link: '/en/blog/' },
         ],
         sidebar: sidebar(false, '/en'),
         outline: { label: 'On this page', level: [2, 3] as [number, number] },

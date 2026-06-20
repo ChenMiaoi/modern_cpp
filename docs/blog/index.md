@@ -1,28 +1,9 @@
 ---
-title: "博客"
-topic: blog
+title: "关于我"
+topic: about
 feature: index
 standard: N/A
-status_checked_at: 2026-06-02
----
-# 博客
-
-学习笔记、技术分析和实践总结。
-
-## 文章列表
-
-*（暂无文章，后续将持续更新。）*
-
-<!-- 
-添加新文章的方式：
-1. 在 blog/ 目录下创建 .md 文件
-2. 使用如下 frontmatter：
-
----
-title: 文章标题
-date: 2026-05-31
-tags: [cpp11, move-semantics]
+status_checked_at: 2026-06-20
 ---
 
-3. 在此页面添加链接
--->
+<AboutMe />
