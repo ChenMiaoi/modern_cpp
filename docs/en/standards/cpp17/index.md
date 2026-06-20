@@ -33,6 +33,12 @@ C++17 (ISO/IEC 14882:2017) is a major update that introduces a large number of h
 | `std::string_view` | Non-owning string view, zero-copy |
 | `<filesystem>` | Standardized filesystem operations |
 | Parallel Algorithms | `std::execution::par` execution policies |
+| `std::apply` | Apply function to tuple |
+| `std::byte` | Type-safe byte type |
+| `std::clamp` | Numeric clamping |
+| `std::invoke` | Unified call syntax |
+| `std::from_chars` / `std::to_chars` | High-performance numeric conversion |
+| `std::conjunction` / `disjunction` / `negation` | Type trait logical composition |
 
 ## Design Philosophy
 

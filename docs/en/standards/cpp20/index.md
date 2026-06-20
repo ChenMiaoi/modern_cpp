@@ -52,6 +52,10 @@ A modular compilation system that replaces `#include`, addressing header compila
 | `std::format` | Type-safe formatting library (Python-style) |
 | `std::span` | Non-owning sequence view over contiguous memory |
 | `std::jthread` | Thread with automatic join |
+| `std::latch` / `std::barrier` / `std::counting_semaphore` | Synchronization primitives |
+| `std::source_location` | Replaces `__FILE__`/`__LINE__` |
+| `std::ranges` algorithms | Range-based find, sort, transform |
+| `std::erase` / `std::erase_if` | Uniform container erasure |
 | Calendars and time zones | Major extensions to the `chrono` library |
 
 ## Compiler Support

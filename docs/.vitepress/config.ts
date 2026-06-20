@@ -33,6 +33,7 @@ function sidebar(zh: boolean, prefix = '') {
         { text: zh ? '用户定义字面量' : 'User-Defined Literals', link: L('/standards/cpp11/user-defined-literals') },
         { text: 'static_assert', link: L('/standards/cpp11/static-assert') },
         { text: zh ? '属性 (Attributes)' : 'Attributes', link: L('/standards/cpp11/attributes') },
+        { text: zh ? 'Range-based for' : 'Range-based for', link: L('/standards/cpp11/range-based-for') },
       ]},
       { text: zh ? '标准库' : 'Standard Library', collapsed: false, items: [
         { text: zh ? '智能指针' : 'Smart Pointers', link: L('/standards/cpp11/smart-pointers') },
@@ -43,6 +44,11 @@ function sidebar(zh: boolean, prefix = '') {
         { text: zh ? 'chrono 时间库' : 'chrono Library', link: L('/standards/cpp11/chrono') },
         { text: zh ? '无序容器' : 'Unordered Containers', link: L('/standards/cpp11/unordered-containers') },
         { text: 'std::tuple', link: L('/standards/cpp11/tuple') },
+        { text: 'std::function', link: L('/standards/cpp11/function') },
+        { text: 'std::reference_wrapper', link: L('/standards/cpp11/reference-wrapper') },
+        { text: 'std::initializer_list', link: L('/standards/cpp11/initializer-list') },
+        { text: 'std::begin / std::end', link: L('/standards/cpp11/begin-end') },
+        { text: 'std::ratio', link: L('/standards/cpp11/ratio') },
       ]},
     ]}],
     '/standards/cpp14/': [{ text: zh ? 'C++14 (ISO/IEC 14882:2014)' : 'C++14 (ISO/IEC 14882:2014)', items: [
@@ -69,6 +75,12 @@ function sidebar(zh: boolean, prefix = '') {
         { text: zh ? '类模板参数推导 (CTAD)' : 'Class Template Argument Deduction (CTAD)', link: L('/standards/cpp17/class-template-argument-deduction') },
         { text: zh ? '嵌套命名空间' : 'Nested Namespaces', link: L('/standards/cpp17/nested-namespaces') },
         { text: '[[nodiscard]] / [[maybe_unused]] / [[fallthrough]]', link: L('/standards/cpp17/attributes') },
+        { text: zh ? 'std::apply' : 'std::apply', link: L('/standards/cpp17/apply') },
+        { text: 'std::byte', link: L('/standards/cpp17/byte') },
+        { text: 'std::clamp', link: L('/standards/cpp17/clamp') },
+        { text: 'std::invoke', link: L('/standards/cpp17/invoke') },
+        { text: zh ? 'from_chars / to_chars' : 'from_chars / to_chars', link: L('/standards/cpp17/chars') },
+        { text: zh ? 'conjunction / disjunction / negation' : 'conjunction / disjunction / negation', link: L('/standards/cpp17/type-traits-logic') },
       ]},
       { text: zh ? '标准库' : 'Standard Library', collapsed: false, items: [
         { text: 'std::string_view', link: L('/standards/cpp17/string-view') },
@@ -94,6 +106,10 @@ function sidebar(zh: boolean, prefix = '') {
         { text: 'std::jthread', link: L('/standards/cpp20/jthread') },
         { text: zh ? '日历与时间区 (chrono)' : 'Calendar & Timezone (chrono)', link: L('/standards/cpp20/chrono-calendar-tz') },
         { text: zh ? 'std::expected (路径)' : 'std::expected (Path)', link: L('/standards/cpp20/expected') },
+        { text: zh ? '同步原语' : 'Synchronization Primitives', link: L('/standards/cpp20/synchronization-primitives') },
+        { text: 'std::source_location', link: L('/standards/cpp20/source-location') },
+        { text: zh ? 'Ranges 算法' : 'Ranges Algorithms', link: L('/standards/cpp20/ranges-algorithms') },
+        { text: 'std::erase / std::erase_if', link: L('/standards/cpp20/erase') },
       ]},
     ]}],
     '/standards/cpp23/': [{ text: zh ? 'C++23 (ISO/IEC 14882:2024)' : 'C++23 (ISO/IEC 14882:2024)', items: [
@@ -109,6 +125,9 @@ function sidebar(zh: boolean, prefix = '') {
       { text: 'std::stacktrace', link: L('/standards/cpp23/stacktrace') },
       { text: 'std::move_only_function', link: L('/standards/cpp23/move-only-function') },
       { text: 'import std', link: L('/standards/cpp23/import-std') },
+      { text: 'std::ranges::to', link: L('/standards/cpp23/ranges-to') },
+      { text: 'std::views::zip', link: L('/standards/cpp23/views-zip') },
+      { text: 'std::to_underlying', link: L('/standards/cpp23/to-underlying') },
     ]}],
     '/standards/cpp26/': [{ text: zh ? 'C++26 (进行中)' : 'C++26 (In Progress)', items: [
       { text: zh ? '概述' : 'Overview', link: L('/standards/cpp26/') },

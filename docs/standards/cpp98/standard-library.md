@@ -14,7 +14,7 @@ status_checked_at: 2026-06-02
 | `vector` | 序列 | 动态数组 | 连续内存，随机访问 O(1) |
 | `deque` | 序列 | 分段数组 | 两端插入 O(1) |
 | `list` | 序列 | 双向链表 | 任意位置插入 O(1) |
-| `set` / `multiset | 关联 | 红黑树 | 有序集合 |
+| `set` / `multiset` | 关联 | 红黑树 | 有序集合 |
 | `map` / `multimap` | 关联 | 红黑树 | 有序键值对 |
 | `stack` | 容器适配器 | 默认基于 `deque` | LIFO |
 | `queue` | 容器适配器 | 默认基于 `deque` | FIFO |
@@ -42,9 +42,12 @@ std::sort(vec.begin(), vec.end());
 // 查找
 auto it = std::find(vec.begin(), vec.end(), 42);
 
-// 变换
-std::transform(src.begin(), src.end(), dst.begin(), [](int x) { return x * 2; });
-// 注意：C++98 没有 lambda，上面这行是现代写法
+// 变换（C++98 需要手写函数对象或函数指针）
+struct Double {
+    int operator()(int x) const { return x * 2; }
+};
+std::transform(src.begin(), src.end(), dst.begin(), Double());
+// 注意：C++11 起可写为 [](int x){ return x*2; }
 
 // 累加
 int sum = std::accumulate(vec.begin(), vec.end(), 0);

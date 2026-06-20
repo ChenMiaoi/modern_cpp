@@ -52,6 +52,10 @@ auto result = numbers
 | `std::format` | 类型安全的格式化库（Python 风格） |
 | `std::span` | 连续内存的非拥有序列视图 |
 | `std::jthread` | 自动 join 的线程 |
+| `std::latch` / `std::barrier` / `std::counting_semaphore` | 同步原语 |
+| `std::source_location` | 替代 `__FILE__`/`__LINE__` |
+| `std::ranges` 算法 | 范围化的查找、排序、变换 |
+| `std::erase` / `std::erase_if` | 统一容器擦除 |
 | 日历与时间区 | `chrono` 库的重大扩展 |
 
 ## 编译器支持

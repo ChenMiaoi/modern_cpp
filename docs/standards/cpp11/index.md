@@ -25,6 +25,7 @@ C++11（ISO/IEC 14882:2011）是 C++ 历史上最具里程碑意义的版本，�
 | `static_assert` | 编译期断言 |
 | 委托构造函数 | 构造函数复用 |
 | 用户定义字面量 | 自定义 `operator""` 语法糖 |
+| Range-based for | 简洁的容器遍历语法 |
 
 ### 标准库层面
 
@@ -37,6 +38,11 @@ C++11（ISO/IEC 14882:2011）是 C++ 历史上最具里程碑意义的版本，�
 | `<chrono>` | 类型安全的时间库 |
 | `<regex>` | 正则表达式 |
 | `<random>` | 高质量随机数 |
+| `std::function` | 类型擦除的通用可调用对象封装 |
+| `std::reference_wrapper` | 可拷贝的引用包装器 |
+| `std::initializer_list` | 列表初始化支持 |
+| `std::begin` / `std::end` | 统一遍历接口，支持数组和容器 |
+| `std::ratio` | 编译期有理数算术 |
 | 无序容器 | `unordered_map`、`unordered_set` |
 
 ## 为什么是分水岭

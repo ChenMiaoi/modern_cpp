@@ -22,6 +22,9 @@ C++23 (ISO/IEC 14882:2024) continues the direction of C++20, further refining an
 | Multidimensional subscript operator | `matrix[i, j]` syntax |
 | `std::flat_map` / `flat_set` | Containers based on sorted vectors |
 | `import std` | Import the entire standard library |
+| `std::ranges::to` | Construct containers from ranges |
+| `std::views::zip` / `zip_transform` | Parallel iteration over multiple ranges |
+| `std::to_underlying` | Convert enum class to underlying type |
 
 ## Highlights
 

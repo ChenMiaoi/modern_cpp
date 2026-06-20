@@ -808,7 +808,7 @@ compiler_optimization:
       api:
         - 'node exercises/cpplings.mjs run inlinevars1'
 
-  niscard:
+  nodiscard:
     title: "nodiscard"
     docs:
       - "docs/standards/cpp17/attributes.md"
@@ -1506,6 +1506,48 @@ cpp98:
     exercises: []
     solutions: []
 
+  cpp11_initializer_list:
+    title: "std::initializer_list"
+    docs:
+      - "docs/standards/cpp11/initializer-list.md"
+    exercises: []
+    solutions: []
+
+  cpp11_range_based_for:
+    title: "Range-based for"
+    docs:
+      - "docs/standards/cpp11/range-based-for.md"
+    exercises: []
+    solutions: []
+
+  cpp11_function:
+    title: "std::function"
+    docs:
+      - "docs/standards/cpp11/function.md"
+    exercises: []
+    solutions: []
+
+  cpp11_reference_wrapper:
+    title: "std::reference_wrapper"
+    docs:
+      - "docs/standards/cpp11/reference-wrapper.md"
+    exercises: []
+    solutions: []
+
+  cpp11_begin_end:
+    title: "std::begin / std::end"
+    docs:
+      - "docs/standards/cpp11/begin-end.md"
+    exercises: []
+    solutions: []
+
+  cpp11_ratio:
+    title: "std::ratio"
+    docs:
+      - "docs/standards/cpp11/ratio.md"
+    exercises: []
+    solutions: []
+
   cpp14_shared_timed_mutex:
     title: "std::shared_timed_mutex"
     docs:
@@ -1527,10 +1569,101 @@ cpp98:
     exercises: []
     solutions: []
 
+  cpp17_apply:
+    title: "std::apply"
+    docs:
+      - "docs/standards/cpp17/apply.md"
+    exercises: []
+    solutions: []
+
+  cpp17_byte:
+    title: "std::byte"
+    docs:
+      - "docs/standards/cpp17/byte.md"
+    exercises: []
+    solutions: []
+
+  cpp17_clamp:
+    title: "std::clamp"
+    docs:
+      - "docs/standards/cpp17/clamp.md"
+    exercises: []
+    solutions: []
+
+  cpp17_invoke:
+    title: "std::invoke"
+    docs:
+      - "docs/standards/cpp17/invoke.md"
+    exercises: []
+    solutions: []
+
+  cpp17_chars:
+    title: "std::from_chars / std::to_chars"
+    docs:
+      - "docs/standards/cpp17/chars.md"
+    exercises: []
+    solutions: []
+
+  cpp17_type_traits_logic:
+    title: "conjunction / disjunction / negation"
+    docs:
+      - "docs/standards/cpp17/type-traits-logic.md"
+    exercises: []
+    solutions: []
+
   cpp20_expected:
     title: "C++20 expected"
     docs:
       - "docs/standards/cpp20/expected.md"
+    exercises: []
+    solutions: []
+
+  cpp20_synchronization_primitives:
+    title: "同步原语"
+    docs:
+      - "docs/standards/cpp20/synchronization-primitives.md"
+    exercises: []
+    solutions: []
+
+  cpp20_source_location:
+    title: "std::source_location"
+    docs:
+      - "docs/standards/cpp20/source-location.md"
+    exercises: []
+    solutions: []
+
+  cpp20_ranges_algorithms:
+    title: "Ranges 算法"
+    docs:
+      - "docs/standards/cpp20/ranges-algorithms.md"
+    exercises: []
+    solutions: []
+
+  cpp20_erase:
+    title: "std::erase / std::erase_if"
+    docs:
+      - "docs/standards/cpp20/erase.md"
+    exercises: []
+    solutions: []
+
+  cpp23_ranges_to:
+    title: "std::ranges::to"
+    docs:
+      - "docs/standards/cpp23/ranges-to.md"
+    exercises: []
+    solutions: []
+
+  cpp23_views_zip:
+    title: "std::views::zip"
+    docs:
+      - "docs/standards/cpp23/views-zip.md"
+    exercises: []
+    solutions: []
+
+  cpp23_to_underlying:
+    title: "std::to_underlying"
+    docs:
+      - "docs/standards/cpp23/to-underlying.md"
     exercises: []
     solutions: []
 

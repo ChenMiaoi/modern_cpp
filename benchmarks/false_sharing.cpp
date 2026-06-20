@@ -16,8 +16,11 @@ static const int ITERATIONS = 10000000;
 static const int NUM_THREADS = 4;
 
 // Case 1: Adjacent atomics — suffer false sharing
+struct PackedCounter {
+    std::atomic<long long> value{0};
+};
 struct PackedCounters {
-    std::atomic<long long> counters[NUM_THREADS];
+    PackedCounter counters[NUM_THREADS];
 };
 
 // Case 2: Padded atomics — no false sharing

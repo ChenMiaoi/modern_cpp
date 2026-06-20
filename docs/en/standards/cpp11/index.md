@@ -25,6 +25,7 @@ C++11 (ISO/IEC 14882:2011) is the most milestone version in C++ history, known a
 | `static_assert` | Compile-time assertions |
 | Delegating constructors | Constructor reuse |
 | User-defined literals | Custom `operator""` syntax sugar |
+| Range-based for | Concise container iteration syntax |
 
 ### Standard Library Level
 
@@ -37,6 +38,11 @@ C++11 (ISO/IEC 14882:2011) is the most milestone version in C++ history, known a
 | `<chrono>` | Type-safe time library |
 | `<regex>` | Regular expressions |
 | `<random>` | High-quality random numbers |
+| `std::function` | Type-erased universal callable wrapper |
+| `std::reference_wrapper` | Copyable reference wrapper |
+| `std::initializer_list` | List initialization support |
+| `std::begin` / `std::end` | Uniform iteration interface for arrays and containers |
+| `std::ratio` | Compile-time rational arithmetic |
 | Unordered containers | `unordered_map`, `unordered_set` |
 
 ## Why It Was a Watershed Moment

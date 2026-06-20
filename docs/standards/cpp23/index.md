@@ -22,6 +22,9 @@ C++23（ISO/IEC 14882:2024）延续了 C++20 的方向，在四大基石之上�
 | 多维下标运算符 | `matrix[i, j]` 语法 |
 | `std::flat_map` / `flat_set` | 基于排序 vector 的容器 |
 | `import std` | 导入整个标准库 |
+| `std::ranges::to` | 从 range 构造容器 |
+| `std::views::zip` / `zip_transform` | 多 range 并行遍历 |
+| `std::to_underlying` | enum class 转底层类型 |
 
 ## 亮点解读
 

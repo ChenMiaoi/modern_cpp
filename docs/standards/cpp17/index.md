@@ -33,6 +33,12 @@ C++17（ISO/IEC 14882:2017）是一次大规模更新，引入了大量实用性
 | `std::string_view` | 非拥有的字符串视图，零拷贝 |
 | `<filesystem>` | 文件系统操作标准化 |
 | 并行算法 | `std::execution::par` 执行策略 |
+| `std::apply` | 将函数应用到 tuple 元组 |
+| `std::byte` | 类型安全的字节类型 |
+| `std::clamp` | 数值钳制 |
+| `std::invoke` | 统一调用语法 |
+| `std::from_chars` / `std::to_chars` | 高性能数值转换 |
+| `std::conjunction` / `disjunction` / `negation` | 类型 traits 逻辑运算 |
 
 ## 设计哲学
 
