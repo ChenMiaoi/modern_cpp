@@ -36,3 +36,6 @@
 	path = references/impl/gcc
 	url = https://github.com/gcc-mirror/gcc.git
 	shallow = true
+[submodule "prism"]
+	path = prism
+	url = git@github.com:ChenMiaoi/prism.git
